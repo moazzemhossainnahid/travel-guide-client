@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { AiOutlineBars, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import Authentication from './Authentication';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
 import UseAdmin from '../../../Hooks/useAdmin';
+import { FaBars } from 'react-icons/fa';
 
 
 
@@ -35,7 +36,7 @@ const Header = () => {
 
                 <div onClick={() => setOpen(!open)} className="text-3xl absolute right-8 text-black top-6 cursor-pointer md:hidden">
                     {
-                        open ? <AiOutlineClose /> : <AiOutlineBars />
+                        open ? <AiOutlineClose /> : <FaBars />
                     }
                 </div>
                 <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 opacity-100' : 'top-[-490px] opacity-0 md:opacity-100'}`}>

@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <div className="App pt-20">
+      <div className="App pt-16">
         {(window.location.pathname !== '/cpanel' && window.location.pathname !== '/cpanel/addashboard' && window.location.pathname !== '/cpanel/mblogs' && window.location.pathname !== '/cpanel/mjobs' && window.location.pathname !== '/cpanel/msocializations' && window.location.pathname !== '/cpanel/mjobapplications') && <Header />}
         {/* <Header /> */}
         <div className="">
