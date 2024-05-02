@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Fade from "react-reveal/Fade";
-// import TestimonialSlider from './TestimonialSlider';
+import TestimonialSlider from './TestimonialSlider';
 
 
 const data = [
@@ -118,7 +118,7 @@ const Testimonials = () => {
                   <span className="font-bold">Our</span> Guests Says
                 </h2>
                 <div>
-                  {/* <TestimonialSlider Data={data} /> */}
+                  <TestimonialSlider data={data} />
                 </div>
               </div>
             </Fade>
