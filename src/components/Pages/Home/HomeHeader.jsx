@@ -106,6 +106,26 @@ const HomeHeader = ({ allTours, allHotel }) => {
             <div className="flex p-4 px-16 lg:px-18 z-10 rounded-lg shadow-lg space-x-14 bg-gray-100">
               <div>
                 <Link
+                  onClick={() => setActive("flight")}
+                  className="flex space-x-1"
+                  to=""
+                >
+                  <img
+                    className="w-5 h-5"
+                    src="https://i.ibb.co/0p0VD7m/plane.png"
+                    alt=""
+                  />
+                  <h5 className="text-gray-900 text-md md:text-xl lg:text-xl leading-tight font-bold">
+                    Flight
+                  </h5>
+                </Link>
+                {active === "flight" && (
+                  <div className="bg-primary w-24 h-1 mt-3"></div>
+                )}
+              </div>
+
+              <div>
+                <Link
                   onClick={() => setActive("hotel")}
                   className="flex space-x-1"
                   to=""
@@ -120,7 +140,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                   </h5>
                 </Link>
                 {active === "hotel" && (
-                  <div className="bg-[#33D687] w-24 h-1 mt-3"></div>
+                  <div className="bg-primary w-24 h-1 mt-3"></div>
                 )}
               </div>
 
@@ -140,7 +160,27 @@ const HomeHeader = ({ allTours, allHotel }) => {
                   </h5>
                 </Link>
                 {active === "tour" && (
-                  <div className="bg-[#33D687] w-20 h-1 mt-3"></div>
+                  <div className="bg-primary w-20 h-1 mt-3"></div>
+                )}
+              </div>
+
+              <div>
+                <Link
+                  onClick={() => setActive("visa")}
+                  className="flex space-x-1"
+                  to=""
+                >
+                  <img
+                    className="w-5 h-5"
+                    src="https://i.ibb.co/QXG2hKw/6556294.png"
+                    alt=""
+                  />
+                  <h5 className="text-gray-900 text-md md:text-xl lg:text-xl leading-tight font-bold">
+                    Visa
+                  </h5>
+                </Link>
+                {active === "visa" && (
+                  <div className="bg-primary w-20 h-1 mt-3"></div>
                 )}
               </div>
             </div>
@@ -202,11 +242,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                         className=" appearance-none py-3 border
                       border-gray-300 text-gray-700 
                       sm:text-sm rounded-lg focus:ring-red-400 
-                      focus:border-red-400 block w-full p-2 h-11 
-                      dark:bg-gray-700 dark:border-gray-600 
-                      dark:placeholder-gray-400 dark:text-white
-                       dark:focus:ring-blue-500 
-                       dark:focus:border-blue-500"
+                      focus:border-red-400 block w-full p-2 h-11 "
                         type="date"
                       />
                     </div>
@@ -218,11 +254,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                         className=" appearance-none py-3 border
                       border-gray-300 text-gray-700 
                       sm:text-sm rounded-lg focus:ring-red-400 
-                      focus:border-red-400 block w-full p-2 h-11 
-                      dark:bg-gray-700 dark:border-gray-600 
-                      dark:placeholder-gray-400 dark:text-white
-                       dark:focus:ring-blue-500 
-                       dark:focus:border-blue-500"
+                      focus:border-red-400 block w-full p-2 h-11 "
                         type="date"
                       />
                     </div>
