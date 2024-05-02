@@ -1,10 +1,8 @@
 import React from "react";
-import Wobble from "react-reveal/Wobble";
 
 const WhyUsCard = ({ data }) => {
   const { icon, image, title, description } = data;
   return (
-    <Wobble>
       <div className="p-3 w-full mx-auto">
         <div className="card bg-transparent group hover:duration-300">
           <figure className="flex-col">
@@ -25,7 +23,6 @@ const WhyUsCard = ({ data }) => {
           </div>
         </div>
       </div>
-    </Wobble>
   );
 };
 

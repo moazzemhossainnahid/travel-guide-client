@@ -2,9 +2,10 @@ import React from "react";
 import { Fade } from "react-reveal";
 import Jump from "react-reveal/Jump";
 import WhyUsCard from "./WhyUsCard";
-import { whyUsData } from "../../../Data/Data";
+import { whyUsData } from "../../../../Data/Data";
 
 const WhyUs = () => {
+
   return (
     <div className="bg-gradient-to-tr from-purple-400 to-green-700 text-center">
       <img

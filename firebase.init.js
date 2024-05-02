@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBUfIn0z_6VXC-0l21ejFlWcvkLZUM-iVU",
-  authDomain: "alumbridge-5f82d.firebaseapp.com",
-  projectId: "alumbridge-5f82d",
-  storageBucket: "alumbridge-5f82d.appspot.com",
-  messagingSenderId: "57798068775",
-  appId: "1:57798068775:web:c040d87a100ee43ead5c02"
+  apiKey: "AIzaSyCSW2jYwlWJCPeX6clCcYmH_LtlF0z8qmk",
+  authDomain: "travel-guide-c3681.firebaseapp.com",
+  projectId: "travel-guide-c3681",
+  storageBucket: "travel-guide-c3681.appspot.com",
+  messagingSenderId: "293246266461",
+  appId: "1:293246266461:web:af41129898f5f2d26af1b4"
 };
  
 

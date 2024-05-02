@@ -2,11 +2,11 @@ import React, { useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
-import UseToken from '../../../hooks/useToken';
+import UseToken from '../../../Hooks/useToken';
 import { GiCancel } from "react-icons/gi";
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import Loading from '../../../components/others/Loading';
+import Loading from '../../../Components/Others/Loading';
   
 const Signin = () => {
     const [signInWithEmailAndPassword, suser, sloading, serror] = useSignInWithEmailAndPassword(auth);

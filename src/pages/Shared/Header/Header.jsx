@@ -4,7 +4,7 @@ import { AiOutlineBars, AiOutlineClose } from "react-icons/ai";
 import Authentication from './Authentication';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
-import UseAdmin from '../../../hooks/useAdmin';
+import UseAdmin from '../../../Hooks/useAdmin';
 
 
 

@@ -5,7 +5,7 @@ import auth from '../../../../firebase.init';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { sendEmailVerification } from 'firebase/auth';
-import Loading from '../../../components/others/Loading';
+import Loading from '../../../Components/Others/Loading';
  
 const Signup = () => {
     const [createUserWithEmailAndPassword, cuser, cloading, cerror] = useCreateUserWithEmailAndPassword(auth);

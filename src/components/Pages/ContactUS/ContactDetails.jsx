@@ -7,26 +7,27 @@ import Swing from "react-reveal/Swing";
 const ContactDetails = () => {
   const form = useRef();
 
-//   const sendEmail = (e) => {
-//     e.preventDefault();
+  //   const sendEmail = (e) => {
+  //     e.preventDefault();
 
-//     emailjs
-//       .sendForm(
-//         "service_dml7lyi",
-//         "template_na9m8go",
-//         form.current,
-//         "wdT4zt6LdX8GyA82Y"
-//       )
-//       .then(
-//         (result) => {
-//           swal("Successfull", "You Send an Email!", "success");
-//           e.target.reset();
-//         },
-//         (error) => {
-//           swal("OPPSS...", "Email not Send!", "error");
-//         }
-//       );
-//   };
+  //     emailjs
+  //       .sendForm(
+  //         "service_dml7lyi",
+  //         "template_na9m8go",
+  //         form.current,
+  //         "wdT4zt6LdX8GyA82Y"
+  //       )
+  //       .then(
+  //         (result) => {
+  //           swal("Successfull", "You Send an Email!", "success");
+  //           e.target.reset();
+  //         },
+  //         (error) => {
+  //           swal("OPPSS...", "Email not Send!", "error");
+  //         }
+  //       );
+  //   };
+
 
   return (
     <div className="bg-gray-100">
@@ -81,7 +82,7 @@ const ContactDetails = () => {
           <div className="xl:w-3/5 lg:w-3/5 bg-gray-200 h-full pt-5 pb-5 xl:pr-5 xl:pl-0 rounded-tr rounded-br">
             <form
               ref={form}
-            //   onSubmit={sendEmail}
+              //   onSubmit={sendEmail}
               id="contact"
               className="bg-white text-left py-4 px-8 rounded-tr rounded-br"
             >
@@ -191,18 +192,8 @@ const ContactDetails = () => {
           </div>
         </div>
         <div className="container mx-auto py-10 ">
-          <div className="flex justify-start py-3">
-            {/* Map */}
-            <iframe
-              title="map"
-              className="w-full lg:h-[25rem] rounded-md border p-2 mx-auto"
-              id="gmap_canvas"
-              src="https://maps.google.com/maps?q=daffodilbangladesh&t=&z=13&ie=UTF8& iwloc=&output=embed"
-              frameBorder="0"
-              scrolling="no"
-              marginHeight="0"
-              marginWidth="0"
-            ></iframe>
+          <div className='overflow-hidden p-5 my-10'>
+            <iframe title='map' className='w-full lg:w-[95vw] h-[300px] mx-auto rounded-md' id="gmap_canvas" src="https://maps.google.com/maps?q=%20daffodilinternationaluniversity%20%20bangladesh&t=&z=13&ie=UTF8&iwloc=&output=embed" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
           </div>
         </div>
       </div>

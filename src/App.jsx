@@ -1,15 +1,16 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Home from './pages/Home/Home'
-import NotFound from './pages/NotFound/NotFound'
+import Home from './Pages/Home/Home'
+import NotFound from './Pages/NotFound/NotFound'
 import { ToastContainer } from 'react-toastify'
-import Footer from './pages/Shared/Footer/Footer'
-import Header from './pages/Shared/Header/Header'
-import ContactUS from './pages/ContactUS/ContactUS'
-import AboutUS from './pages/AboutUS/AboutUS'
-import Signin from './pages/Auth/Signin/Signin'
-import Signup from './pages/Auth/Signup/Signup'
+import Footer from './Pages/Shared/Footer/Footer'
+import Header from './Pages/Shared/Header/Header'
+import ContactUS from './Pages/ContactUS/ContactUS'
+import AboutUS from './Pages/AboutUS/AboutUS'
+import Signin from './Pages/Auth/Signin/Signin'
+import Signup from './Pages/Auth/Signup/Signup'
+import Profile from './Components/Dashboard/UserDashboard/Profile/Profile'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
             <Route path='/profile' element={<Profile />} /> */}
             <Route path='/signin' element={<Signin />} />
             <Route path='/signup' element={<Signup />} />
+            <Route path='/profile' element={<Profile />}/>
             <Route path='/aboutus' element={<AboutUS />} />
             <Route path='/contactus' element={<ContactUS />} />
 

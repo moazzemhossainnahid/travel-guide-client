@@ -4,6 +4,7 @@ import { Bounce, Fade, Zoom } from "react-reveal";
 
 const CounterDetails = ({ data }) => {
   const { icon, count, title } = data;
+  
   return (
     <div>
       <Bounce left>

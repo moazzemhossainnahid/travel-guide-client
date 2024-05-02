@@ -3,6 +3,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 
 const AboutHeader = () => {
+    
     return (
         <div className="bg-gradient-to-tr from-purple-400 relative to-green-700 h-[25rem] lg:h-[30rem] w-full bg-cover bg-center">
             <img

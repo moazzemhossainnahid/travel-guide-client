@@ -5,7 +5,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import auth from '../../../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import UseAdmin from '../../../hooks/useAdmin';
+import UseAdmin from '../../../Hooks/useAdmin';
 
 
 const Authentication = () => {

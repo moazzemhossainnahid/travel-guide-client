@@ -1,9 +1,10 @@
 import React from 'react';
-import PageTitle from '../../components/others/PageTitle';
-import AboutHeader from './AboutHeader';
-import HeroAbout from './HeroAbout';
-import WhyUs from './WhyUs/WhyUs';
-import Partners from './Partners';
+import PageTitle from '../../Components/Others/PageTitle';
+import AboutHeader from '../../Components/Pages/AboutUS/AboutHeader';
+import HeroAbout from '../../Components/Pages/AboutUS/HeroAbout';
+import Partners from '../../Components/Pages/AboutUS/Partners';
+import WhyUs from '../../Components/Pages/AboutUS/WhyUs/WhyUs';
+
 
 
 const AboutUS = () => {

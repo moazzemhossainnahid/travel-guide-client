@@ -6,7 +6,7 @@ const useProfile = () => {
     const [user] = useAuthState(auth);
     const [profile, setProfile] = useState([]);
     const email = user?.email;
-  
+   
     useEffect(() => {
         fetch(`https://alumbridge-server.vercel.app/api/v1/users/${email}`, {
             method: "GET",

@@ -4,6 +4,7 @@ import { Success } from "../../../Components/Data";
 import CounterDetails from "./CounterDetails";
 
 const Counter = () => {
+
   return (
     <div className="text-center py-7">
       <Swing>
@@ -12,7 +13,7 @@ const Counter = () => {
         </h3>
       </Swing>
       <div className="py-10 lg:py-20 bg-white px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 ">
-        {Success.map((data, index) => (
+        {Success?.map((data, index) => (
           <CounterDetails data={data} key={index} />
         ))}
       </div>

@@ -3,7 +3,6 @@ import { Bounce, Flip, Roll, Slide, Zoom } from "react-reveal";
 import LightSpeed from "react-reveal/LightSpeed";
 
 const HeroAbout = () => {
-
   
   return (
     <div className="py-10 lg:px-10 w-full overflow-hidden mx-auto text-center bg-gray-100">
