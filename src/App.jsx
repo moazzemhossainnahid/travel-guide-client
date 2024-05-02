@@ -8,6 +8,8 @@ import Footer from './pages/Shared/Footer/Footer'
 import Header from './pages/Shared/Header/Header'
 import ContactUS from './pages/ContactUS/ContactUS'
 import AboutUS from './pages/AboutUS/AboutUS'
+import Signin from './pages/Auth/Signin/Signin'
+import Signup from './pages/Auth/Signup/Signup'
 
 function App() {
 
@@ -30,6 +32,8 @@ function App() {
             <Route path='/signin' element={<Signin />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/profile' element={<Profile />} /> */}
+            <Route path='/signin' element={<Signin />} />
+            <Route path='/signup' element={<Signup />} />
             <Route path='/aboutus' element={<AboutUS />} />
             <Route path='/contactus' element={<ContactUS />} />
 

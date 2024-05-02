@@ -15,8 +15,8 @@ const Header = () => {
 
     let Links = [
         { name: 'Home', to: '/' },
-        { name: 'Jobs', to: '/jobs' },
-        { name: 'Blogs', to: '/blogs' },
+        { name: 'Tours', to: '/tours' },
+        { name: 'Hotels', to: '/hotels' },
         { name: 'About US', to: '/aboutus' },
         { name: 'Contact US', to: '/contactus' }
     ];
@@ -28,8 +28,9 @@ const Header = () => {
         <nav className='shadow-md w-full fixed top-0 left-0 text-left z-[99]'>
             <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">
                 <div onClick={() => { navigate('/') }} className="font-bold text-3xl cursor-pointer flex items-center text-[#0f52ba]">
-                    <span className="px-2 md:px-1"></span>
-                    AlumBridge
+                    <img src="https://cdn-icons-png.flaticon.com/512/5029/5029158.png" alt="" className="w-10" />
+                    <span className="px-2 md:px-1">Travel Guide</span>
+                    
                 </div>
 
                 <div onClick={() => setOpen(!open)} className="text-3xl absolute right-8 text-black top-6 cursor-pointer md:hidden">
