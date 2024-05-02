@@ -27,7 +27,7 @@ export const Navigation = [
 
 
 
-  export const Success = [
+  export const SuccessData = [
     {
       icon: 'https://preview.colorlib.com/theme/travello/images/mountain.svg',
       count: 17,

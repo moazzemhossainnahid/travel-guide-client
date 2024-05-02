@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PageTitle from '../../Components/Others/PageTitle';
 import HomeHeader from '../../Components/Pages/Home/HomeHeader';
 import TopCard from '../../Components/Pages/Home/TopCard';
+import Counter from '../../Components/Pages/Home/Counter/Counter';
 
 const Home = () => {
     const [allTours, setTour_data] = useState([]);
@@ -13,6 +14,7 @@ const Home = () => {
             <PageTitle title="Home"></PageTitle>
             <HomeHeader allTours={allTours} allHotel={allHotel} />
             <TopCard/>
+            <Counter/>
 
 
         </div>
