@@ -100,6 +100,11 @@ const HomeHeader = ({ allTours, allHotel }) => {
         className="h-full w-full object-cover absolute mix-blend-overlay"
       />
 
+      <div className="space-y-5 absolute pt-20 w-full h-full">
+      <h3 className="text-5xl text-center text-white">Welcome to TravelGuide!</h3>
+      <p className="text-center text-white">Find Flights, Hotels, Visa & Holidays</p>
+      </div>
+
       <div className="flex justify-center absolute px-5 items-center w-full h-full">
         <div className="container mx-auto">
           <div className="flex  justify-center shadow-lg">
@@ -156,7 +161,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                     alt=""
                   />
                   <h5 className="text-gray-900 text-md md:text-xl lg:text-xl leading-tight font-bold">
-                    Tour
+                    Holidays
                   </h5>
                 </Link>
                 {active === "tour" && (

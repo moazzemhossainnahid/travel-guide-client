@@ -1,16 +1,20 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Home from './Pages/Home/Home'
 import NotFound from './Pages/NotFound/NotFound'
 import { ToastContainer } from 'react-toastify'
+import Home from './Pages/Home/Home'
 import Footer from './Pages/Shared/Footer/Footer'
 import Header from './Pages/Shared/Header/Header'
 import ContactUS from './Pages/ContactUS/ContactUS'
 import AboutUS from './Pages/AboutUS/AboutUS'
 import Signin from './Pages/Auth/Signin/Signin'
 import Signup from './Pages/Auth/Signup/Signup'
+import Tours from './Pages/Tours/Tours'
 import Profile from './Components/Dashboard/UserDashboard/Profile/Profile'
+import Hotels from './Pages/Hotels/Hotels'
+import HotelDetails from './Pages/Hotels/HotelDetails/HotelDetails'
+import TourDetails from './Pages/Tours/TourDeatils/TourDetails'
 
 function App() {
 
@@ -22,22 +26,15 @@ function App() {
         <div className="">
           <Routes>
             <Route path='/' element={<Home />} />
-            {/* <Route path='/jobs' element={<Jobs />} />
-            <Route path='/jobs/:id' element={<RequireAuth><SingleJobDetails /></RequireAuth>} />
-            <Route path='/blogs' element={<Blogs />} />
-            <Route path='/blogs/:id' element={<RequireAuth><SingleBlogDetails /></RequireAuth>} />
-            <Route path='/socializations' element={<Socializations />} />
-            <Route path='/socializations/:id' element={<RequireAuth><SingleSocializationDetails /></RequireAuth>} />
+            <Route path='/hotels' element={<Hotels />} />
+            <Route path='/hotels/:id' element={<HotelDetails />} />
+            <Route path='/tours' element={<Tours />} />
+            <Route path='/tours/:id' element={<TourDetails />} />
             <Route path='/aboutus' element={<AboutUS />} />
             <Route path='/contactus' element={<ContactUS />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/profile' element={<Profile />} /> */}
-            <Route path='/signin' element={<Signin />} />
-            <Route path='/signup' element={<Signup />} />
-            <Route path='/profile' element={<Profile />}/>
-            <Route path='/aboutus' element={<AboutUS />} />
-            <Route path='/contactus' element={<ContactUS />} />
+            <Route path='/profile' element={<Profile />} />
 
             <Route path='*' element={<NotFound />} />
 

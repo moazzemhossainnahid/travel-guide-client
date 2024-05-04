@@ -23,7 +23,7 @@ const DBCards = () => {
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    fetch(`https://alumbridge-server.vercel.app/api/v1/users`, {
+    fetch(`http://localhost:5000/api/v1/users`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -34,7 +34,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`https://alumbridge-server.vercel.app/api/v1/jobs`, {
+    fetch(`http://localhost:5000/api/v1/jobs`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -45,7 +45,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`https://alumbridge-server.vercel.app/api/v1/blogs`, {
+    fetch(`http://localhost:5000/api/v1/blogs`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -56,7 +56,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`https://alumbridge-server.vercel.app/api/v1/socializations`, {
+    fetch(`http://localhost:5000/api/v1/socializations`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -67,7 +67,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`https://alumbridge-server.vercel.app/api/v1/jobapplications`, {
+    fetch(`http://localhost:5000/api/v1/jobapplications`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

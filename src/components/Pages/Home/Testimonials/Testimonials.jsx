@@ -2,52 +2,6 @@ import React, { useState } from 'react';
 import Fade from "react-reveal/Fade";
 import TestimonialSlider from './TestimonialSlider';
 
-
-const data = [
-    {
-      id: 1,
-      name: "Daren Smith",
-      description: "Far far away, behind the word mountains, far from the countries Far far away, behind the word mountains, far from the countries",
-      area: "Canada",
-      img: "https://i.ibb.co/z5SDymX/pic1.webp"
-    },
-    {
-      id: 2,
-      name: "San Francisco",
-      description: "Far far away, behind the word mountains, far from the countries Far far away, behind the word mountains, far from the countries",
-      area: "Switzerland",
-      img: "https://i.ibb.co/q1fy4Yr/pic2.webp"
-    },
-    {
-      id: 3,
-      name: "Tiger Sib",
-      description: "Far far away, behind the word mountains, far from the countries Far far away, behind the word mountains, far from the countries",
-      area: "Australia",
-      img: "https://i.ibb.co/xHkZt2v/pic3.webp"
-    },
-    {
-      id: 4,
-      name: "Ashraful Islam",
-      description: "Far far away, behind the word mountains, far from the countries Far far away, behind the word mountains, far from the countries",
-      area: "Bangladesh",
-      img: "https://i.ibb.co/w7nSrzs/resize.png"
-    },
-    {
-      id: 5,
-      name: "Luxury Kru",
-      description: "Far far away, behind the word mountains, far from the countries Far far away, behind the word mountains, far from the countries",
-      area: "Italy",
-      img: "https://i.ibb.co/xHkZt2v/pic3.webp"
-    },
-    {
-      id: 6,
-      name: "Henry Smith",
-      description: "Far far away, behind the word mountains, far from the countries Far far away, behind the word mountains, far from the countries",
-      area: "London",
-      img: "https://i.ibb.co/z5SDymX/pic1.webp"
-    }
-  ];
-
 const Testimonials = () => {
     const [moreText, setMoreText] = useState(false);
 
@@ -118,7 +72,7 @@ const Testimonials = () => {
                   <span className="font-bold">Our</span> Guests Says
                 </h2>
                 <div>
-                  <TestimonialSlider data={data} />
+                  <TestimonialSlider />
                 </div>
               </div>
             </Fade>

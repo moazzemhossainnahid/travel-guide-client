@@ -2,7 +2,7 @@ import React from 'react';
 import { FaQuoteLeft } from 'react-icons/fa6';
 
 
-const TestimonialSlider = ({ Data }) => {
+const TestimonialSlider = () => {
 
 
     return (

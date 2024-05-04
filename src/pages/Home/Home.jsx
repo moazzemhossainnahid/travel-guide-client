@@ -5,6 +5,7 @@ import TopCard from '../../Components/Pages/Home/TopCard';
 import Counter from '../../Components/Pages/Home/Counter/Counter';
 import Testimonials from '../../Components/Pages/Home/Testimonials/Testimonials';
 import NewsLetter from '../../Components/Pages/Home/NewsLetter';
+import HomeHotels from '../../Components/Pages/Home/HomeHotels/HomeHotels';
 
 const Home = () => {
     const [allTours, setTour_data] = useState([]);
@@ -16,6 +17,7 @@ const Home = () => {
             <PageTitle title="Home"></PageTitle>
             <HomeHeader allTours={allTours} allHotel={allHotel} />
             <TopCard />
+            <HomeHotels/>
             <Counter />
             <Testimonials />
             <NewsLetter/>
