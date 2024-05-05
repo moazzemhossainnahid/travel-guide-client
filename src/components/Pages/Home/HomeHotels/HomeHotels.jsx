@@ -1,21 +1,14 @@
 import React from 'react';
 import { Fade } from 'react-reveal';
-import useCountries from '../../../../Hooks/useCountries';
 
 // import required modules
 import HotelSlider from './HotelSlider';
+import useHotels from '../../../../Hooks/useHotels';
 
 const HomeHotels = () => {
-    const [countries] = useCountries();
+    const [hotels] = useHotels("Bangladesh");
 
-
-    console.log("countries", countries);
-
-    const bd = countries?.find(country => country?.country_name === 'Bangladesh');
-
-    const bdHotels = bd && bd?.locations?.flatMap(location => location?.hotels)
-
-    console.log("bdHotels", bdHotels);
+    // console.log("hotels", hotels);
 
 
     return (
@@ -31,7 +24,7 @@ const HomeHotels = () => {
 
             <Fade left>
                 <div className="px-0 md:px-5 lg:px-8">
-                    {bdHotels?.length && <HotelSlider data={bdHotels} />}
+                    {hotels?.length && <HotelSlider data={hotels} />}
                 </div>
             </Fade>
         </div>
