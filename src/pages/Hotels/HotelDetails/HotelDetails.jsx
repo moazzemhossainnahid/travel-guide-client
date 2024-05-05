@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import useHotelDetails from '../../../Hooks/useHotelDetails';
 import { FaLocationDot } from 'react-icons/fa6';
 import { FaCheck, FaCheckCircle } from 'react-icons/fa';
+import { Link } from 'react-scroll';
 
 const HotelDetails = () => {
     const { id } = useParams();
@@ -93,7 +94,7 @@ const HotelDetails = () => {
                     <p className="font-bold text-2xl">({(hotel?.rating?.total_rating / hotel?.rating?.total_people).toFixed(2)}/5)</p>
                 </div>
 
-                <p className="pt-3 flex gap-2 text-xl items-center font-semibold"> <FaLocationDot className='text-2xl' /> {hotel?.location} </p>
+                <p className="pt-3 flex gap-2 text-xl items-center font-semibold"> <FaLocationDot className='text-2xl' /> {hotel?.location} <Link to="map" smooth={true} className="text-sm text-primary pl-2 pt-1 cursor-pointer">Show in Map</Link> </p>
 
             </div>
             <div className="py-5">
@@ -122,7 +123,7 @@ const HotelDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className='overflow-hidden p-5 my-10'>
+            <div id='map' className='overflow-hidden p-5 my-10'>
                 <iframe title='map' className='w-full lg:w-[95vw] h-[300px] mx-auto rounded-md' id="gmap_canvas" src={`https://maps.google.com/maps?q=%20${hotel?.hotel_name}%20%20bangladesh&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
             </div>
         </div>
