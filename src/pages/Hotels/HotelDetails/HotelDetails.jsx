@@ -81,6 +81,12 @@ const HotelDetails = () => {
                         }
                     </div>
                 </div>
+
+                <p className="pt-3 flex gap-2 text-xl items-center font-semibold"> <FaLocationDot className='text-2xl' /> {hotel?.location} </p>
+
+            </div>
+            <div className='overflow-hidden p-5 my-10'>
+                <iframe title='map' className='w-full lg:w-[95vw] h-[300px] mx-auto rounded-md' id="gmap_canvas" src={`https://maps.google.com/maps?q=%20${hotel?.hotel_name}%20%20bangladesh&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
             </div>
         </div>
     );
