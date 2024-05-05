@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import useHotelDetails from '../../../Hooks/useHotelDetails';
-import { FaLocationDot } from 'react-icons/fa6';
-import { FaCheck, FaCheckCircle } from 'react-icons/fa';
+import { FaBangladeshiTakaSign, FaLocationDot, FaPhoneFlip, FaRestroom, FaScrewdriver } from 'react-icons/fa6';
+import { FaBed, FaBus, FaCheck, FaCheckCircle, FaCheckSquare, FaCoffee, FaGlasses, FaMobileAlt, FaPhoneAlt, FaWifi } from 'react-icons/fa';
 import { Link } from 'react-scroll';
 
 const HotelDetails = () => {
@@ -96,6 +96,75 @@ const HotelDetails = () => {
 
                 <p className="pt-3 flex gap-2 text-xl items-center font-semibold"> <FaLocationDot className='text-2xl' /> {hotel?.location} <Link to="map" smooth={true} className="text-sm text-primary pl-2 pt-1 cursor-pointer">Show in Map</Link> </p>
 
+            </div>
+            <div className="py-5">
+                <h3 className="text-2xl font-bold">Select Your Rooms</h3>
+                <div className="pt-5">
+                    {
+                        hotel?.rooms?.map(room => (
+                            <div key={room?._id} className="w-full flex flex-col md:flex-row gap-3 shadow p-3 rounded-xl mt-3">
+                                <div className="w-full md:w-1/3 flex flex-col gap-3 mx-auto">
+                                    <img src={room?.images && room?.images[0]} alt="room" className="rounded w-full" />
+                                    <div className="grid grid-cols-2 justify-center items-center gap-3">
+                                        <img src={room?.images && room?.images[1]} alt="room" className="rounded w-full" />
+                                        <img src={room?.images && room?.images[2]} alt="room" className="rounded w-full" />
+                                    </div>
+                                </div>
+                                <div className="w-full md:w-2/3 mx-auto">
+                                    <h3 className="text-3xl font-semibold">{room?.title}</h3>
+                                    <div className="pt-2 text-xs md:text-base flex justify-start items-center gap-3">
+                                        <div className="flex items-center justify-center gap-1">
+                                            <FaPhoneAlt />
+                                            <p className="font-mono">Telephone</p>
+                                        </div>
+                                        <div className="flex items-center justify-center gap-1">
+                                            <FaMobileAlt />
+                                            <p className="font-mono">Mirror</p>
+                                        </div>
+                                        <div className="flex items-center justify-center gap-1">
+                                            <FaWifi />
+                                            <p className="font-mono">WiFi</p>
+                                        </div>
+                                        <div className="flex items-center justify-center gap-1">
+                                            <FaCoffee />
+                                            <p className="font-mono">Kettle or coffee maker</p>
+                                        </div>
+                                        <div className="flex items-center justify-center gap-1">
+                                            <FaBus />
+                                            <p className="font-mono">Transport</p>
+                                        </div>
+
+                                    </div>
+                                    <div className="w-full pt-3 flex flex-col md:flex-row justify-start items-start gap-5 md:gap-0">
+                                        <div className="w-full space-y-3">
+                                            <h3 className="bg-gray-300 px-4 md:rounded-l-md">Benefits</h3>
+                                            <div className='space-y-3'>
+                                                <p className='flex items-center gap-1'> <FaCheckSquare /> Breakfast</p>
+                                                <p className='flex items-center gap-1'> <FaCheckSquare /> Non-smoking room</p>
+                                            </div>
+                                        </div>
+                                        <div className="w-full space-y-3">
+                                            <h3 className="bg-gray-300 px-4">Room(s)</h3>
+                                            <div className='space-y-3'>
+                                                <p className='flex items-center gap-1'> <FaBed /> 1 Room</p>
+                                            </div>
+                                        </div>
+                                        <div className="w-full space-y-3">
+                                            <h3 className="bg-gray-300 px-4 md:rounded-r-md">Price per night</h3>
+                                            <div className='flex flex-col md:flex-row justify-start items-start gap-2 space-y-3'>
+                                                <div className="">
+                                                    <p className='text-xs md:-ml-7'> Price per night as low as</p>
+                                                    <h4 className="text-2xl flex items-center gap-1 font-bold"> <FaBangladeshiTakaSign className='' /> {room?.price}</h4>
+                                                </div>
+                                                <button className="btn btn-primary uppercase">Reserve</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
             <div className="py-5">
                 <h3 className="text-2xl font-bold">About this hotel</h3>
