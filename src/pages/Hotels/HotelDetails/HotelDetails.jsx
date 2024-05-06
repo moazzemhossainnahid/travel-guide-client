@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useHotelDetails from '../../../Hooks/useHotelDetails';
 import { FaBangladeshiTakaSign, FaLocationDot, FaPhoneFlip, FaRestroom, FaScrewdriver } from 'react-icons/fa6';
 import { FaBed, FaBus, FaCheck, FaCheckCircle, FaCheckSquare, FaCoffee, FaGlasses, FaMobileAlt, FaPhoneAlt, FaWifi } from 'react-icons/fa';
@@ -8,6 +8,7 @@ import { Link } from 'react-scroll';
 const HotelDetails = () => {
     const { id } = useParams();
     const { hotel } = useHotelDetails(id);
+    const navigate = useNavigate();
 
     // console.log(hotel);
     return (
@@ -156,7 +157,7 @@ const HotelDetails = () => {
                                                     <p className='text-xs md:-ml-7'> Price per night as low as</p>
                                                     <h4 className="text-2xl flex items-center gap-1 font-bold"> <FaBangladeshiTakaSign className='' /> {room?.price}</h4>
                                                 </div>
-                                                <button className="btn btn-primary uppercase">Reserve</button>
+                                                <button onClick={() => navigate(`/checkout/hotel/${hotel?._id}/room/${room?._id}`)} className="btn btn-primary uppercase">Reserve</button>
                                             </div>
                                         </div>
                                     </div>

@@ -56,7 +56,7 @@ const TourDetails = () => {
                     <span> &#8592;</span> <span className="pl-2">Go Back</span>
                 </button>
                 {tour && (
-                    <div className="blog-wrap pt-10">
+                    <div className="blog-wrap pt-10 p-3">
                         <header>
                             {/* <p className="blog-date pb-5 font-semibold text-gray-500">
                 Published {new Date(tour?.createdAt).toLocaleString()}

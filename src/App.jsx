@@ -15,6 +15,8 @@ import Profile from './Components/Dashboard/UserDashboard/Profile/Profile'
 import Hotels from './Pages/Hotels/Hotels'
 import HotelDetails from './Pages/Hotels/HotelDetails/HotelDetails'
 import TourDetails from './Pages/Tours/TourDeatils/TourDetails'
+import Checkout from './Pages/Checkout/Checkout'
+import RequireAuth from './Components/Others/RequireAuth/RequireAuth'
 
 function App() {
 
@@ -29,12 +31,13 @@ function App() {
             <Route path='/hotels' element={<Hotels />} />
             <Route path='/hotels/:id' element={<HotelDetails />} />
             <Route path='/tours' element={<Tours />} />
-            <Route path='/tours/:id' element={<TourDetails />} />
-            <Route path='/aboutus' element={<AboutUS />} />
-            <Route path='/contactus' element={<ContactUS />} />
+            <Route path='/tours/:id' element={<RequireAuth><TourDetails /></RequireAuth>} />
+            <Route path='/checkout/hotel/:hotelId/room/:roomId' element={<RequireAuth><Checkout/></RequireAuth>} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile' element={<RequireAuth><Profile /></RequireAuth>} />
+            <Route path='/aboutus' element={<AboutUS />} />
+            <Route path='/contactus' element={<ContactUS />} />
 
             <Route path='*' element={<NotFound />} />
 
