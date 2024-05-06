@@ -9,7 +9,7 @@ const HotelDetails = () => {
     const { id } = useParams();
     const { hotel } = useHotelDetails(id);
 
-    console.log(hotel);
+    // console.log(hotel);
     return (
         <div className='w-full py-7 px-3'>
             <h3 className="text-3xl md:text-5xl font-bold uppercase">{hotel?.hotel_name}</h3>
