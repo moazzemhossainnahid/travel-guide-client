@@ -52,12 +52,12 @@ const CheckoutForm = ({ hotel, room, handleEntryDateChange, handleExitDateChange
   };
 
   return (
-    <div className="w-full border bg-white px-5 col-span-2  shadow-sm py-5">
+    <div className="w-full border bg-white px-5 col-span-2 shadow-sm py-5">
       <h2 className="py-5 text-3xl text-black text-opacity-75">
         Personal Information
       </h2>
       <form onSubmit={confirmToPay}>
-        <div className=" grid md:grid-cols-2 grid-cols-1 justify-items-stretch  gap-5  ">
+        <div className="grid md:grid-cols-2 grid-cols-1 justify-items-stretch  gap-5  ">
           <div>
             <label className="relative cursor-pointer">
               <input
@@ -177,7 +177,7 @@ const CheckoutForm = ({ hotel, room, handleEntryDateChange, handleExitDateChange
             <hr />
           </div>
 
-          <div className="py-4 flex items-center justify-center">
+          <div className="py-4 flex items-center justify-start">
             <input
               type="checkbox"
               name=""
@@ -185,12 +185,12 @@ const CheckoutForm = ({ hotel, room, handleEntryDateChange, handleExitDateChange
               id=""
               className="checkbox checkbox-sm border-2 checkbox-success"
             />
-            <span className="ml-2">
+            <p className="ml-2 text-start">
               I have read and accepted{" "}
               <a href="!#" className="text-[#009DA6] font-semibold font-sans">
                 Terms & Conditions
               </a>
-            </span>
+            </p>
           </div>
           <div>
             <input
