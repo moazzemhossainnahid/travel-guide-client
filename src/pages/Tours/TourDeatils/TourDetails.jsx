@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useTourDetails from '../../../Hooks/useTourDetails';
 import { useForm } from 'react-hook-form';
 import { FaCheckSquare } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const TourDetails = () => {
     const navigate = useNavigate();
