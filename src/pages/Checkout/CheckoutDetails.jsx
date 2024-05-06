@@ -40,15 +40,15 @@ const CheckoutItemDetails = ({ hotel, room, numberOfDays }) => {
   };
   // console.log(item);
   return (
-    <div className=" relative bg-[#F9FAFC]">
-      <div className="border sticky top-20 px-4   shadow-lg rounded-sm">
+    <div className="w-full relative bg-[#F9FAFC]">
+      <div className="w-full border sticky top-20 px-4 shadow-lg rounded-sm">
         <div className="py-4 ">
           <h3 className="text-2xl text-black text-opacity-90 text-left ">
             Buying Summary :
           </h3>
           <h2 className="text-lg text-semibold text-gray-600 flex capitalize items-center gap-x-2">
             <AiOutlineArrowRight />
-            <span className="lowercase">{hotel?.hotel_name}</span>
+            <span className="capitalize">{hotel?.hotel_name}</span>
           </h2>
           <p className="font-semibold">{room?.title}</p>
         </div>

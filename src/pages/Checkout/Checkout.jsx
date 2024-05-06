@@ -16,11 +16,21 @@ const Checkout = () => {
     const [entryDate, setEntryDate] = useState(new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), 10 + 6, 0, 0).toISOString().split('T')[0]);
   
     const handleEntryDateChange = (event) => {
-      setEntryDate(event.target.value);
-    };
+        const newEntryDate = event.target.value;
+        setEntryDate(newEntryDate);
+      
+        const nextDay = new Date(newEntryDate);
+        nextDay.setDate(nextDay.getDate() + 1);
+        setExitDate(nextDay.toISOString().split('T')[0]);
+      };
   
+    const [exitDate, setExitDate] = useState(() => {
+        const nextDay = new Date(entryDate);
+        nextDay.setDate(nextDay.getDate() + 1);
+        return nextDay.toISOString().split('T')[0];
+      });
   
-    const [exitDate, setExitDate] = useState(new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate() + 1, 12 + 6, 0, 0).toISOString().split('T')[0]);
+    // const [exitDate, setExitDate] = useState(new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate() + 1, 12 + 6, 0, 0).toISOString().split('T')[0]);
   
     // const handleExitDateChange = (event) => {
     //   setExitDate(event.target.value);
@@ -51,13 +61,13 @@ const Checkout = () => {
 
 
     return (
-        <div className='bg-white'>
+        <div className='bg-white w-full'>
             <div className="bg-white py-5 ">
-                <h2 className="md:container sm:px-2 mx-auto text-3xl text-black font-bold font-mono">
+                <h2 className="md:container sm:px-2 mx-auto text-3xl md:text-4xl pt-7 text-black font-bold font-mono">
                     Checkout
                 </h2>
             </div>
-            <div className="md:container sm:px-2 mx-auto grid md:grid-cols-3 py-5 gap-5">
+            <div className="md:container sm:px-2 mx-auto grid grid-cols-1 md:grid-cols-3 py-5 gap-5">
                 <CheckoutForm hotel={hotel} room={room} handleEntryDateChange={handleEntryDateChange} handleExitDateChange={handleExitDateChange} entryDate={entryDate} exitDate={exitDate}/>
                 <CheckoutCourseDetails hotel={hotel} room={room} numberOfDays={numberOfDays}  />
             </div>
