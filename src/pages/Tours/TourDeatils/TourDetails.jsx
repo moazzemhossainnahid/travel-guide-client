@@ -10,7 +10,40 @@ const TourDetails = () => {
     const { tour } = useTourDetails(id);
     const { register, handleSubmit, reset } = useForm();
 
-    console.log("tour", tour);
+    // console.log("tour", tour);
+
+    const handleBookingTour = async (data) => {
+        const booking = {
+          name: data.name,
+          tourPlan: tour.name,
+          phone: data.phone,
+          address: data.address,
+          adult: data.adult,
+          children: data.children,
+        };
+        
+    console.log(booking);
+    
+        // send to database
+        fetch(`http://localhost:5000/api/v1/tour-booking`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(booking),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            //   console.log(data);
+            if (data?.status === "Successful") {
+              toast.success("Tour Booked Successfully");
+              reset();
+            } else {
+              toast.error("Faild to Booked Tour");
+            }
+          });
+      };
 
     return (
         <div className="w-full">
@@ -104,7 +137,7 @@ const TourDetails = () => {
                     </label>
                     <h3 class="text-lg font-bold">Insert Booking Information For <br /> /{tour?.name}/</h3>
                     <form
-                        onSubmit={handleSubmit()}
+                        onSubmit={handleSubmit(handleBookingTour)}
                         action=""
                         className="py-3"
                     >
