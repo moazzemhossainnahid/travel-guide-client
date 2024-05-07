@@ -56,8 +56,8 @@ const Checkout = () => {
     const numberOfDays = Math.ceil((exit - entry) / (1000 * 60 * 60 * 24));
 
 
-    console.log("hotel", hotel);
-    console.log("room", room);
+    // console.log("hotel", hotel);
+    // console.log("room", room);
 
 
     return (
@@ -68,7 +68,7 @@ const Checkout = () => {
                 </h2>
             </div>
             <div className="md:container sm:px-2 mx-auto grid grid-cols-1 md:grid-cols-3 py-5 gap-y-5 md:gap-x-5">
-                <CheckoutForm hotel={hotel} room={room} handleEntryDateChange={handleEntryDateChange} handleExitDateChange={handleExitDateChange} entryDate={entryDate} exitDate={exitDate} />
+                <CheckoutForm hotel={hotel} room={room} handleEntryDateChange={handleEntryDateChange} handleExitDateChange={handleExitDateChange} entryDate={entryDate} exitDate={exitDate} numberOfDays={numberOfDays} />
                 <CheckoutCourseDetails hotel={hotel} room={room} numberOfDays={numberOfDays} />
             </div>
         </div>

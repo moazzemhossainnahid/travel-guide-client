@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 
-const CheckoutForm = ({ hotel, room, handleEntryDateChange, handleExitDateChange, entryDate, exitDate }) => {
+const CheckoutForm = ({ hotel, room, handleEntryDateChange, handleExitDateChange, entryDate, exitDate, numberOfDays }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [user] = useAuthState(auth);
 
@@ -22,32 +22,41 @@ const CheckoutForm = ({ hotel, room, handleEntryDateChange, handleExitDateChange
   };
 
 
+  const roomPrice = room?.price && parseFloat(room?.price?.replace(/,/g, ''));
+
+
+  // Calculate room price based on number of days
+  const roomTotalPrice = roomPrice * numberOfDays;
+
+
   const confirmToPay = (event) => {
 
     event.preventDefault();
 
     const info = {
-      // item_name: item?.name,
-      // item_desc: item?.description,
-      // item_category: item?.category,
-      // item_image: item?.image,
-      // total_amount: (item?.price + item?.price / 100 * 3 + item?.price / 100 * 1).toFixed(2),
+      hotel_name: hotel?.hotel_name,
+      hotel_location: hotel?.location,
+      hotel_image: hotel?.image,
+      room_title: room?.title,
+      room_image: room?.images && room?.images[0],
+      entryDate: event.target.entryDate.value,
+      exitDate: event.target.exitDate.value,
+      total_amount: (roomTotalPrice + roomTotalPrice / 100 * 3 + roomTotalPrice / 100 * 1).toFixed(2),
       cus_name: user?.displayName,
       cus_email: user?.email,
+      cus_phone: event.target.phone.value,
     };
 
     // console.log(info);
 
-    axios.post(`http://localhost:5000/api/v1/ssl/init`, info).then((res) => {
+    axios.post(`http://localhost:5000/api/v1/ssl/init`, info)
+    .then((res) => {
       console.log(res.data);
       if (res?.data) {
         window.location = res?.data;
       }
     });
 
-    // if (urlData?.data) {
-    //   window.location.href = urlData?.data
-    // }
 
   };
 
@@ -87,21 +96,37 @@ const CheckoutForm = ({ hotel, room, handleEntryDateChange, handleExitDateChange
             </label>
           </div>
         </div>
-        <div className="py-5">
-          <label className="relative cursor-pointer">
-            <input
-              type="text"
-              defaultValue={hotel?.hotel_name}
-              placeholder="Input"
-              className="h-[50px] bg-[#f3f3f3] w-full px-6 text-md border capitalize rounded outline-none focus:border-gray-700 focus:border-opacity-60 placeholder-gray-300 placeholder-opacity-0 transition duration-200"
-              name="name"
-            />
-            <span className=" text-sm bg-transparent te text-opacity-80 absolute left-2 px-2 top-[-27px] transition duration-200 input-text">
-              Hotel Name
-            </span>
-          </label>
+        <div className="grid md:grid-cols-2 grid-cols-1 justify-items-stretch gap-5 py-5">
+          <div className="">
+            <label className="relative cursor-pointer">
+              <input
+                type="text"
+                placeholder="Input"
+                className="h-[50px] bg-[#f3f3f3] w-full px-6 text-md border capitalize rounded outline-none focus:border-gray-700 focus:border-opacity-60 placeholder-gray-300 placeholder-opacity-0 transition duration-200"
+                name="phone"
+                required
+              />
+              <span className=" text-sm bg-transparent te text-opacity-80 absolute left-2 px-2 top-[-27px] transition duration-200 input-text">
+                Phone
+              </span>
+            </label>
+          </div>
+          <div className="">
+            <label className="relative cursor-pointer">
+              <input
+                type="text"
+                defaultValue={hotel?.hotel_name}
+                placeholder="Input"
+                className="h-[50px] bg-[#f3f3f3] w-full px-6 text-md border capitalize rounded outline-none focus:border-gray-700 focus:border-opacity-60 placeholder-gray-300 placeholder-opacity-0 transition duration-200"
+                name="name"
+              />
+              <span className=" text-sm bg-transparent te text-opacity-80 absolute left-2 px-2 top-[-27px] transition duration-200 input-text">
+                Hotel Name
+              </span>
+            </label>
+          </div>
         </div>
-        <div className=" grid md:grid-cols-2 grid-cols-1 justify-items-stretch  gap-5  ">
+        <div className="grid md:grid-cols-2 grid-cols-1 justify-items-stretch gap-5">
 
           <div>
             <label className="relative cursor-pointer">
@@ -145,6 +170,7 @@ const CheckoutForm = ({ hotel, room, handleEntryDateChange, handleExitDateChange
                 placeholder="Input"
                 className="h-[50px]  bg-[#f3f3f3] w-full px-6 text-md border rounded outline-none focus:border-gray-700 focus:border-opacity-60 placeholder-gray-300 placeholder-opacity-0 transition duration-200"
                 name="entryDate"
+                required
               />
               <span className=" text-sm bg-transparent te text-opacity-80 absolute left-2 px-2 top-[-27px] transition duration-200 input-text">
                 Entry Date
@@ -161,6 +187,7 @@ const CheckoutForm = ({ hotel, room, handleEntryDateChange, handleExitDateChange
                 placeholder="Input"
                 className="h-[50px]  bg-[#f3f3f3] w-full px-6 text-md border rounded outline-none focus:border-gray-700 focus:border-opacity-60 placeholder-gray-300 placeholder-opacity-0 transition duration-200"
                 name="exitDate"
+                required
               />
               <span className=" text-sm bg-transparent te text-opacity-80 absolute left-2 px-2 top-[-27px] transition duration-200 input-text">
                 Exit Date

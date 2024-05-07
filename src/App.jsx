@@ -17,6 +17,7 @@ import HotelDetails from './Pages/Hotels/HotelDetails/HotelDetails'
 import TourDetails from './Pages/Tours/TourDeatils/TourDetails'
 import Checkout from './Pages/Checkout/Checkout'
 import RequireAuth from './Components/Others/RequireAuth/RequireAuth'
+import Success from './Components/Others/Success/Success'
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
             <Route path='/tours' element={<Tours />} />
             <Route path='/tours/:id' element={<RequireAuth><TourDetails /></RequireAuth>} />
             <Route path='/checkout/hotel/:hotelId/room/:roomId' element={<RequireAuth><Checkout/></RequireAuth>} />
+            <Route path='/ssl-payment-success/:id' element={<Success />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/profile' element={<RequireAuth><Profile /></RequireAuth>} />

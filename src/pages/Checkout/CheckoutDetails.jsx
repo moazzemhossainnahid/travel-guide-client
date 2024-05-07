@@ -1,7 +1,7 @@
 import React from "react";
 import { MdLocationPin } from "react-icons/md";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { FaDollarSign } from "react-icons/fa";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 
 
 const CheckoutItemDetails = ({ hotel, room, numberOfDays }) => {
@@ -85,19 +85,19 @@ const CheckoutItemDetails = ({ hotel, room, numberOfDays }) => {
             <div className="flex justify-between text-lg text-black text-opacity-90  my-2">
               <p>Item Fee</p>
               <p className="flex items-center gap-1">
-                <FaDollarSign /> {roomTotalPrice}
+                <FaBangladeshiTakaSign /> {roomTotalPrice}
               </p>
             </div>
             <div className="flex justify-between text-lg text-black text-opacity-90  my-2">
               <p>Govt.Tax 3%</p>
               <p className="flex items-center gap-1">
-                <FaDollarSign /> {(roomTotalPrice / 100 * 3).toFixed(2)}
+                <FaBangladeshiTakaSign /> {(roomTotalPrice / 100 * 3).toFixed(2)}
               </p>
             </div>
             <div className="flex justify-between text-lg text-black text-opacity-90  my-2">
               <p>Service Charge 1%</p>
               <p className="flex items-center gap-1">
-                <FaDollarSign /> {(roomTotalPrice / 100 * 1).toFixed(2)}
+                <FaBangladeshiTakaSign /> {(roomTotalPrice / 100 * 1).toFixed(2)}
               </p>
             </div>
             <div className="py-5">
@@ -106,7 +106,7 @@ const CheckoutItemDetails = ({ hotel, room, numberOfDays }) => {
             <div className="flex justify-between text-lg text-black text-opacity-90  my-2 mb-10">
               <p className="text-xl font-semibold ">Total</p>
               <p className="text-xl font-semibold flex items-center gap-1 ">
-                = <FaDollarSign /> {(roomTotalPrice + roomTotalPrice / 100 * 5 + roomTotalPrice / 100 * 2).toFixed(2)}
+                = <FaBangladeshiTakaSign /> {(roomTotalPrice + roomTotalPrice / 100 * 3 + roomTotalPrice / 100 * 1).toFixed(2)}
               </p>
             </div>
           </div>
