@@ -22,7 +22,7 @@ const ManageHotels = () => {
   const imageUrlKey = "e738f1d16de6b265746b7f82cc157644";
 
   // useEffect(() => {
-  //   fetch("http://localhost:5000/api/v1/countries")
+  //   fetch("https://travel-guide-server-ii.vercel.app/api/v1/countries")
   //     .then((res) => res.json())
   //     .then((data) => setHotels(data?.data?.result));
   // }, [number]);
@@ -53,7 +53,7 @@ const ManageHotels = () => {
           };
 
           // send to database
-          fetch(`http://localhost:5000/api/v1/countries`, {
+          fetch(`https://travel-guide-server-ii.vercel.app/api/v1/countries`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

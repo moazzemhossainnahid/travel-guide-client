@@ -7,7 +7,7 @@ const DeleteTourModal = ({ deleteTour, setNumber, number }) => {
 
 
     const handleDelete = (id) => {
-        const url = `http://localhost:5000/api/v1/tours/${id}`;
+        const url = `https://travel-guide-server-ii.vercel.app/api/v1/tours/${id}`;
         fetch(url, {
             method: 'DELETE',
             headers: {

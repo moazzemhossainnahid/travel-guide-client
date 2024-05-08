@@ -17,7 +17,7 @@ const ManageTours = () => {
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/tours")
+    fetch("https://travel-guide-server-ii.vercel.app/api/v1/tours")
       .then((res) => res.json())
       .then((data) => setTours(data?.data?.result));
   }, [number]);
@@ -58,7 +58,7 @@ const ManageTours = () => {
 
 
     // send to database
-    fetch(`http://localhost:5000/api/v1/tours`, {
+    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/tours`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

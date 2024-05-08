@@ -20,7 +20,7 @@ const UpdateTourModal = ({ updateTour, setNumber, number }) => {
         };
 
         // send to database
-        fetch(`http://localhost:5000/api/v1/tours/${_id}`, {
+        fetch(`https://travel-guide-server-ii.vercel.app/api/v1/tours/${_id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json",

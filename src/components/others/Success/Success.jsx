@@ -11,7 +11,7 @@ const Success = () => {
     const [item, setItem] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/v1/orders/${id}`)
+        axios.get(`https://travel-guide-server-ii.vercel.app/api/v1/orders/${id}`)
             .then(res => setItem(res.data));
     }, [id]);
 
@@ -23,7 +23,7 @@ const Success = () => {
             val_id: item?.val_id
         }
 
-        axios.post(`http://localhost:5000/api/v1/ssl/validate`, data)
+        axios.post(`https://travel-guide-server-ii.vercel.app/api/v1/ssl/validate`, data)
             .then(res => {
                 if (res.data) {
                     // alert("Order placed successfully");
