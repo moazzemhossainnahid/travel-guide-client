@@ -1,7 +1,6 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import NotFound from './Pages/NotFound/NotFound'
 import { ToastContainer } from 'react-toastify'
 import Home from './Pages/Home/Home'
 import Footer from './Pages/Shared/Footer/Footer'
@@ -26,6 +25,7 @@ import ManageOrders from './Components/Dashboard/AdminDashboard/ManageOrders/Man
 import ManageBookedTours from './Components/Dashboard/AdminDashboard/ManageBookedTours/ManageBookedTours'
 import ManageTours from './Components/Dashboard/AdminDashboard/ManageTours/ManageTours'
 import ManageHotels from './Components/Dashboard/AdminDashboard/ManageCountries/ManageHotels'
+import NotFound from './Pages/NotFound/NotFound'
 
 function App() {
 

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const NotFound = () => {
     const navigate = useNavigate();
+    
     return ( 
         <div className="bg-gray-800 h-screen">
             <div className="flex items-center justify-center py-12">
