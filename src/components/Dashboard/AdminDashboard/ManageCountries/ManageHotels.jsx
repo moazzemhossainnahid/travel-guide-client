@@ -1,34 +1,36 @@
 import React, { useEffect, useState } from "react";
 
-import ManageBlogsRow from "./ManageBlogsRow";
-import DeleteBlogsModal from "./Modals/DeleteBlogsModal";
+import ManageHotelsRow from "./ManageHotelsRow";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import UpdateBlogsModal from "./Modals/UpdateBlogsModal";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../../firebase.init";
-  
-const ManageBlogs = () => {
+import UpdateHotelsModal from "./Modals/UpdateHotelsModal";
+import DeleteHotelsModal from "./Modals/DeleteHotelsModal";
+import useHotels from "../../../../Hooks/useHotels";
+
+const ManageHotels = () => {
   const [number, setNumber] = useState(0);
-  const [blogs, setBlogs] = useState(null);
-  const [updateBlog, setUpdateBlog] = useState(null);
-  const [deleteBlog, setDeleteBlog] = useState(null);
+  // const [hotels, setHotels] = useState(null);
+  const [updateHotel, setUpdateHotel] = useState(null);
+  const [deleteHotel, setDeleteHotel] = useState(null);
   const { register, handleSubmit, reset } = useForm();
-  const [allBlogs, setAllBlogs] = useState(false);
+  const [allHotels, setAllHotels] = useState(false);
   const [user] = useAuthState(auth);
+  const [hotels] = useHotels("Bangladesh");
 
   const imageUrlKey = "e738f1d16de6b265746b7f82cc157644";
 
-  useEffect(() => {
-    fetch("http://localhost:5000/api/v1/blogs")
-      .then((res) => res.json())
-      .then((data) => setBlogs(data?.data));
-  }, [number]);
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/api/v1/countries")
+  //     .then((res) => res.json())
+  //     .then((data) => setHotels(data?.data?.result));
+  // }, [number]);
 
   // console.log(blogs);
 
 
-  const handleAddBlog = async (data) => {
+  const handleAddHotel = async (data) => {
     const image = data.photoURL[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -41,7 +43,7 @@ const ManageBlogs = () => {
       .then((result) => {
         if (result.success) {
           const img = result.data.url;
-          const blog = {
+          const hotel = {
             title: data.title,
             category: data.category,
             author: user?.displayName,
@@ -51,23 +53,23 @@ const ManageBlogs = () => {
           };
 
           // send to database
-          fetch(`http://localhost:5000/api/v1/blogs`, {
+          fetch(`http://localhost:5000/api/v1/countries`, {
             method: "POST",
             headers: {
               "content-type": "application/json",
               authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
-            body: JSON.stringify(blog),
+            body: JSON.stringify(hotel),
           })
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
               if (data?.status === "Successful") {
-                toast.success("Blog Add Successfully");
+                toast.success("Hotel Add Successfully");
                 reset();
                 setNumber(number + 1);
               } else {
-                toast.error("Faild to Add Blog");
+                toast.error("Faild to Add Hotel");
               }
             });
         }
@@ -79,24 +81,22 @@ const ManageBlogs = () => {
   };
 
 
-  const blogsFilter = blogs && blogs?.result?.filter(blog => blog?.email === user?.email);
-
 
   return (
     <div className=" text-left h-full w-full">
       <div className="w-full flex items-center justify-center my-12">
         <div className="bg-white shadow rounded py-12 px-8 mb-20">
           <p className="md:text-3xl text-xl font-bold pb-10 leading-7 text-center text-gray-700">
-            Total Blogs: {blogsFilter?.length}
+            Total Hotels: {hotels?.length}
           </p>
-          <div className="pb-5">
+          {/* <div className="pb-5">
             <label
               for="addBlog"
               className="rounded btn btn-sm btn-primary btn-outline"
             >
-              Add Blog
+              Add Hotel
             </label>
-          </div>
+          </div> */}
           <table className="border-collapse w-full bg-slate-200">
             {/* <!-- head --> */}
             <thead>
@@ -111,10 +111,10 @@ const ManageBlogs = () => {
                   Title
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Category
+                  Rooms
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Author
+                  Location
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
                   Action
@@ -124,54 +124,54 @@ const ManageBlogs = () => {
             <tbody>
               {/* <!-- row 1 --> */}
 
-              {allBlogs
-                ? blogsFilter?.map((blog, index) => (
-                  <ManageBlogsRow
-                    key={blog?._id}
-                    blog={blog}
+              {allHotels
+                ? hotels?.map((hotel, index) => (
+                  <ManageHotelsRow
+                    key={hotel?._id}
+                    hotel={hotel}
                     index={index}
-                    setUpdateBlog={setUpdateBlog}
-                    setDeleteBlog={setDeleteBlog}
-                  ></ManageBlogsRow>
+                    setUpdateHotel={setUpdateHotel}
+                    setDeleteHotel={setDeleteHotel}
+                  ></ManageHotelsRow>
                 ))
-                : blogsFilter
+                : hotels
                   ?.slice(0, 7)
-                  ?.map((blog, index) => (
-                    <ManageBlogsRow
-                      key={blog?._id}
-                      blog={blog}
+                  ?.map((hotel, index) => (
+                    <ManageHotelsRow
+                      key={hotel?._id}
+                      hotel={hotel}
                       index={index}
-                      setUpdateBlog={setUpdateBlog}
-                      setDeleteBlog={setDeleteBlog}
-                    ></ManageBlogsRow>
+                      setUpdateHotel={setUpdateHotel}
+                      setDeleteHotel={setDeleteHotel}
+                    ></ManageHotelsRow>
                   ))}
             </tbody>
           </table>
-          {blogsFilter?.length > 7 && (
+          {hotels?.length > 7 && (
             <div className="pt-7">
               <button
-                onClick={() => setAllBlogs(!allBlogs)}
+                onClick={() => setAllHotels(!allHotels)}
                 className="btn btn-outline btn-secondary flex items-center justify-center mx-auto"
               >
-                {`${allBlogs ? "See Less Blogs" : "See More Blogs"}`}{" "}
+                {`${allHotels ? "See Less Hotels" : "See More Hotels"}`}{" "}
                 <span className="text-2xl -mt-1">&#8608;</span>
               </button>
             </div>
           )}
         </div>
-        {updateBlog && (
-          <UpdateBlogsModal
-          updateBlog={updateBlog}
+        {updateHotel && (
+          <UpdateHotelsModal
+            updateHotel={updateHotel}
             setNumber={setNumber}
             number={number}
-          ></UpdateBlogsModal>
+          ></UpdateHotelsModal>
         )}
-        {deleteBlog && (
-          <DeleteBlogsModal
-            deleteBlog={deleteBlog}
+        {deleteHotel && (
+          <DeleteHotelsModal
+            deleteHotel={deleteHotel}
             setNumber={setNumber}
             number={number}
-          ></DeleteBlogsModal>
+          ></DeleteHotelsModal>
         )}
       </div>
 
@@ -187,9 +187,9 @@ const ManageBlogs = () => {
           >
             ✕
           </label>
-          <h3 class="text-lg font-bold">Please Add New Blog Information</h3>
+          <h3 class="text-lg font-bold">Please Add New Hotel Information</h3>
           <form
-            onSubmit={handleSubmit(handleAddBlog)}
+            onSubmit={handleSubmit(handleAddHotel)}
             action=""
             className="py-3"
           >
@@ -233,4 +233,4 @@ const ManageBlogs = () => {
   );
 };
 
-export default ManageBlogs;
+export default ManageHotels;
