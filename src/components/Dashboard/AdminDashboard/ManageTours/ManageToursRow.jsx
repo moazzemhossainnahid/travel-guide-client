@@ -26,8 +26,8 @@ const ManageToursRow = ({ tour, index, setUpdateTour, setDeleteTour }) => {
             </td>
             <td className="w-full lg:w-auto text-xs p-2 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                 <div className="flex justify-between px-3 pb-1 gap-2 items-center">
-                    <label htmlFor="update-job-modal" onClick={() => setUpdateTour(tour)} className=" text-black rounded shadow px-2 py-1 cursor-pointer text-xs bg-danger "><FaPen className='text-green-700' /></label>
-                    <label htmlFor='delete-job-modal' onClick={() => setDeleteTour(tour)} className="btn text-white bg-white btn-xs"><FaTrash className='text-red-700' /></label>
+                    <label htmlFor="update-tour-modal" onClick={() => setUpdateTour(tour)} className=" text-black rounded shadow px-2 py-1 cursor-pointer text-xs bg-danger "><FaPen className='text-green-700' /></label>
+                    <label htmlFor='delete-tour-modal' onClick={() => setDeleteTour(tour)} className="btn text-white bg-white btn-xs"><FaTrash className='text-red-700' /></label>
                 </div>
             </td>
         </tr>

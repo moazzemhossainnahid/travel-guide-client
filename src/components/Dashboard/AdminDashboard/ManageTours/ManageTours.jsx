@@ -23,17 +23,39 @@ const ManageTours = () => {
   }, [number]);
 
 
-  const handleAddJob = async (data) => {
+  const handleAddTour = async (data) => {
 
-    const job = {
-      jobTitle: data.jobTitle,
-      companyName: data.companyName,
-      positionName: data.positionName,
-      vacancy: data.vacancy,
-      skills: data.skills,
-      email: user?.email,
+    const formattedPrice = `$${data?.price}`;
+    const id = `${tours?.length + 1}`;
+
+    const tour = {
+      id: id,
+      name: data.name,
+      country: data.country,
+      duration: data.duration,
+      price: formattedPrice,
+      image: data.image,
+      departureDate: data.departureDate,
+      returnDate: data.returnDate,
       description: data.description,
+      highlights: [
+        "Sundarbans mangrove forest",
+        "Sundarbans wildlife",
+        "Boat safari"
+      ],
+      included: [
+        "Accommodation",
+        "Meals",
+        "Transportation",
+        "Guided tours"
+      ],
+      notIncluded: [
+        "International airfare",
+        "Personal expenses"
+      ],
     };
+
+
 
     // send to database
     fetch(`http://localhost:5000/api/v1/tours`, {
@@ -42,7 +64,7 @@ const ManageTours = () => {
         "content-type": "application/json",
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-      body: JSON.stringify(job),
+      body: JSON.stringify(tour),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -98,7 +120,16 @@ const ManageTours = () => {
             <tbody>
               {/* <!-- row 1 --> */}
 
-              {tours && tours?.length > 7 ?
+              {allTours ?
+                tours?.map((tour, index) => (
+                  <ManageToursRow
+                    key={tour?._id}
+                    tour={tour}
+                    index={index}
+                    setUpdateTour={setUpdateTour}
+                    setDeleteTour={setDeleteTour}
+                  ></ManageToursRow>
+                )) :
                 tours
                   ?.slice(0, 7)
                   ?.map((tour, index) => (
@@ -110,15 +141,6 @@ const ManageTours = () => {
                       setDeleteTour={setDeleteTour}
                     ></ManageToursRow>
                   ))
-                : tours?.map((tour, index) => (
-                  <ManageToursRow
-                    key={tour?._id}
-                    tour={tour}
-                    index={index}
-                    setUpdateTour={setUpdateTour}
-                    setDeleteTour={setDeleteTour}
-                  ></ManageToursRow>
-                ))
               }
             </tbody>
           </table>
@@ -161,61 +183,75 @@ const ManageTours = () => {
           >
             ✕
           </label>
-          <h3 class="text-lg font-bold">Please Add New Job Information</h3>
+          <h3 class="text-lg font-bold">Please Add New Tour Information</h3>
           <form
-            onSubmit={handleSubmit(handleAddJob)}
+            onSubmit={handleSubmit(handleAddTour)}
             action=""
             className="py-3"
           >
             <input
-              {...register("jobTitle")}
+              {...register("name")}
               type="text"
               required
-              placeholder="Enter Job Title"
+              placeholder="Enter Tour Package Name"
               className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
             />
             <div className="w-full flex flex-col md:flex-row gap-3">
 
               <input
-                {...register("companyName")}
+                {...register("country")}
                 type="text"
                 required
-                placeholder="Enter Company Name"
+                placeholder="Enter Tour Country"
                 className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
               />
               <input
-                {...register("positionName")}
+                {...register("duration")}
                 type="text"
                 required
-                placeholder="Enter Position Name"
+                placeholder="Enter Duration (Ex: 3 days)"
                 className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
               />
             </div>
             <input
-              {...register("vacancy")}
-              type="number"
+              {...register("price")}
+              type="text"
               required
-              placeholder="Enter Job Vacancy"
+              placeholder="Enter Tour Price"
               className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
             />
             <input
-              {...register("skills")}
+              {...register("image")}
               type="text"
               required
-              placeholder="Enter Job skills"
+              placeholder="Enter Tour Image URL"
+              className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
+            />
+            <input
+              {...register("departureDate")}
+              type="date"
+              required
+              placeholder="Enter Tour departureDate"
+              className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
+            />
+            <input
+              {...register("returnDate")}
+              type="date"
+              required
+              placeholder="Enter Tour returnDate"
               className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
             />
             <textarea
               {...register("description")}
               type="text"
               required
-              placeholder="Enter Job Description"
+              placeholder="Enter Tour Description"
               className="input bg-slate-100 my-2 input-ghost w-full h-20 block mx-auto"
             />
             <input
               className="btn px-7 btn-warning mt-5 block mx-auto"
               type="submit"
-              value="Add Job"
+              value="Add Tour"
             />
           </form>
         </div>

@@ -48,10 +48,10 @@ const UpdateTourModal = ({ updateTour, setNumber, number }) => {
 
     return (
         <div>
-            <input type="checkbox" id="update-job-modal" className="modal-toggle" />
+            <input type="checkbox" id="update-tour-modal" className="modal-toggle" />
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <label htmlFor="update-job-modal" className="btn btn-sm btn-circle absolute right-2 top-2" onClick={closeModal}>
+                    <label htmlFor="update-tour-modal" className="btn btn-sm btn-circle absolute right-2 top-2" onClick={closeModal}>
                         ✕
                     </label>
                     <h1 className='mb-4 badge badge-error text-2xl badge-lg p-4'>Update Tour</h1>
@@ -119,7 +119,7 @@ const UpdateTourModal = ({ updateTour, setNumber, number }) => {
                                 defaultValue={description}
                                 type="text"
                                 required
-                                placeholder="Enter Blog Description"
+                                placeholder="Enter Tour Description"
                                 className="input bg-slate-100 my-2 input-ghost w-full h-20 block mx-auto"
                             />
                             <input
