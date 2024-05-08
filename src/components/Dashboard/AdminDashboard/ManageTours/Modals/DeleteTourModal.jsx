@@ -1,9 +1,9 @@
 
 import { toast } from 'react-toastify';
 
-const DeleteJobModal = ({ deleteJob, setNumber, number }) => {
+const DeleteTourModal = ({ deleteTour, setNumber, number }) => {
     // console.log(deleteJob);
-    const { jobTitle, companyName, positionName, skills, description, vacancy, _id } = deleteJob;
+    const { jobTitle, companyName, positionName, skills, description, vacancy, _id } = deleteTour;
 
 
     const handleDelete = (id) => {
@@ -55,4 +55,4 @@ const DeleteJobModal = ({ deleteJob, setNumber, number }) => {
     );
 };
 
-export default DeleteJobModal;
+export default DeleteTourModal;

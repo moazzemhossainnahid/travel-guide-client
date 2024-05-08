@@ -17,7 +17,7 @@ const ViewBookedToursModal = ({ booked }) => {
                                 <h3 className="text-xl font-semibold">Adult: {adult}</h3>
                                 <h3 className="text-md font-normal">Children: {children ? children : 0}</h3>
                             </div>
-                            <h3 class="text-lg font-bold italic underline">Applicant's Information:</h3>
+                            <h3 class="text-lg font-bold italic underline">Booking's Information:</h3>
                             <div className="py-3 space-y-3">
                                 <h3 className="text-2xl font-bold">{name}</h3>
                                 <h3 className="text-xl font-semibold">{phone}</h3>

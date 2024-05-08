@@ -24,6 +24,7 @@ import AdDashboard from './Components/Dashboard/AdminDashboard/Dashboard/AdDashb
 import ManageUsers from './Components/Dashboard/AdminDashboard/ManageUsers/ManageUsers'
 import ManageOrders from './Components/Dashboard/AdminDashboard/ManageOrders/ManageOrders'
 import ManageBookedTours from './Components/Dashboard/AdminDashboard/ManageBookedTours/ManageBookedTours'
+import ManageTours from './Components/Dashboard/AdminDashboard/ManageTours/ManageTours'
 
 function App() {
 
@@ -57,7 +58,7 @@ function App() {
               <Route path="musers" element={<ManageUsers />} />
               {/* <Route path="mjobs" element={<ManageJobs />} /> */}
               <Route path="mbookhotels" element={<ManageOrders />} />
-              {/* <Route path="msocializations" element={<ManageSocializations />} /> */}
+              <Route path="mtours" element={<ManageTours />} />
               <Route path="mbooktours" element={<ManageBookedTours />} />
             </Route>
           </Routes>

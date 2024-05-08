@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
-import DeleteJobModal from "./Modals/DeleteJobModal";
-import ManageJobsRow from "./ManageJobsRow";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import UpdateJobModal from "./Modals/UpdateJobModal";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../../firebase.init";
-  
-const ManageJobs = () => {
+import DeleteTourModal from "./Modals/DeleteTourModal";
+import UpdateTourModal from "./Modals/UpdateTourModal";
+import ManageToursRow from "./ManageToursRow";
+
+const ManageTours = () => {
   const [number, setNumber] = useState(0);
-  const [jobs, setJobs] = useState(null);
-  const [updateJob, setUpdateJob] = useState(null);
-  const [deleteJob, setDeleteJob] = useState(null);
+  const [tours, setTours] = useState(null);
+  const [updateTour, setUpdateTour] = useState(null);
+  const [deleteTour, setDeleteTour] = useState(null);
   const { register, handleSubmit, reset } = useForm();
-  const [allJobs, setAllJobs] = useState(false);
+  const [allTours, setAllTours] = useState(false);
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/jobs")
+    fetch("http://localhost:5000/api/v1/tours")
       .then((res) => res.json())
-      .then((data) => setJobs(data?.data));
+      .then((data) => setTours(data?.data?.result));
   }, [number]);
 
 
@@ -36,7 +36,7 @@ const ManageJobs = () => {
     };
 
     // send to database
-    fetch(`http://localhost:5000/api/v1/jobs`, {
+    fetch(`http://localhost:5000/api/v1/tours`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -48,16 +48,15 @@ const ManageJobs = () => {
       .then((data) => {
         console.log(data);
         if (data?.status === "Successful") {
-          toast.success("Job Add Successfully");
+          toast.success("Tour Add Successfully");
           reset();
           setNumber(number + 1);
         } else {
-          toast.error("Faild to Add Job");
+          toast.error("Faild to Add Tour");
         }
       });
   };
 
-  const jobsFilter = jobs && jobs?.result?.filter(job => job?.email === user?.email);
 
 
   return (
@@ -65,14 +64,14 @@ const ManageJobs = () => {
       <div className="w-full flex items-center justify-center my-12">
         <div className="bg-white shadow rounded py-12 px-8 mb-20">
           <p className="md:text-3xl text-xl font-bold pb-10 leading-7 text-center text-gray-700">
-            Total Jobs: {jobsFilter?.length}
+            Total Tour plans: {tours?.length}
           </p>
           <div className="pb-5">
             <label
               for="addJob"
               className="rounded btn btn-sm btn-warning btn-outline"
             >
-              Add Job
+              Add Tour
             </label>
           </div>
           <table className="border-collapse w-full bg-slate-200">
@@ -83,13 +82,13 @@ const ManageJobs = () => {
                   Index
                 </th>
                 <th className="p-3 text-sm font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Company Name
+                  Title
                 </th>
                 <th className="p-3 text-sm font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Position Name
+                  Country
                 </th>
                 <th className="p-3 text-sm font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Published Date
+                  Duration
                 </th>
                 <th className="p-3 text-sm font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
                   Action
@@ -99,54 +98,55 @@ const ManageJobs = () => {
             <tbody>
               {/* <!-- row 1 --> */}
 
-              {allJobs
-                ? jobsFilter?.map((job, index) => (
-                  <ManageJobsRow
-                    key={job?._id}
-                    job={job}
-                    index={index}
-                    setUpdateJob={setUpdateJob}
-                    setDeleteJob={setDeleteJob}
-                  ></ManageJobsRow>
-                ))
-                : jobsFilter
+              {tours && tours?.length > 7 ?
+                tours
                   ?.slice(0, 7)
-                  ?.map((job, index) => (
-                    <ManageJobsRow
-                      key={job?._id}
-                      job={job}
+                  ?.map((tour, index) => (
+                    <ManageToursRow
+                      key={tour?._id}
+                      tour={tour}
                       index={index}
-                      setUpdateJob={setUpdateJob}
-                      setDeleteJob={setDeleteJob}
-                    ></ManageJobsRow>
-                  ))}
+                      setUpdateTour={setUpdateTour}
+                      setDeleteTour={setDeleteTour}
+                    ></ManageToursRow>
+                  ))
+                : tours?.map((tour, index) => (
+                  <ManageToursRow
+                    key={tour?._id}
+                    tour={tour}
+                    index={index}
+                    setUpdateTour={setUpdateTour}
+                    setDeleteTour={setDeleteTour}
+                  ></ManageToursRow>
+                ))
+              }
             </tbody>
           </table>
-          {jobsFilter?.length > 7 && (
+          {tours?.length > 7 && (
             <div className="pt-7">
               <button
-                onClick={() => setAllJobs(!allJobs)}
+                onClick={() => setAllTours(!allTours)}
                 className="btn btn-outline btn-secondary flex items-center justify-center mx-auto"
               >
-                {`${allJobs ? "See Less Jobs" : "See More Jobs"}`}{" "}
+                {`${allTours ? "See Less Tours" : "See More Tours"}`}{" "}
                 <span className="text-2xl -mt-1">&#8608;</span>
               </button>
             </div>
           )}
         </div>
-        {updateJob && (
-          <UpdateJobModal
-            updateJob={updateJob}
+        {updateTour && (
+          <UpdateTourModal
+            updateTour={updateTour}
             setNumber={setNumber}
             number={number}
-          ></UpdateJobModal>
+          ></UpdateTourModal>
         )}
-        {deleteJob && (
-          <DeleteJobModal
-            deleteJob={deleteJob}
+        {deleteTour && (
+          <DeleteTourModal
+            deleteTour={deleteTour}
             setNumber={setNumber}
             number={number}
-          ></DeleteJobModal>
+          ></DeleteTourModal>
         )}
       </div>
 
@@ -224,4 +224,4 @@ const ManageJobs = () => {
   );
 };
 
-export default ManageJobs;
+export default ManageTours;

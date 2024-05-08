@@ -2,39 +2,41 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-const UpdateJobModal = ({ updateJob, setNumber, number }) => {
-    const { jobTitle, companyName, positionName, description, skills, vacancy, _id } = updateJob;
-
+const UpdateTourModal = ({ updateTour, setNumber, number }) => {
+    const { name, country, duration, price, image, departureDate, returnDate, description, _id } = updateTour && updateTour;
+    // console.log(updateTour);
     const { register, handleSubmit, reset } = useForm();
 
-    const handleUpdateJob = async (data) => {
-        const job = {
-            jobTitle: data.jobTitle,
-            companyName: data.companyName,
-            positionName: data.positionName,
-            vacancy: data.vacancy,
-            skills: data.skills,
+    const handleUpdateTour = async (data) => {
+        const tour = {
+            name: data.name,
+            country: data.country,
+            duration: data.duration,
+            price: data.price,
+            image: data.image,
+            departureDate: data.departureDate,
+            returnDate: data.returnDate,
             description: data.description,
         };
 
         // send to database
-        fetch(`http://localhost:5000/api/v1/jobs/${_id}`, {
+        fetch(`http://localhost:5000/api/v1/tours/${_id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json",
                 authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             },
-            body: JSON.stringify(job),
+            body: JSON.stringify(tour),
         })
             .then((res) => res.json())
             .then((data) => {
                 if (data?.status === "Successful") {
-                    toast.success("Job Update Successfully");
+                    toast.success("Tour Update Successfully");
                     reset();
                     setNumber(number + 1);
                     closeModal();
                 } else {
-                    toast.error("Failed to Update Job");
+                    toast.error("Failed to Update Tour");
                 }
             });
     };
@@ -42,6 +44,7 @@ const UpdateJobModal = ({ updateJob, setNumber, number }) => {
     const closeModal = () => {
         window.location.reload();
     };
+
 
     return (
         <div>
@@ -51,48 +54,64 @@ const UpdateJobModal = ({ updateJob, setNumber, number }) => {
                     <label htmlFor="update-job-modal" className="btn btn-sm btn-circle absolute right-2 top-2" onClick={closeModal}>
                         ✕
                     </label>
-                    <h1 className='mb-4 badge badge-error text-2xl badge-lg p-4'>Update Job</h1>
+                    <h1 className='mb-4 badge badge-error text-2xl badge-lg p-4'>Update Tour</h1>
                     <div className="w-full gap-3">
-                        <form onSubmit={handleSubmit(handleUpdateJob)} className="py-3">
+                        <form onSubmit={handleSubmit(handleUpdateTour)} className="py-3">
                             <input
-                                {...register("jobTitle")}
-                                defaultValue={jobTitle}
+                                {...register("name")}
+                                defaultValue={name}
                                 type="text"
-                                placeholder="Enter Job Title"
+                                placeholder="Enter Tour Package Name"
                                 className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
                             />
                             <div className="flex flex-col md:flex-row justify-between items-center md:gap-3">
                                 <input
-                                    {...register("companyName")}
-                                    defaultValue={companyName}
+                                    {...register("country")}
+                                    defaultValue={country}
                                     type="text"
                                     required
-                                    placeholder="Enter Company Name"
+                                    placeholder="Enter Tour Country"
                                     className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
                                 />
                                 <input
-                                    {...register("positionName")}
-                                    defaultValue={positionName}
+                                    {...register("duration")}
+                                    defaultValue={duration}
                                     type="text"
                                     required
-                                    placeholder="Enter Job Position"
+                                    placeholder="Enter Tour Duration"
                                     className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
                                 />
                             </div>
                             <input
-                                {...register("skills")}
-                                defaultValue={skills}
+                                {...register("price")}
+                                defaultValue={price}
                                 type="text"
                                 required
-                                placeholder="Enter Job Skills"
+                                placeholder="Enter Tour Price"
                                 className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
                             />
                             <input
-                                {...register("vacancy")}
-                                defaultValue={vacancy}
-                                type="number"
+                                {...register("image")}
+                                defaultValue={image}
+                                type="text"
                                 required
-                                placeholder="Enter Job Vacancy"
+                                placeholder="Enter Tour Image URL"
+                                className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
+                            />
+                            <input
+                                {...register("departureDate")}
+                                defaultValue={departureDate?.slice(0, 10)}
+                                type="date"
+                                required
+                                placeholder="Enter Tour departureDate"
+                                className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
+                            />
+                            <input
+                                {...register("returnDate")}
+                                value={returnDate?.slice(0, 10)}
+                                type="date"
+                                required
+                                placeholder="Enter Tour returnDate"
                                 className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
                             />
                             <textarea
@@ -106,7 +125,7 @@ const UpdateJobModal = ({ updateJob, setNumber, number }) => {
                             <input
                                 className="btn px-7 btn-primary mt-5 block mx-auto"
                                 type="submit"
-                                value="Update Job"
+                                value="Update Tour"
                             />
                         </form>
                     </div>
@@ -116,4 +135,4 @@ const UpdateJobModal = ({ updateJob, setNumber, number }) => {
     );
 };
 
-export default UpdateJobModal;
+export default UpdateTourModal;
