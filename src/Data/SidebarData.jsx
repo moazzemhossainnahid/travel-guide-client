@@ -1,10 +1,11 @@
-import { FaBook, FaDashcube, FaUser } from "react-icons/fa";
+import { FaCube, FaHotel, FaUser } from "react-icons/fa";
+import { FaAddressBook, FaBookAtlas, FaTentArrowTurnLeft } from "react-icons/fa6";
 
 export const SidebarData = [
     {
         title: "Dashboard",
         href: "addashboard",
-        icon: <FaDashcube/>,
+        icon: <FaCube/>,
     },
     { 
         title: "Manage Users",
@@ -12,18 +13,23 @@ export const SidebarData = [
         icon: <FaUser/>,
     },
     {
-        title: "Manage Books",
-        href: "mbooks",
-        icon: <FaBook/>,
+        title: "Manage Hotels",
+        href: "mhotels",
+        icon: <FaHotel/>,
     },
-    // {
-    //     title: "Manage Orders",
-    //     href: "morders",
-    //     icon: faListCheck,
-    // },
-    // {
-    //     title: "Manage Contacts",
-    //     href: "mcontacts",
-    //     icon: faContactBook,
-    // },
+    {
+        title: "Manage Hotel Bookings",
+        href: "mbookhotels",
+        icon: <FaAddressBook/>,
+    },
+    {
+        title: "Manage Tours",
+        href: "mtours",
+        icon: <FaTentArrowTurnLeft/>,
+    },
+    {
+        title: "Manage Tour Bookings",
+        href: "mbooktours",
+        icon: <FaBookAtlas/>,
+    },
 ];

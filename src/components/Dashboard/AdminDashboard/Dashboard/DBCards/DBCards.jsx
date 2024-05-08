@@ -10,11 +10,14 @@ const DBCards = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [tours, setTours] = useState([]);
-  const [socializations, setSocializations] = useState([]);
+  const [tourBooking, setTourBooking] = useState([]);
   const [countries, setCountries] = useState([]);
-  const [blogs, setBlogs] = useState([]);
-  const [jobApplications, setJobApplications] = useState([]);
+  const [bookedHotel, setBookedHotel] = useState([]);
   const [user] = useAuthState(auth);
+
+  const allHotels = countries?.flatMap(country =>
+    country?.locations?.flatMap(location => location?.hotels)
+);
 
   useEffect(() => {
     fetch(`http://localhost:5000/api/v1/users`, {
@@ -50,32 +53,26 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/socializations`, {
+    fetch(`http://localhost:5000/api/v1/tour-booking`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
-      .then((data) => setSocializations(data?.data?.result));
+      .then((data) => setTourBooking(data?.data?.result));
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/jobapplications`, {
+    fetch(`http://localhost:5000/api/v1/orders`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
-      .then((data) => setJobApplications(data?.data?.result));
+      .then((data) => setBookedHotel(data?.data?.result));
   }, []);
-
-
-  const blogsFilter = blogs && blogs?.filter(blog => blog?.email === user?.email);
-  const jobsFilter = tours && tours?.filter(job => job?.email === user?.email);
-  const socializationsFilter = socializations && socializations?.filter(s => s?.email === user?.email);
-  const jobApplicationsFilter = jobApplications && jobApplications?.filter(ja => ja?.email === user?.email);
 
 
   return (
@@ -132,7 +129,7 @@ const DBCards = () => {
           <div className="flex items-center justify-between bg-[#219422] p-3 rounded-t-xl">
             <div className="">
               <h3 className="text-3xl md:text-4xl font-bold py-2 text-white">
-                {blogsFilter?.length}
+                {allHotels?.length}
               </h3>
               <h3 className="text-md font-bold text-white">Total Hotels</h3>
             </div>
@@ -156,7 +153,7 @@ const DBCards = () => {
           <div className="flex items-center justify-between bg-[#572194b9] p-3 rounded-t-xl">
             <div className="">
               <h3 className="text-3xl md:text-4xl font-bold py-2 text-white">
-                {socializationsFilter?.length}
+                {bookedHotel?.length}
               </h3>
               <h3 className="text-md font-bold text-white">Total Booked Hotels</h3>
             </div>
@@ -204,7 +201,7 @@ const DBCards = () => {
           <div className="flex items-center justify-between bg-[#ad303c] p-3 rounded-t-xl">
             <div className="">
               <h3 className="text-3xl md:text-4xl font-bold py-2 text-white">
-                {jobApplicationsFilter?.length}{" "}
+                {tourBooking?.length}{" "}
               </h3>
               <h3 className="text-md font-bold text-white">Total Booked Tour</h3>
             </div>

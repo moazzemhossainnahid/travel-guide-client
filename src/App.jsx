@@ -25,13 +25,14 @@ import ManageUsers from './Components/Dashboard/AdminDashboard/ManageUsers/Manag
 import ManageJobs from './Components/Dashboard/AdminDashboard/ManageJobs/ManageJobs'
 import ManageJobApplications from './Components/Dashboard/AdminDashboard/ManageJobApplications/ManageJobApplications'
 import ManageBlogs from './Components/Dashboard/AdminDashboard/ManageBlogs/ManageBlogs'
+import ManageOrders from './Components/Dashboard/AdminDashboard/ManageOrders/ManageOrders'
 
 function App() {
 
   return (
     <>
       <div className="App pt-16">
-        {(window.location.pathname !== '/cpanel' && window.location.pathname !== '/cpanel/addashboard' && window.location.pathname !== '/cpanel/mblogs' && window.location.pathname !== '/cpanel/mjobs' && window.location.pathname !== '/cpanel/msocializations' && window.location.pathname !== '/cpanel/mjobapplications') && <Header />}
+        {(window.location.pathname !== '/cpanel' && window.location.pathname !== '/cpanel/addashboard' && window.location.pathname !== '/cpanel/musers' && window.location.pathname !== '/cpanel/mbookhotels' && window.location.pathname !== '/cpanel/mhotels' && window.location.pathname !== '/cpanel/mtours' && window.location.pathname !== '/cpanel/mbooktours') && <Header />}
         {/* <Header /> */}
         <div className="">
           <Routes>
@@ -57,13 +58,13 @@ function App() {
               <Route path="addashboard" element={<AdDashboard />} />
               <Route path="musers" element={<ManageUsers />} />
               <Route path="mjobs" element={<ManageJobs />} />
-              <Route path="mblogs" element={<ManageBlogs />} />
+              <Route path="mbookhotels" element={<ManageOrders />} />
               {/* <Route path="msocializations" element={<ManageSocializations />} /> */}
               <Route path="mjobapplications" element={<ManageJobApplications />} />
             </Route>
           </Routes>
         </div>
-        {(window.location.pathname !== '/cpanel' && window.location.pathname !== '/cpanel/addashboard' && window.location.pathname !== '/cpanel/mblogs' && window.location.pathname !== '/cpanel/mjobs' && window.location.pathname !== '/cpanel/msocializations' && window.location.pathname !== '/cpanel/mjobapplications') && <Footer />}
+        {(window.location.pathname !== '/cpanel' && window.location.pathname !== '/cpanel/addashboard' && window.location.pathname !== '/cpanel/musers' && window.location.pathname !== '/cpanel/mbookhotels' && window.location.pathname !== '/cpanel/mhotels' && window.location.pathname !== '/cpanel/mtours' && window.location.pathname !== '/cpanel/mbooktours') && <Footer />}
         <ToastContainer />
       </div>
     </>
