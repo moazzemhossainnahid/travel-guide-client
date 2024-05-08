@@ -32,6 +32,7 @@ const DeleteHotelsModal = ({ deleteHotel, setNumber, number }) => {
             if (data?.status === "Success") {
                 toast.success("Hotel Delete Successfully");
                 setNumber(number + 1);
+                window.location.reload();
             } else {
                 toast.error("Faild to Delete Hotel");
             }
