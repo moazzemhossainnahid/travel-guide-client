@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../../../../../firebase.init";
-import { FaArrowAltCircleRight, FaHotel, FaJediOrder, FaTripadvisor, FaUsers } from "react-icons/fa";
-import { FaAddressBook, FaBookAtlas, FaTentArrowTurnLeft } from "react-icons/fa6";
+import { FaArrowAltCircleRight, FaHotel, FaUsers } from "react-icons/fa";
+import { FaAddressBook, FaBookAtlas, FaCity, FaTentArrowTurnLeft } from "react-icons/fa6";
 
 const DBCards = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [tours, setTours] = useState([]);
   const [socializations, setSocializations] = useState([]);
+  const [countries, setCountries] = useState([]);
   const [blogs, setBlogs] = useState([]);
   const [jobApplications, setJobApplications] = useState([]);
   const [user] = useAuthState(auth);
@@ -38,14 +39,14 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/blogs`, {
+    fetch(`http://localhost:5000/api/v1/countries`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
     })
       .then((res) => res.json())
-      .then((data) => setBlogs(data?.data?.result));
+      .then((data) => setCountries(data?.data?.result));
   }, []);
 
   useEffect(() => {
@@ -108,12 +109,12 @@ const DBCards = () => {
           <div className="flex items-center justify-between bg-[#17A2BB] p-3 rounded-t-xl">
             <div className="">
               <h3 className="text-3xl md:text-4xl font-bold py-2 text-white">
-                {tours?.length}
+                {countries?.length}
               </h3>
               <h3 className="text-md font-bold text-white">Total Countries</h3>
             </div>
             <div className="">
-              <FaTentArrowTurnLeft className="text-[#42424281] text-3xl md:text-4xl" />
+              <FaCity className="text-[#42424281] text-3xl md:text-4xl" />
             </div>
           </div>
           <div
