@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import UpdateBlogsModal from "./Modals/UpdateBlogsModal";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../../firebase.init";
-
+  
 const ManageBlogs = () => {
   const [number, setNumber] = useState(0);
   const [blogs, setBlogs] = useState(null);

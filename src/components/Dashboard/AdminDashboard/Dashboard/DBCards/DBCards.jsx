@@ -1,17 +1,9 @@
-import {
-  faArrowAltCircleRight,
-  faBookAtlas,
-  faBraille,
-  faCartShopping,
-  faListCheck,
-  faBookmark,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../../../../../firebase.init";
+import { FaArrowAltCircleRight, FaUsers } from "react-icons/fa";
 
 const DBCards = () => {
   const navigate = useNavigate();
@@ -88,7 +80,7 @@ const DBCards = () => {
     <div className="">
       <div className="grid md:grid-cols-2 gap-5 py-10 text-start">
         {/* Registered Users */}
-        {/* <div className="">
+        <div className="">
           <div className="flex items-center justify-between bg-[#252525] p-3 rounded-t-xl">
             <div className="">
               <h3 className="text-3xl md:text-4xl font-bold py-2 text-white">
@@ -97,22 +89,19 @@ const DBCards = () => {
               <h3 className="text-md font-bold text-white">Total Users</h3>
             </div>
             <div className="">
-              <FontAwesomeIcon
-                className="text-[#42424281] text-3xl md:text-4xl"
-                icon={faUsers}
-              />
+              <FaUsers className="text-[#42424281] text-3xl md:text-4xl" />
             </div>
           </div>
           <div
             onClick={() => navigate("/cpanel/musers")}
             className="bg-[#1e1e1e] cursor-pointer py-2 text-center rounded-b-xl"
           >
-            <h2 className="text-md text-white">
+            <h2 className="text-md text-white flex items-center justify-center gap-2">
               More Info{" "}
-              <FontAwesomeIcon className="pl-2" icon={faArrowAltCircleRight} />{" "}
+              <FaArrowAltCircleRight className="pl-2 text-2xl" />{" "}
             </h2>
           </div>
-        </div> */}
+        </div>
         {/* Total Jobs */}
         <div className="">
           <div className="flex items-center justify-between bg-[#17A2BB] p-3 rounded-t-xl">
@@ -123,19 +112,19 @@ const DBCards = () => {
               <h3 className="text-md font-bold text-white">Total Job Posts</h3>
             </div>
             <div className="">
-              <FontAwesomeIcon
+              {/* <FontAwesomeIcon
                 className="text-[#42424281] text-3xl md:text-4xl"
                 icon={faCartShopping}
-              />
+              /> */}
             </div>
           </div>
           <div
             onClick={() => navigate("/cpanel/mjobs")}
             className="bg-[#0c93ab] cursor-pointer py-2 text-center rounded-b-xl"
           >
-            <h2 className="text-md text-white">
+            <h2 className="text-md text-white flex items-center justify-center gap-2">
               More Info{" "}
-              <FontAwesomeIcon className="pl-2" icon={faArrowAltCircleRight} />{" "}
+              <FaArrowAltCircleRight className="pl-2 text-2xl" />{" "}
             </h2>
           </div>
         </div>
@@ -149,19 +138,19 @@ const DBCards = () => {
               <h3 className="text-md font-bold text-white">Total Blog Posts</h3>
             </div>
             <div className="">
-              <FontAwesomeIcon
+              {/* <FontAwesomeIcon
                 className="text-[#42424281] text-3xl md:text-4xl"
                 icon={faBraille}
-              />
+              /> */}
             </div>
           </div>
           <div
             onClick={() => navigate("/cpanel/mblogs")}
             className="bg-[#186e1a] cursor-pointer py-2 text-center rounded-b-xl"
           >
-            <h2 className="text-md text-white">
+            <h2 className="text-md text-white flex items-center justify-center gap-2">
               More Info{" "}
-              <FontAwesomeIcon className="pl-2" icon={faArrowAltCircleRight} />{" "}
+              <FaArrowAltCircleRight className="pl-2 text-2xl" />{" "}
             </h2>
           </div>
         </div>
@@ -176,19 +165,19 @@ const DBCards = () => {
               <h3 className="text-md font-bold text-white">Total Socialization Posts</h3>
             </div>
             <div className="">
-              <FontAwesomeIcon
+              {/* <FontAwesomeIcon
                 className="text-[#42424281] text-3xl md:text-4xl"
                 icon={faBookAtlas}
-              />
+              /> */}
             </div>
           </div>
           <div
             onClick={() => navigate("/cpanel/msocializations")}
             className="bg-[#572194ea] cursor-pointer py-2 text-center rounded-b-xl"
           >
-            <h2 className="text-md text-white">
+            <h2 className="text-md text-white flex items-center justify-center gap-2">
               More Info{" "}
-              <FontAwesomeIcon className="pl-2" icon={faArrowAltCircleRight} />{" "}
+              <FaArrowAltCircleRight className="pl-2 text-2xl" />{" "}
             </h2>
           </div>
         </div>
@@ -203,19 +192,19 @@ const DBCards = () => {
               <h3 className="text-md font-bold text-white">Total Job Applications</h3>
             </div>
             <div className="">
-              <FontAwesomeIcon
+              {/* <FontAwesomeIcon
                 className="text-[#42424281] text-3xl md:text-4xl"
                 icon={faBookmark}
-              />
+              /> */}
             </div>
           </div>
           <div
             onClick={() => navigate("/cpanel/mjobapplications")}
             className="bg-[#8f4626] cursor-pointer py-2 text-center rounded-b-xl"
           >
-            <h2 className="text-md text-white">
+            <h2 className="text-md text-white flex items-center justify-center gap-2">
               More Info{" "}
-              <FontAwesomeIcon className="pl-2" icon={faArrowAltCircleRight} />{" "}
+              <FaArrowAltCircleRight className="pl-2 text-2xl" />{" "}
             </h2>
           </div>
         </div>

@@ -7,6 +7,6 @@ const AdDashboard = () => {
             <DBCards/>
         </div> 
     ); 
-};
+}; 
  
 export default AdDashboard;

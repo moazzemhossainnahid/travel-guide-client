@@ -18,6 +18,13 @@ import TourDetails from './Pages/Tours/TourDeatils/TourDetails'
 import Checkout from './Pages/Checkout/Checkout'
 import RequireAuth from './Components/Others/RequireAuth/RequireAuth'
 import Success from './Components/Others/Success/Success'
+import RequireAdmin from './Components/Others/RequireAdmin/RequireAdmin'
+import CPanel from './Components/Dashboard/AdminDashboard/Admin/CPanel'
+import AdDashboard from './Components/Dashboard/AdminDashboard/Dashboard/AdDashboard'
+import ManageUsers from './Components/Dashboard/AdminDashboard/ManageUsers/ManageUsers'
+import ManageJobs from './Components/Dashboard/AdminDashboard/ManageJobs/ManageJobs'
+import ManageJobApplications from './Components/Dashboard/AdminDashboard/ManageJobApplications/ManageJobApplications'
+import ManageBlogs from './Components/Dashboard/AdminDashboard/ManageBlogs/ManageBlogs'
 
 function App() {
 
@@ -33,7 +40,7 @@ function App() {
             <Route path='/hotels/:id' element={<HotelDetails />} />
             <Route path='/tours' element={<Tours />} />
             <Route path='/tours/:id' element={<RequireAuth><TourDetails /></RequireAuth>} />
-            <Route path='/checkout/hotel/:hotelId/room/:roomId' element={<RequireAuth><Checkout/></RequireAuth>} />
+            <Route path='/checkout/hotel/:hotelId/room/:roomId' element={<RequireAuth><Checkout /></RequireAuth>} />
             <Route path='/ssl-payment-success/:id' element={<Success />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/signup' element={<Signup />} />
@@ -45,15 +52,15 @@ function App() {
 
 
             {/* Control Panel Routes */}
-            {/* <Route path="/cpanel" element={<RequireAuth><RequireAdmin><CPanel /></RequireAdmin></RequireAuth>}>
+            <Route path="/cpanel" element={<RequireAuth><RequireAdmin><CPanel /></RequireAdmin></RequireAuth>}>
               <Route index element={<AdDashboard />} />
               <Route path="addashboard" element={<AdDashboard />} />
               <Route path="musers" element={<ManageUsers />} />
               <Route path="mjobs" element={<ManageJobs />} />
               <Route path="mblogs" element={<ManageBlogs />} />
-              <Route path="msocializations" element={<ManageSocializations />} />
+              {/* <Route path="msocializations" element={<ManageSocializations />} /> */}
               <Route path="mjobapplications" element={<ManageJobApplications />} />
-            </Route> */}
+            </Route>
           </Routes>
         </div>
         {(window.location.pathname !== '/cpanel' && window.location.pathname !== '/cpanel/addashboard' && window.location.pathname !== '/cpanel/mblogs' && window.location.pathname !== '/cpanel/mjobs' && window.location.pathname !== '/cpanel/msocializations' && window.location.pathname !== '/cpanel/mjobapplications') && <Footer />}

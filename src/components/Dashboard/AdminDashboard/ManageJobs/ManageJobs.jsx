@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import UpdateJobModal from "./Modals/UpdateJobModal";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../../firebase.init";
-
+  
 const ManageJobs = () => {
   const [number, setNumber] = useState(0);
   const [jobs, setJobs] = useState(null);

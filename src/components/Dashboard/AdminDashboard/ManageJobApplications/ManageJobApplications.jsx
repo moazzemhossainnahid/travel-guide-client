@@ -10,7 +10,7 @@ const ManageJobApplications = () => {
   const [applications, setApplications] = useState(null);
   const [viewApplication, setViewApplication] = useState(null);
   const[user] = useAuthState(auth)
-
+  
   useEffect(() => {
     fetch("http://localhost:5000/api/v1/jobapplications")
       .then((res) => res.json())
