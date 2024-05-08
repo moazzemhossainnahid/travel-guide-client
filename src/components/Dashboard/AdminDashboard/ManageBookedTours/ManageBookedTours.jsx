@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from "react";
-import ManageJobApplicationsRow from "./ManageJobApplicationsRow";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../../../../firebase.init";
-import ViewJobApplicationsModal from "./Modals/ViewJobApplicationsModal";
 
-const ManageJobApplications = () => {
-  const [applications, setApplications] = useState(null);
-  const [viewApplication, setViewApplication] = useState(null);
-  const[user] = useAuthState(auth)
-  
+import ManageBookedToursRow from "./ManageBookedToursRow";
+import ViewBookedToursModal from "./Modals/ViewBookedToursModal";
+
+const ManageBookedTours = () => {
+  const [tourBooking, setTourBooking] = useState(null);
+  const [viewData, setViewData] = useState(null);
+
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/jobapplications")
+    fetch("http://localhost:5000/api/v1/tour-booking", {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
       .then((res) => res.json())
-      .then((data) => setApplications(data?.data));
+      .then((data) => setTourBooking(data?.data?.result));
   }, []);
 
-  const applicationFilter = applications && applications?.result?.filter(app => app?.email === user?.email);
+  // console.log(tourBooking);
 
   return (
     <div className=" text-left h-full w-full">
       <div className="w-full flex items-center justify-center my-12">
         <div className="bg-white shadow rounded py-12 px-8 mb-20">
           <p className="md:text-3xl text-xl font-bold pb-10 leading-7 text-center text-gray-700">
-            Total Job Applications: {applicationFilter?.length}
+            Total Booked Tours: {tourBooking?.length}
           </p>
           <table className="border-collapse w-full bg-slate-200">
             {/* <!-- head --> */}
@@ -37,10 +39,10 @@ const ManageJobApplications = () => {
                   Name
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Phone
+                  Tour
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Address
+                  Phone
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
                   Action
@@ -50,25 +52,25 @@ const ManageJobApplications = () => {
             <tbody>
               {/* <!-- row 1 --> */}
 
-              {applicationFilter?.map((application, index) => (
-                <ManageJobApplicationsRow
-                  key={application?._id}
-                  application={application}
-                  setViewApplication={setViewApplication}
+              {tourBooking?.map((booked, index) => (
+                <ManageBookedToursRow
+                  key={booked?._id}
+                  booked={booked}
+                  setViewData={setViewData}
                   index={index}
-                ></ManageJobApplicationsRow>
+                ></ManageBookedToursRow>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      {viewApplication && (
-        <ViewJobApplicationsModal
-        application={viewApplication}
-        ></ViewJobApplicationsModal>
+      {viewData && (
+        <ViewBookedToursModal
+          booked={viewData}
+        ></ViewBookedToursModal>
       )}
     </div>
   );
 };
 
-export default ManageJobApplications;
+export default ManageBookedTours;

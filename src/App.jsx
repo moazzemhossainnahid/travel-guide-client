@@ -22,10 +22,8 @@ import RequireAdmin from './Components/Others/RequireAdmin/RequireAdmin'
 import CPanel from './Components/Dashboard/AdminDashboard/Admin/CPanel'
 import AdDashboard from './Components/Dashboard/AdminDashboard/Dashboard/AdDashboard'
 import ManageUsers from './Components/Dashboard/AdminDashboard/ManageUsers/ManageUsers'
-import ManageJobs from './Components/Dashboard/AdminDashboard/ManageJobs/ManageJobs'
-import ManageJobApplications from './Components/Dashboard/AdminDashboard/ManageJobApplications/ManageJobApplications'
-import ManageBlogs from './Components/Dashboard/AdminDashboard/ManageBlogs/ManageBlogs'
 import ManageOrders from './Components/Dashboard/AdminDashboard/ManageOrders/ManageOrders'
+import ManageBookedTours from './Components/Dashboard/AdminDashboard/ManageBookedTours/ManageBookedTours'
 
 function App() {
 
@@ -57,10 +55,10 @@ function App() {
               <Route index element={<AdDashboard />} />
               <Route path="addashboard" element={<AdDashboard />} />
               <Route path="musers" element={<ManageUsers />} />
-              <Route path="mjobs" element={<ManageJobs />} />
+              {/* <Route path="mjobs" element={<ManageJobs />} /> */}
               <Route path="mbookhotels" element={<ManageOrders />} />
               {/* <Route path="msocializations" element={<ManageSocializations />} /> */}
-              <Route path="mjobapplications" element={<ManageJobApplications />} />
+              <Route path="mbooktours" element={<ManageBookedTours />} />
             </Route>
           </Routes>
         </div>

@@ -1,9 +1,12 @@
 import React from 'react';
 import { FaEye, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2'
-const ManageJobApplicationsRow = ({ application, index, setViewApplication }) => {
+const ManageBookedToursRow = ({ booked, index, setViewData }) => {
 
-    const { name, phone, address, email, message, _id, jobTitle, jobPosition, jobEmail, companyName } = application;
+    const { name, phone, address, email, tourPlan, adult, children, _id } = booked;
+
+
+    console.log(booked);
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -16,7 +19,7 @@ const ManageJobApplicationsRow = ({ application, index, setViewApplication }) =>
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                const url = `http://localhost:5000/api/v1/jobapplications/${id}`;
+                const url = `http://localhost:5000/api/v1/tour-booking/${id}`;
                 fetch(url, {
                     method: 'DELETE',
                     headers: {
@@ -44,11 +47,6 @@ const ManageJobApplicationsRow = ({ application, index, setViewApplication }) =>
 
     }
 
-    const closeModal = () => {
-        window.location.reload();
-    };
-
-
     return (
         <tr className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
             <td className="w-full lg:w-auto p-2 text-sm text-gray-800 text-center border border-b block font-semibold lg:table-cell relative lg:static">
@@ -59,17 +57,17 @@ const ManageJobApplicationsRow = ({ application, index, setViewApplication }) =>
                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Name</span>
                 {name} <br />
             </td>
+            <td className="w-full lg:w-auto p-2 font-bold text-green-700 text-sm text-center border border-b block lg:table-cell relative lg:static">
+                <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Tour</span>
+                {tourPlan}
+            </td>
             <td className="w-full lg:w-auto p-2 text-sm text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Phone</span>
                 {phone}
             </td>
-            <td className="w-full lg:w-auto p-2 font-bold text-green-700 text-sm text-center border border-b block lg:table-cell relative lg:static">
-                <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Address</span>
-                {address}
-            </td>
             <td className="w-full lg:w-auto text-xs p-2 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                 <div className="flex justify-between px-3 pb-1 gap-2 items-center">
-                    <label onClick={() => setViewApplication(application)} htmlFor="view-jobapplication-modal" className=" text-black rounded shadow px-2 py-1 cursor-pointer text-xs bg-danger "><FaEye className='text-green-700' /></label>
+                    <label onClick={() => setViewData(booked)} htmlFor="view-jobapplication-modal" className=" text-black rounded shadow px-2 py-1 cursor-pointer text-xs bg-danger "><FaEye className='text-green-700' /></label>
                     <label onClick={() => handleDelete(_id)} className="btn text-white bg-white btn-xs"><FaTrash className='text-red-700' /></label>
                 </div>
             </td>
@@ -78,4 +76,4 @@ const ManageJobApplicationsRow = ({ application, index, setViewApplication }) =>
     );
 };
 
-export default ManageJobApplicationsRow;
+export default ManageBookedToursRow;
