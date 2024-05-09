@@ -5,7 +5,7 @@ import HeroAbout from '../../Components/Pages/AboutUS/HeroAbout';
 import Partners from '../../Components/Pages/AboutUS/Partners';
 import WhyUs from '../../Components/Pages/AboutUS/WhyUs/WhyUs';
 
-
+      
 
 const AboutUS = () => {
     return (

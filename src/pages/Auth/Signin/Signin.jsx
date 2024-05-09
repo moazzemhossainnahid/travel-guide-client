@@ -7,7 +7,7 @@ import { GiCancel } from "react-icons/gi";
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import Loading from '../../../Components/Others/Loading';
-  
+        
 const Signin = () => {
     const [signInWithEmailAndPassword, suser, sloading, serror] = useSignInWithEmailAndPassword(auth);
     const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);

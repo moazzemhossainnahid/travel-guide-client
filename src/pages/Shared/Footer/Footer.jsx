@@ -2,8 +2,8 @@
 import { FaFacebook, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
-
-  
+   
+      
   return (
     <div className=''>
     <div className="bg-gray-700 ">
