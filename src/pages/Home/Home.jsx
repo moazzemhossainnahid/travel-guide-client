@@ -11,8 +11,8 @@ import HomeTours from '../../Components/Pages/Home/HomeTours/HomeTours';
 const Home = () => {
     const [allTours, setTour_data] = useState([]);
     const [allHotel, setHotel_data] = useState([]);
-
-
+ 
+ 
     return (
         <div className='w-full'>
             <PageTitle title="Home"></PageTitle>

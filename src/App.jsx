@@ -2,7 +2,6 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import { ToastContainer } from 'react-toastify'
-import Home from './Pages/Home/Home'
 import Footer from './Pages/Shared/Footer/Footer'
 import Header from './Pages/Shared/Header/Header'
 import ContactUS from './Pages/ContactUS/ContactUS'
@@ -26,6 +25,7 @@ import ManageBookedTours from './Components/Dashboard/AdminDashboard/ManageBooke
 import ManageTours from './Components/Dashboard/AdminDashboard/ManageTours/ManageTours'
 import ManageHotels from './Components/Dashboard/AdminDashboard/ManageCountries/ManageHotels'
 import NotFound from './Pages/NotFound/NotFound'
+import Home from './Pages/Home/Home'
 
 function App() {
 
