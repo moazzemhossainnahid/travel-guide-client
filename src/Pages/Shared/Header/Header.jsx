@@ -4,14 +4,12 @@ import { AiOutlineClose } from "react-icons/ai";
 import Authentication from './Authentication';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
-import UseAdmin from '../../../Hooks/useAdmin';
 import { FaBars } from 'react-icons/fa';
      
         
 
 const Header = () => {
     const [user] = useAuthState(auth);
-    const [admin] = UseAdmin();
     const navigate = useNavigate();
 
     let Links = [
