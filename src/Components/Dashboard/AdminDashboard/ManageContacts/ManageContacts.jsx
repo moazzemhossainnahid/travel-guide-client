@@ -7,7 +7,7 @@ const ManageContacts = () => {
   const [contacts, setContacts] = useState(null);
   const [deleteContact, setDeleteContact] = useState(null);
   const [allContacts, setAllContacts] = useState(false);
-
+ 
   useEffect(() => {
     fetch("https://readify-server-five.vercel.app/api/v1/contacts")
       .then((res) => res.json())

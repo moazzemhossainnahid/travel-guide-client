@@ -4,7 +4,7 @@ import useHotelDetails from '../../../Hooks/useHotelDetails';
 import { FaBangladeshiTakaSign, FaLocationDot, FaPhoneFlip, FaRestroom, FaScrewdriver } from 'react-icons/fa6';
 import { FaBed, FaBus, FaCheck, FaCheckCircle, FaCheckSquare, FaCoffee, FaGlasses, FaMobileAlt, FaPhoneAlt, FaWifi } from 'react-icons/fa';
 import { Link } from 'react-scroll';
-
+ 
 const HotelDetails = () => {
     const { id } = useParams();
     const { hotel } = useHotelDetails(id);

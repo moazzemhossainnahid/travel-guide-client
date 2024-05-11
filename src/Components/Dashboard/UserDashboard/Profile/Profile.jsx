@@ -5,7 +5,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../../firebase.init';
 import useProfile from '../../../../Hooks/useProfile';
 
-  
+   
 const Profile = () => {
     const { register, handleSubmit, reset } = useForm();
     const [user] = useAuthState(auth);

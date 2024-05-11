@@ -6,7 +6,7 @@ import auth from "../../../../../firebase.init";
 import DeleteTourModal from "./Modals/DeleteTourModal";
 import UpdateTourModal from "./Modals/UpdateTourModal";
 import ManageToursRow from "./ManageToursRow";
-
+  
 const ManageTours = () => {
   const [number, setNumber] = useState(0);
   const [tours, setTours] = useState(null);

@@ -6,7 +6,7 @@ const CPanel = () => {
         <div className='bg-white'>
             <Sidebar/>
         </div>
-    );   
+    );    
 };  
 
 export default CPanel;

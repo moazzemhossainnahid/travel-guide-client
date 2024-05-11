@@ -5,7 +5,7 @@ import UserDetails from "./UserDetails";
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
   const [allUsers, setAllUsers] = useState(false);
-  
+    
   useEffect(() => {
     fetch("https://travel-guide-server-ii.vercel.app/api/v1/users", {
       method: "GET",

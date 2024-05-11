@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { GiEntryDoor, GiExitDoor } from 'react-icons/gi';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+ 
 const Success = () => {
     const navigate = useNavigate();
     const { id } = useParams();

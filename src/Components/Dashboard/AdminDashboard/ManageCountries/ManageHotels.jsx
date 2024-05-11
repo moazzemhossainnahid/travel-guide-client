@@ -8,7 +8,7 @@ import auth from "../../../../../firebase.init";
 import UpdateHotelsModal from "./Modals/UpdateHotelsModal";
 import DeleteHotelsModal from "./Modals/DeleteHotelsModal";
 import useHotels from "../../../../Hooks/useHotels";
-
+  
 const ManageHotels = () => {
   const [number, setNumber] = useState(0);
   // const [hotels, setHotels] = useState(null);

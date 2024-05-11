@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useTourDetails from '../../../Hooks/useTourDetails';
 import { useForm } from 'react-hook-form';
@@ -11,7 +10,7 @@ const TourDetails = () => {
     const { tour } = useTourDetails(id);
     const { register, handleSubmit, reset } = useForm();
 
-    // console.log("tour", tour);
+    // console.log("tour", tour); 
 
     const handleBookingTour = async (data) => {
         const booking = {
@@ -86,7 +85,7 @@ const TourDetails = () => {
                                 <h3 className="bg-gray-300 px-4 md:rounded-l-md">Highlights</h3>
                                 <div className='space-y-3'>
                                     {
-                                        tour?.highlights?.map(t => <p className='flex items-center gap-1'> <FaCheckSquare /> {t}</p>)
+                                        tour?.highlights?.map(t => <p key={t} className='flex items-center gap-1'> <FaCheckSquare /> {t}</p>)
                                     }
                                 </div>
                             </div>
@@ -94,7 +93,7 @@ const TourDetails = () => {
                                 <h3 className="bg-gray-300 px-4 md:rounded-l-md">Included</h3>
                                 <div className='space-y-3'>
                                     {
-                                        tour?.included?.map(t => <p className='flex items-center gap-1'> <FaCheckSquare /> {t}</p>)
+                                        tour?.included?.map(t => <p key={t} className='flex items-center gap-1'> <FaCheckSquare /> {t}</p>)
                                     }
                                 </div>
                             </div>
@@ -102,7 +101,7 @@ const TourDetails = () => {
                                 <h3 className="bg-gray-300 px-4 md:rounded-l-md">Not Included</h3>
                                 <div className='space-y-3'>
                                     {
-                                        tour?.notIncluded?.map(t => <p className='flex items-center gap-1'> <FaCheckSquare /> {t}</p>)
+                                        tour?.notIncluded?.map(t => <p key={t} className='flex items-center gap-1'> <FaCheckSquare /> {t}</p>)
                                     }
                                 </div>
                             </div>
@@ -114,7 +113,7 @@ const TourDetails = () => {
                         </div>
                         <div className="pt-7">
                             <label
-                                for="bookAppointment"
+                                htmlFor="bookAppointment"
                                 className="w-2/3 md:w-2/5 btn btn-outline btn-primary hover:text-white flex items-center justify-center mx-auto"
                             >
                                 Apply for Booking{" "}
@@ -127,16 +126,16 @@ const TourDetails = () => {
 
             {/* <!-- The Book Appointment modal --> */}
 
-            <input type="checkbox" id="bookAppointment" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box relative  bg-slate-300">
+            <input type="checkbox" id="bookAppointment" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box relative  bg-slate-300">
                     <label
-                        for="bookAppointment"
-                        class="btn btn-sm btn-circle absolute right-2 top-2"
+                        htmlFor="bookAppointment"
+                        className="btn btn-sm btn-circle absolute right-2 top-2"
                     >
                         ✕
                     </label>
-                    <h3 class="text-lg font-bold">Insert Booking Information For <br /> /{tour?.name}/</h3>
+                    <h3 className="text-lg font-bold">Insert Booking Information For <br /> /{tour?.name}/</h3>
                     <form
                         onSubmit={handleSubmit(handleBookingTour)}
                         action=""

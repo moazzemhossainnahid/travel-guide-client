@@ -6,7 +6,7 @@ import ViewBookedToursModal from "./Modals/ViewBookedToursModal";
 const ManageBookedTours = () => {
   const [tourBooking, setTourBooking] = useState(null);
   const [viewData, setViewData] = useState(null);
-
+ 
   useEffect(() => {
     fetch("https://travel-guide-server-ii.vercel.app/api/v1/tour-booking", {
       method: 'GET',
