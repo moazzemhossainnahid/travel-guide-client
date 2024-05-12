@@ -5,7 +5,7 @@ const useCountries = () => {
     const [loading, setLoading] = useState(true); // Initialize loading state as true
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/v1/countries`, {
+        fetch(`https://travel-guide-server-ii.vercel.app/api/v1/countries`, {
             method: "GET",
         }) 
         .then(res => res.json())

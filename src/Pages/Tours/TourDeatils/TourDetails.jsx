@@ -26,7 +26,7 @@ const TourDetails = () => {
 
     
         // send to database
-        fetch(`http://localhost:5000/api/v1/tour-booking`, {
+        fetch(`https://travel-guide-server-ii.vercel.app/api/v1/tour-booking`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

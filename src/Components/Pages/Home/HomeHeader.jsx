@@ -15,30 +15,6 @@ const HomeHeader = ({ allTours, allHotel }) => {
   const [hotelName, setHotelName] = useState("");
   const [tourName, setTourName] = useState("");
 
-  console.log(singleHotelData);
-  console.log(suggestHotel);
-
-
-  // const handleSearchField = async (name) => {
-  //   let matches = [];
-  //   if (active === "hotel") {
-  //     if (name.length > 0) {
-  //       matches = allHotel?.filter((hotel) => {
-  //         return hotel.hotel_name.toLowerCase().includes(name.toLowerCase());
-  //       });
-  //     }
-  //     setHotelText(name);
-  //     setSuggestHotel(matches);
-  //   } else {
-  //     if (name.length > 0) {
-  //       matches = allTours?.filter((tour) => {
-  //         return tour.name.toLowerCase().includes(name.toLowerCase());
-  //       });
-  //     }
-  //     setTourText(name);
-  //     setSuggestTour(matches);
-  //   }
-  // };
 
   const handleSearchField = async (name) => {
     let matches = [];
@@ -217,8 +193,8 @@ const HomeHeader = ({ allTours, allHotel }) => {
             <div className="-mt-4">
               {active === "hotel" && (
                 <div className="p-10 rounded-2xl relative shadow-lg bg-white">
-                  <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5">
-                    <div className="leading-tight lg:col-span-3 border p-3 rounded-2xl hover:cursor-pointer">
+                <div className="grid grid-cols-1 sm:grid-cols-1 relative rounded-2xl p-10 shadow-lg bg-white">
+                  <div className="md:w-[38rem] lg:w-[55rem] hover:cursor-pointer leading-tight border p-3 rounded-2xl">
                       <p
                         onClick={() => setToggles(!toggles)}
                         className="text-xs md:text-sm lg:text-sm"
@@ -247,7 +223,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                           ) : (
                             <h2
                               onClick={() => setToggles(!toggles)}
-                              className="text-lg  font-semibold md:text-xl lg:text-2xl py-2"
+                              className="text-lg font-semibold md:text-xl lg:text-2xl py-2"
                             >
                               Hotel Noorjahan Grand
                             </h2>
@@ -262,7 +238,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                         </div>
                       )}
                     </div>
-                    <div className="leading-tight border p-3 rounded-2xl">
+                    {/* <div className="leading-tight border p-3 rounded-2xl">
                       <p className="text-xs md:text-sm lg:text-sm pb-2">
                         CHECK IN
                       </p>
@@ -285,7 +261,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                       focus:border-red-400 block w-full p-2 h-11 "
                         type="date"
                       />
-                    </div>
+                    </div> */}
                   </div>
                   <div>
                     {/* suggest part of div */}
