@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useHotelDetails from '../../../Hooks/useHotelDetails';
 import { FaBangladeshiTakaSign, FaLocationDot } from 'react-icons/fa6';
@@ -9,7 +9,9 @@ const HotelDetails = () => {
     const { id } = useParams();
     const { hotel } = useHotelDetails(id);
     const navigate = useNavigate();
+    const [imageError, setImageError] = useState(false);
 
+    const fallbackImageUrl = "https://freepngimg.com/thumb/hotel/33386-8-hotel-clipart-thumb.png";
     // console.log(hotel);
     return (
         <div className='w-full py-7 px-3'>
@@ -17,7 +19,7 @@ const HotelDetails = () => {
             <p className="pt-3 flex gap-2 items-center font-semibold"> <FaLocationDot className='text-2xl' /> {hotel?.location} </p>
             <div className="py-7 flex flex-col md:flex-row gap-5 justify-center items-center">
                 <div className="w-full h-96">
-                    <img src={hotel?.image} alt="hotel_image" className="rounded-xl h-full" />
+                    <img src={imageError ? fallbackImageUrl : hotel?.image} onError={() => setImageError(true)} alt="hotel_image" className="rounded-xl h-full" />
                 </div>
                 <div className="w-full h-96 grid grid-cols-2 items-center justify-center gap-3">
                     <img src={`https://api.sharetrip.net/api/v1/hotel/image?key=HyANbffVjkBh1mA2CJLuNFZlI6UkKrgAbXWPt8bqt5XudxSGJg/auh/IeYO9o63FWll2h/tvGridd5Ar9ZmNcLK2zvqYu7SQFFOLep/AnjzvHum1pSdfWYcCEAHilkZUD00Yfpcvp/xci6Z3AnHIvw==`} alt="hotel_image" className="rounded-xl h-full" />

@@ -4,44 +4,36 @@ import { Link, useNavigate } from "react-router-dom";
 const HomeHeader = ({ allTours, allHotel }) => {
   const navigate = useNavigate();
   const [active, setActive] = useState("hotel");
-  const [text, setText] = useState("");
-  const [hotelNameText, setHotelNameText] = useState("");
+  const [tourText, setTourText] = useState("");
+  const [hotelText, setHotelText] = useState("");
   const [toggle, setToggle] = useState(false);
   const [toggles, setToggles] = useState(false);
-  const [suggest, setSuggest] = useState([]);
-  const [suggestText, setSuggestText] = useState([]);
+  const [suggestHotel, setSuggestHotel] = useState([]);
+  const [suggestTour, setSuggestTour] = useState([]);
   const [singleData, setSingleData] = useState([]);
   const [singleDataH, setSingleDataH] = useState([]);
   const [name, setName] = useState("");
   const [nameTour, setNameTour] = useState("");
 
-  /* ----------------------------------------------------------------*/
-  /*                   SEARCH FILTER FUNCTIONALITY                   */
-  /* ----------------------------------------------------------------*/
+
   const handleSearchField = async (name) => {
-    let matchesText = [];
     let matches = [];
     if (active === "hotel") {
       if (name.length > 0) {
-        matches = allHotel?.filter((title) => {
-          const regex = new RegExp(`${name}`, "");
-          const result = title.name.match(regex);
-          return result;
+        matches = allHotel?.filter((hotel) => {
+          return hotel.hotel_name.toLowerCase().includes(name.toLowerCase());
         });
       }
-
-      setHotelNameText(name);
-      setSuggest(matches);
+      setHotelText(name);
+      setSuggestHotel(matches);
     } else {
       if (name.length > 0) {
-        matchesText = allTours?.filter((title) => {
-          const regex = new RegExp(`${name}`, "");
-          const result = title.name.match(regex);
-          return result;
+        matches = allTours?.filter((tour) => {
+          return tour.name.toLowerCase().includes(name.toLowerCase());
         });
       }
-      setText(name);
-      setSuggestText(matchesText);
+      setTourText(name);
+      setSuggestTour(matches);
     }
   };
 
@@ -49,23 +41,24 @@ const HomeHeader = ({ allTours, allHotel }) => {
     if (active === "hotel") {
       setName(event);
       setToggles(!toggles);
-      const location = allHotel?.filter((data) =>
-        data.name.toLowerCase().includes(name.toLowerCase())
+      const hotels = allHotel?.filter((data) =>
+        data.hotel_name.toLowerCase().includes(name.toLowerCase())
       );
-      setSingleDataH(location);
+      setSingleDataH(hotels);
       const result = allHotel?.filter(
-        (item) => item.name.toLowerCase() === event.toLowerCase()
+        (item) => item.hotel_name.toLowerCase() === event.toLowerCase()
       );
 
       if (result.length > 0) {
         document.getElementById("suggested_item").style.display = "none";
-        setSuggest([]);
+        setSuggestHotel([]);
       }
     } else {
       setNameTour(event);
       setToggle(!toggle);
       const location = allTours?.filter((data) =>
-        data.name.toLowerCase().includes(nameTour.toLowerCase())
+        data.name.toLowerCase().includes(nameTour.toLowerCase()) ||
+        data.country.toLowerCase().includes(nameTour.toLowerCase())
       );
       setSingleData(location);
       const result = allTours?.filter(
@@ -73,21 +66,18 @@ const HomeHeader = ({ allTours, allHotel }) => {
       );
       if (result.length > 0) {
         document.getElementById("suggested_item_tour").style.display = "none";
-        setSuggestText([]);
+        setSuggestTour([]);
       }
     }
   };
 
   const handleButton = (id) => {
     if (active === "hotel") {
-      navigate(`/hotel/details/${id}`);
+      navigate(`/hotels/${id}`);
     } else {
-      navigate(`/tour/details/${id}`);
+      navigate(`/tours/${id}`);
     }
   };
-  /* ----------------------------------------------------------------*/
-  /*                   FILTER FUNCTIONALITY END                      */
-  /* ----------------------------------------------------------------*/
 
   return (
     <div
@@ -226,7 +216,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                               onClick={() => setToggles(!toggles)}
                               className="text-lg  font-semibold md:text-xl lg:text-2xl py-2"
                             >
-                              Spiritual Ramu Tour
+                              Hotel Noorjahan Grand
                             </h2>
                           )}
                           {singleDataH[0]?.location ? (
@@ -234,7 +224,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                               {singleDataH[0]?.location}
                             </p>
                           ) : (
-                            <p className="text-sm">Station Road, Chittagong</p>
+                            <p className="text-sm">Boroshola, Airport Road, Sylhet</p>
                           )}
                         </div>
                       )}
@@ -266,21 +256,21 @@ const HomeHeader = ({ allTours, allHotel }) => {
                   </div>
                   <div>
                     {/* suggest part of div */}
-                    {hotelNameText.length
-                      ? suggest?.length !== 0 && (
+                    {hotelText.length
+                      ? suggestHotel?.length !== 0 && (
                           <div
                             id="suggested_item"
                             className="bg-white rounded-lg w-5/6 lg:w-1/3 z-10 p-4 absolute"
                           >
-                            {suggest
+                            {suggestHotel
                               ?.slice(0, 10)
-                              ?.map(({ name, index }) => (
+                              ?.map(({ hotel_name, index }) => (
                                 <div className="border-b-2 " key={index}>
                                   <p
-                                    onClick={() => handleText(name)}
+                                    onClick={() => handleText(hotel_name)}
                                     className="pt-3 divide-y hover:text-green-400 hover:cursor-pointer divide-dashed"
                                   >
-                                    {name}
+                                    {hotel_name}
                                   </p>
                                 </div>
                               ))}
@@ -325,15 +315,15 @@ const HomeHeader = ({ allTours, allHotel }) => {
                             onClick={() => setToggle(!toggle)}
                             className="text-lg font-semibold md:text-2xl lg:text-2xl py-2"
                           >
-                            Spiritual Ramu Tour
+                            Gardens by the Bay Tour
                           </h2>
                         )}
-                        {singleData[0]?.location ? (
+                        {singleData[0]?.country ? (
                           <p className="text-xs lg:text-sm">
-                            {singleData[0]?.location}
+                            {singleData[0]?.country}
                           </p>
                         ) : (
-                          <p className="text-xs lg:text-sm">{`Cox's Bazar`}</p>
+                          <p className="text-xs lg:text-sm">{`Indonesia`}</p>
                         )}
                       </div>
                     )}
@@ -342,13 +332,13 @@ const HomeHeader = ({ allTours, allHotel }) => {
                   {/* </div> */}
                   <div>
                     {/* suggest part of div */}
-                    {text.length
-                      ? suggestText.length !== 0 && (
+                    {tourText.length
+                      ? suggestTour.length !== 0 && (
                           <div
                             id="suggested_item_tour"
                             className="bg-white rounded-lg w-5/6 lg:w-1/3 z-10 p-4 absolute"
                           >
-                            {suggestText
+                            {suggestTour
                               ?.slice(0, 10)
                               ?.map(({ name, index }) => (
                                 <div className="border-b-2 " key={index}>

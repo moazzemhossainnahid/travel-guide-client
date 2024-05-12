@@ -11,11 +11,11 @@ const HotelsCard = ({ data }) => {
     return (
         <div className="w-full h-full mx-auto group duration-200 shadow overflow-hidden">
             <div className="w-full h-52 relative overflow-hidden">
-                {/* <div className="absolute top-1 right-1 z-10">
-            {data?.badge === "Vegan" && <h3 className="text-md font-sans bg-green-500 px-2"> <FontAwesomeIcon icon={faLeaf} /> {data?.badge}</h3>}
-            {data?.badge === "Hot" && <h3 className="text-md font-sans bg-red-500 px-2"> <FontAwesomeIcon icon={faFireAlt} /> {data?.badge}</h3>}
-            {data?.badge === "Non Veg" && <h3 className="text-md font-sans bg-yellow-500 px-2"> <FontAwesomeIcon icon={faBowlFood} /> {data?.badge}</h3>}
-        </div> */}
+            {/* <div className="absolute top-1 right-1 z-10">
+                    {data?.badge === "Vegan" && <h3 className="text-md font-sans bg-green-500 px-2"> <FontAwesomeIcon icon={faLeaf} /> {data?.badge}</h3>}
+                    {data?.badge === "Hot" && <h3 className="text-md font-sans bg-red-500 px-2"> <FontAwesomeIcon icon={faFireAlt} /> {data?.badge}</h3>}
+                    {data?.badge === "Non Veg" && <h3 className="text-md font-sans bg-yellow-500 px-2"> <FontAwesomeIcon icon={faBowlFood} /> {data?.badge}</h3>}
+                </div> */}
                 {/* <img src={data?.image} alt="" className="w-full h-full object-cover rounded group-hover:scale-110 duration-200 " /> */}
                 <img
                     src={imageError ? fallbackImageUrl : data?.image} // Use the fallback image URL if imageError is true
