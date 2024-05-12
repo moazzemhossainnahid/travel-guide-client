@@ -8,7 +8,7 @@ const ManageBookedTours = () => {
   const [viewData, setViewData] = useState(null);
  
   useEffect(() => {
-    fetch("https://travel-guide-server-ii.vercel.app/api/v1/tour-booking", {
+    fetch("http://localhost:5000/api/v1/tour-booking", {
       method: 'GET',
       headers: {
         'content-type': 'application/json',

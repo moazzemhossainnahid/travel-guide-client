@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 
 const HotelsCard = ({ data }) => {
     const navigate = useNavigate();
+    const [imageError, setImageError] = useState(false);
+
+    const fallbackImageUrl = "https://freepngimg.com/thumb/hotel/33386-8-hotel-clipart-thumb.png";
 
     return (
         <div className="w-full h-full mx-auto group duration-200 shadow overflow-hidden">
@@ -13,7 +16,13 @@ const HotelsCard = ({ data }) => {
             {data?.badge === "Hot" && <h3 className="text-md font-sans bg-red-500 px-2"> <FontAwesomeIcon icon={faFireAlt} /> {data?.badge}</h3>}
             {data?.badge === "Non Veg" && <h3 className="text-md font-sans bg-yellow-500 px-2"> <FontAwesomeIcon icon={faBowlFood} /> {data?.badge}</h3>}
         </div> */}
-                <img src={data?.image} alt="" className="w-full h-full object-cover rounded group-hover:scale-110 duration-200 " />
+                {/* <img src={data?.image} alt="" className="w-full h-full object-cover rounded group-hover:scale-110 duration-200 " /> */}
+                <img
+                    src={imageError ? fallbackImageUrl : data?.image} // Use the fallback image URL if imageError is true
+                    alt="hotel"
+                    className="w-full h-full object-cover rounded group-hover:scale-110 duration-200"
+                    onError={() => setImageError(true)} // Set imageError to true if the image fails to load
+                />
             </div>
             <div className="space-y-2">
                 <div className="flex justify-between bg-gray-200 items-center text-start h-16 gap-2 pl-2">

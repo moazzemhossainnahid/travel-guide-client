@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useHotelDetails from '../../../Hooks/useHotelDetails';
-import { FaBangladeshiTakaSign, FaLocationDot, FaPhoneFlip, FaRestroom, FaScrewdriver } from 'react-icons/fa6';
-import { FaBed, FaBus, FaCheck, FaCheckCircle, FaCheckSquare, FaCoffee, FaGlasses, FaMobileAlt, FaPhoneAlt, FaWifi } from 'react-icons/fa';
+import { FaBangladeshiTakaSign, FaLocationDot } from 'react-icons/fa6';
+import { FaBed, FaBus, FaCheckCircle, FaCheckSquare, FaCoffee, FaMobileAlt, FaPhoneAlt, FaWifi } from 'react-icons/fa';
 import { Link } from 'react-scroll';
  
 const HotelDetails = () => {
@@ -186,7 +186,7 @@ const HotelDetails = () => {
                         <h3 className="font-bold ">Payment accepted by the property:</h3>
                         <ul className='list-disc'>
                             {
-                                hotel?.payment_accept?.map(p => <li className='flex gap-2 items-center'> <FaCheckCircle className='text-xs' /> {p}</li>)
+                                hotel?.payment_accept?.map(p => <li key={p} className='flex gap-2 items-center'> <FaCheckCircle className='text-xs' /> {p}</li>)
                             }
 
                         </ul>

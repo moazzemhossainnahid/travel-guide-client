@@ -22,10 +22,11 @@ const TourDetails = () => {
           children: data.children,
         };
         
-    console.log(booking);
+    // console.log(booking);
+
     
         // send to database
-        fetch(`https://travel-guide-server-ii.vercel.app/api/v1/tour-booking`, {
+        fetch(`http://localhost:5000/api/v1/tour-booking`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

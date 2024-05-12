@@ -19,7 +19,7 @@ const ManageBookedToursRow = ({ booked, index, setViewData }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                const url = `https://travel-guide-server-ii.vercel.app/api/v1/tour-booking/${id}`;
+                const url = `http://localhost:5000/api/v1/tour-booking/${id}`;
                 fetch(url, {
                     method: 'DELETE',
                     headers: {
