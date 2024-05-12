@@ -108,7 +108,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
         <div className="container mx-auto">
           <div className="flex  justify-center shadow-lg">
             <div className="flex p-4 px-16 lg:px-18 z-10 rounded-lg shadow-lg space-x-14 bg-gray-100">
-              <div>
+              {/* <div>
                 <Link
                   onClick={() => setActive("flight")}
                   className="flex space-x-1"
@@ -126,7 +126,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                 {active === "flight" && (
                   <div className="bg-primary w-24 h-1 mt-3"></div>
                 )}
-              </div>
+              </div> */}
 
               <div>
                 <Link
@@ -167,7 +167,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                   <div className="bg-primary w-20 h-1 mt-3"></div>
                 )}
               </div>
-
+{/* 
               <div>
                 <Link
                   onClick={() => setActive("visa")}
@@ -186,7 +186,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                 {active === "visa" && (
                   <div className="bg-primary w-20 h-1 mt-3"></div>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="flex justify-center">

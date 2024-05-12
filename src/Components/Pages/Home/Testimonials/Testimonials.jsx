@@ -9,7 +9,7 @@ const Testimonials = () => {
     return (
         <div className="py-16">
         <div className="container px-2 lg:px-8 mx-auto">
-          <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 justify-center items-center">
+          <div className="grid gap-10 grid-cols-1 lg:grid-cols-2 justify-center items-center">
             <Fade left>
               <div>
                 <h2 className="text-gray-400 text-lg">Best Directory Website</h2>
