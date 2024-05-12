@@ -108,6 +108,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
         <div className="container mx-auto">
           <div className="flex  justify-center shadow-lg">
             <div className="flex p-4 px-16 lg:px-18 z-10 rounded-lg shadow-lg space-x-14 bg-gray-100">
+
               {/* <div>
                 <Link
                   onClick={() => setActive("flight")}
@@ -167,7 +168,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                   <div className="bg-primary w-20 h-1 mt-3"></div>
                 )}
               </div>
-{/* 
+              {/* 
               <div>
                 <Link
                   onClick={() => setActive("visa")}
@@ -192,9 +193,9 @@ const HomeHeader = ({ allTours, allHotel }) => {
           <div className="flex justify-center">
             <div className="-mt-4">
               {active === "hotel" && (
-                <div className="p-10 rounded-2xl relative shadow-lg bg-white">
-                <div className="grid grid-cols-1 sm:grid-cols-1 relative rounded-2xl p-10 shadow-lg bg-white">
-                  <div className="md:w-[38rem] lg:w-[55rem] hover:cursor-pointer leading-tight border p-3 rounded-2xl">
+                <div className="rounded-2xl relative">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 relative rounded-2xl p-10 shadow-lg bg-white">
+                    <div className="md:w-[38rem] lg:w-[55rem] hover:cursor-pointer leading-tight border p-3 rounded-2xl">
                       <p
                         onClick={() => setToggles(!toggles)}
                         className="text-xs md:text-sm lg:text-sm"
@@ -216,14 +217,14 @@ const HomeHeader = ({ allTours, allHotel }) => {
                           {hotelName.length ? (
                             <h2
                               onClick={() => setToggles(!toggles)}
-                              className="text-lg md:text-xl font-semibold lg:text-2xl py-2"
+                              className="text-md md:text-xl font-semibold lg:text-2xl py-2"
                             >
                               {hotelName}
                             </h2>
                           ) : (
                             <h2
                               onClick={() => setToggles(!toggles)}
-                              className="text-lg font-semibold md:text-xl lg:text-2xl py-2"
+                              className="text-md md:text-xl font-semibold lg:text-2xl py-2"
                             >
                               Hotel Noorjahan Grand
                             </h2>
@@ -315,14 +316,14 @@ const HomeHeader = ({ allTours, allHotel }) => {
                         {tourName.length ? (
                           <h2
                             onClick={() => setToggle(!toggle)}
-                            className="text-lg font-semibold md:text-2xl lg:text-2xl py-2"
+                            className="text-md md:text-xl font-semibold lg:text-2xl py-2"
                           >
                             {tourName}
                           </h2>
                         ) : (
                           <h2
                             onClick={() => setToggle(!toggle)}
-                            className="text-lg font-semibold md:text-2xl lg:text-2xl py-2"
+                            className="text-md md:text-xl font-semibold lg:text-2xl py-2"
                           >
                             Gardens by the Bay Tour
                           </h2>
