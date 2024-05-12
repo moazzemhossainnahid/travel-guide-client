@@ -10,18 +10,44 @@ const HomeHeader = ({ allTours, allHotel }) => {
   const [toggles, setToggles] = useState(false);
   const [suggestHotel, setSuggestHotel] = useState([]);
   const [suggestTour, setSuggestTour] = useState([]);
-  const [singleData, setSingleData] = useState([]);
-  const [singleDataH, setSingleDataH] = useState([]);
-  const [name, setName] = useState("");
-  const [nameTour, setNameTour] = useState("");
+  const [singleTourData, setSingleTourData] = useState([]);
+  const [singleHotelData, setSingleHotelData] = useState([]);
+  const [hotelName, setHotelName] = useState("");
+  const [tourName, setTourName] = useState("");
 
+  console.log(singleHotelData);
+  console.log(suggestHotel);
+
+
+  // const handleSearchField = async (name) => {
+  //   let matches = [];
+  //   if (active === "hotel") {
+  //     if (name.length > 0) {
+  //       matches = allHotel?.filter((hotel) => {
+  //         return hotel.hotel_name.toLowerCase().includes(name.toLowerCase());
+  //       });
+  //     }
+  //     setHotelText(name);
+  //     setSuggestHotel(matches);
+  //   } else {
+  //     if (name.length > 0) {
+  //       matches = allTours?.filter((tour) => {
+  //         return tour.name.toLowerCase().includes(name.toLowerCase());
+  //       });
+  //     }
+  //     setTourText(name);
+  //     setSuggestTour(matches);
+  //   }
+  // };
 
   const handleSearchField = async (name) => {
     let matches = [];
     if (active === "hotel") {
       if (name.length > 0) {
         matches = allHotel?.filter((hotel) => {
-          return hotel.hotel_name.toLowerCase().includes(name.toLowerCase());
+          const hotelNameMatch = hotel.hotel_name.toLowerCase().includes(name.toLowerCase());
+          const locationMatch = hotel.location.toLowerCase().includes(name.toLowerCase());
+          return hotelNameMatch || locationMatch;
         });
       }
       setHotelText(name);
@@ -29,7 +55,9 @@ const HomeHeader = ({ allTours, allHotel }) => {
     } else {
       if (name.length > 0) {
         matches = allTours?.filter((tour) => {
-          return tour.name.toLowerCase().includes(name.toLowerCase());
+          const tourNameMatch = tour.name.toLowerCase().includes(name.toLowerCase());
+          const countryMatch = tour.country.toLowerCase().includes(name.toLowerCase());
+          return tourNameMatch || countryMatch;
         });
       }
       setTourText(name);
@@ -37,16 +65,20 @@ const HomeHeader = ({ allTours, allHotel }) => {
     }
   };
 
+
   const handleText = (event) => {
     if (active === "hotel") {
-      setName(event);
+      setHotelName(event);
       setToggles(!toggles);
       const hotels = allHotel?.filter((data) =>
-        data.hotel_name.toLowerCase().includes(name.toLowerCase())
+        data.hotel_name.toLowerCase().includes(event.toLowerCase()) ||
+        data.location.toLowerCase().includes(event.toLowerCase())
       );
-      setSingleDataH(hotels);
+
+      setSingleHotelData(hotels);
       const result = allHotel?.filter(
-        (item) => item.hotel_name.toLowerCase() === event.toLowerCase()
+        (item) => item.hotel_name.toLowerCase() === event.toLowerCase() ||
+          item.location.toLowerCase() === event.toLowerCase()
       );
 
       if (result.length > 0) {
@@ -54,15 +86,16 @@ const HomeHeader = ({ allTours, allHotel }) => {
         setSuggestHotel([]);
       }
     } else {
-      setNameTour(event);
+      setTourName(event);
       setToggle(!toggle);
       const location = allTours?.filter((data) =>
-        data.name.toLowerCase().includes(nameTour.toLowerCase()) ||
-        data.country.toLowerCase().includes(nameTour.toLowerCase())
+        data.name.toLowerCase().includes(event.toLowerCase()) ||
+        data.country.toLowerCase().includes(event.toLowerCase())
       );
-      setSingleData(location);
+      setSingleTourData(location);
       const result = allTours?.filter(
-        (item) => item.name.toLowerCase() === event.toLowerCase()
+        (item) => item.name.toLowerCase() === event.toLowerCase() ||
+          item.country.toLowerCase().includes(event.toLowerCase())
       );
       if (result.length > 0) {
         document.getElementById("suggested_item_tour").style.display = "none";
@@ -91,8 +124,8 @@ const HomeHeader = ({ allTours, allHotel }) => {
       />
 
       <div className="space-y-5 absolute pt-20 w-full h-full">
-      <h3 className="text-5xl text-center text-white">Welcome to TravelGuide!</h3>
-      <p className="text-center text-white">Find Flights, Hotels, Visa & Holidays</p>
+        <h3 className="text-5xl text-center text-white">Welcome to TravelGuide!</h3>
+        <p className="text-center text-white">Find Flights, Hotels, Visa & Holidays</p>
       </div>
 
       <div className="flex justify-center absolute px-5 items-center w-full h-full">
@@ -204,12 +237,12 @@ const HomeHeader = ({ allTours, allHotel }) => {
                         />
                       ) : (
                         <div>
-                          {name.length ? (
+                          {hotelName.length ? (
                             <h2
                               onClick={() => setToggles(!toggles)}
                               className="text-lg md:text-xl font-semibold lg:text-2xl py-2"
                             >
-                              {name}
+                              {hotelName}
                             </h2>
                           ) : (
                             <h2
@@ -219,9 +252,9 @@ const HomeHeader = ({ allTours, allHotel }) => {
                               Hotel Noorjahan Grand
                             </h2>
                           )}
-                          {singleDataH[0]?.location ? (
+                          {singleHotelData[0]?.location ? (
                             <p className="text-xs lg:text-sm">
-                              {singleDataH[0]?.location}
+                              {singleHotelData[0]?.location}
                             </p>
                           ) : (
                             <p className="text-sm">Boroshola, Airport Road, Sylhet</p>
@@ -258,24 +291,24 @@ const HomeHeader = ({ allTours, allHotel }) => {
                     {/* suggest part of div */}
                     {hotelText.length
                       ? suggestHotel?.length !== 0 && (
-                          <div
-                            id="suggested_item"
-                            className="bg-white rounded-lg w-5/6 lg:w-1/3 z-10 p-4 absolute"
-                          >
-                            {suggestHotel
-                              ?.slice(0, 10)
-                              ?.map(({ hotel_name, index }) => (
-                                <div className="border-b-2 " key={index}>
-                                  <p
-                                    onClick={() => handleText(hotel_name)}
-                                    className="pt-3 divide-y hover:text-green-400 hover:cursor-pointer divide-dashed"
-                                  >
-                                    {hotel_name}
-                                  </p>
-                                </div>
-                              ))}
-                          </div>
-                        )
+                        <div
+                          id="suggested_item"
+                          className="bg-white rounded-lg w-5/6 lg:w-1/3 z-10 p-4 absolute"
+                        >
+                          {suggestHotel
+                            ?.slice(0, 10)
+                            ?.map(({ hotel_name, index }) => (
+                              <div className="border-b-2 " key={index}>
+                                <p
+                                  onClick={() => handleText(hotel_name)}
+                                  className="pt-3 divide-y hover:text-green-400 hover:cursor-pointer divide-dashed"
+                                >
+                                  {hotel_name}
+                                </p>
+                              </div>
+                            ))}
+                        </div>
+                      )
                       : ""}
                   </div>
                 </div>
@@ -303,12 +336,12 @@ const HomeHeader = ({ allTours, allHotel }) => {
                       />
                     ) : (
                       <div>
-                        {nameTour.length ? (
+                        {tourName.length ? (
                           <h2
                             onClick={() => setToggle(!toggle)}
                             className="text-lg font-semibold md:text-2xl lg:text-2xl py-2"
                           >
-                            {nameTour}
+                            {tourName}
                           </h2>
                         ) : (
                           <h2
@@ -318,9 +351,9 @@ const HomeHeader = ({ allTours, allHotel }) => {
                             Gardens by the Bay Tour
                           </h2>
                         )}
-                        {singleData[0]?.country ? (
+                        {singleTourData[0]?.country ? (
                           <p className="text-xs lg:text-sm">
-                            {singleData[0]?.country}
+                            {singleTourData[0]?.country}
                           </p>
                         ) : (
                           <p className="text-xs lg:text-sm">{`Indonesia`}</p>
@@ -334,24 +367,24 @@ const HomeHeader = ({ allTours, allHotel }) => {
                     {/* suggest part of div */}
                     {tourText.length
                       ? suggestTour.length !== 0 && (
-                          <div
-                            id="suggested_item_tour"
-                            className="bg-white rounded-lg w-5/6 lg:w-1/3 z-10 p-4 absolute"
-                          >
-                            {suggestTour
-                              ?.slice(0, 10)
-                              ?.map(({ name, index }) => (
-                                <div className="border-b-2 " key={index}>
-                                  <p
-                                    onClick={() => handleText(name)}
-                                    className="pt-3 divide-y hover:text-green-400 hover:cursor-pointer divide-dashed"
-                                  >
-                                    {name}
-                                  </p>
-                                </div>
-                              ))}
-                          </div>
-                        )
+                        <div
+                          id="suggested_item_tour"
+                          className="bg-white rounded-lg w-5/6 lg:w-1/3 z-10 p-4 absolute"
+                        >
+                          {suggestTour
+                            ?.slice(0, 10)
+                            ?.map(({ name, index }) => (
+                              <div className="border-b-2 " key={index}>
+                                <p
+                                  onClick={() => handleText(name)}
+                                  className="pt-3 divide-y hover:text-green-400 hover:cursor-pointer divide-dashed"
+                                >
+                                  {name}
+                                </p>
+                              </div>
+                            ))}
+                        </div>
+                      )
                       : ""}
                   </div>
                 </div>
@@ -361,7 +394,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
 
           {active === "hotel" ? (
             <div
-              onClick={() => handleButton(singleDataH[0]?._id)}
+              onClick={() => handleButton(singleHotelData[0]?._id)}
               className="flex justify-center w-full -mt-4"
             >
               <button className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3  text-white bg-[#33D687]">
@@ -370,7 +403,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
             </div>
           ) : (
             <div
-              onClick={() => handleButton(singleData[0]?._id)}
+              onClick={() => handleButton(singleTourData[0]?._id)}
               className="flex justify-center w-full -mt-4"
             >
               <button className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3 text-white bg-[#33D687]">
