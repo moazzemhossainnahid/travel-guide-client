@@ -109,7 +109,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
           <div className="flex  justify-center shadow-lg">
             <div className="flex p-4 px-16 lg:px-18 z-10 rounded-lg shadow-lg space-x-14 bg-gray-100">
 
-              {/* <div>
+              <div>
                 <Link
                   onClick={() => setActive("flight")}
                   className="flex space-x-1"
@@ -127,7 +127,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                 {active === "flight" && (
                   <div className="bg-primary w-24 h-1 mt-3"></div>
                 )}
-              </div> */}
+              </div>
 
               <div>
                 <Link
@@ -168,7 +168,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                   <div className="bg-primary w-20 h-1 mt-3"></div>
                 )}
               </div>
-              {/* 
+
               <div>
                 <Link
                   onClick={() => setActive("visa")}
@@ -187,15 +187,87 @@ const HomeHeader = ({ allTours, allHotel }) => {
                 {active === "visa" && (
                   <div className="bg-primary w-20 h-1 mt-3"></div>
                 )}
-              </div> */}
+              </div>
             </div>
           </div>
-          <div className="flex justify-center">
+          <div className="w-full">
+            <div className="-mt-4">
+              {active === "flight" && (
+                <div className="rounded-2xl relative">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 relative rounded-2xl p-10 shadow-lg bg-white">
+                    <div className="w-full mx-auto hover:cursor-pointer leading-tight border p-3 rounded-2xl">
+
+                        <input
+                          type="search"
+                          onChange={(e) => handleSearchField(e.target.value)}
+                          placeholder="type your expected hotel..."
+                          className="w-full shadow appearance-none rounded-lg  py-3 px-3
+                        text-gray-700 leading-tight border border-slate-300 
+                        focus:outline-none focus:border-red-400 focus:ring-1
+                         focus:ring-red-400"
+                        />
+                      
+                    </div>
+                    {/* <div className="leading-tight border p-3 rounded-2xl">
+                      <p className="text-xs md:text-sm lg:text-sm pb-2">
+                        CHECK IN
+                      </p>
+                      <input
+                        className=" appearance-none py-3 border
+                      border-gray-300 text-gray-700 
+                      sm:text-sm rounded-lg focus:ring-red-400 
+                      focus:border-red-400 block w-full p-2 h-11 "
+                        type="date"
+                      />
+                    </div>
+                    <div className="leading-tight border p-3 rounded-2xl">
+                      <p className="text-xs md:text-sm lg:text-sm pb-2">
+                        CHECK OUT
+                      </p>
+                      <input
+                        className=" appearance-none py-3 border
+                      border-gray-300 text-gray-700 
+                      sm:text-sm rounded-lg focus:ring-red-400 
+                      focus:border-red-400 block w-full p-2 h-11 "
+                        type="date"
+                      />
+                    </div> */}
+                  </div>
+                  <div>
+                    {/* suggest part of div */}
+                    {hotelText.length
+                      ? suggestHotel?.length !== 0 && (
+                        <div
+                          id="suggested_item"
+                          className="bg-white rounded-lg w-5/6 lg:w-1/3 z-10 p-4 absolute"
+                        >
+                          {suggestHotel
+                            ?.slice(0, 10)
+                            ?.map(({ hotel_name, index }) => (
+                              <div className="border-b-2 " key={index}>
+                                <p
+                                  onClick={() => handleText(hotel_name)}
+                                  className="pt-3 divide-y hover:text-green-400 hover:cursor-pointer divide-dashed"
+                                >
+                                  {hotel_name}
+                                </p>
+                              </div>
+                            ))}
+                        </div>
+                      )
+                      : ""}
+                  </div>
+                </div>
+              )}
+
+            </div>
+          </div>
+          <div className="w-full mx-auto">
             <div className="-mt-4">
               {active === "hotel" && (
                 <div className="rounded-2xl relative">
                   <div className="grid grid-cols-1 sm:grid-cols-1 relative rounded-2xl p-10 shadow-lg bg-white">
-                    <div className="md:w-[38rem] lg:w-[55rem] hover:cursor-pointer leading-tight border p-3 rounded-2xl">
+                    <div className="w-full mx-auto hover:cursor-pointer leading-tight border p-3 rounded-2xl">
                       <p
                         onClick={() => setToggles(!toggles)}
                         className="text-xs md:text-sm lg:text-sm"
@@ -294,7 +366,83 @@ const HomeHeader = ({ allTours, allHotel }) => {
               {active === "tour" && (
                 // <div className="w-screen flex justify-center">
                 <div className="grid grid-cols-1 sm:grid-cols-1 relative rounded-2xl p-10 shadow-lg bg-white">
-                  <div className="md:w-[38rem] lg:w-[55rem] hover:cursor-pointer leading-tight border p-3 rounded-2xl">
+                  <div className="w-full mx-auto hover:cursor-pointer leading-tight border p-3 rounded-2xl">
+                    <p
+                      onClick={() => setToggle(!toggle)}
+                      className="text-xs md:text-sm lg:text-sm"
+                    >
+                      CITY/HOTEL/RESORT/AREA
+                    </p>
+                    {toggle === true ? (
+                      <input
+                        type="search"
+                        onChange={(e) => handleSearchField(e.target.value)}
+                        placeholder="type your expected tour..."
+                        className="w-full appearance-none rounded-lg py-3 mt-1 px-3
+                          text-gray-700 leading-tight border border-slate-300 
+                          focus:outline-none focus:border-red-400 focus:ring-1
+                           focus:ring-red-400"
+                      />
+                    ) : (
+                      <div>
+                        {tourName.length ? (
+                          <h2
+                            onClick={() => setToggle(!toggle)}
+                            className="text-md md:text-xl font-semibold lg:text-2xl py-2"
+                          >
+                            {tourName}
+                          </h2>
+                        ) : (
+                          <h2
+                            onClick={() => setToggle(!toggle)}
+                            className="text-md md:text-xl font-semibold lg:text-2xl py-2"
+                          >
+                            Gardens by the Bay Tour
+                          </h2>
+                        )}
+                        {singleTourData[0]?.country ? (
+                          <p className="text-xs lg:text-sm">
+                            {singleTourData[0]?.country}
+                          </p>
+                        ) : (
+                          <p className="text-xs lg:text-sm">{`Indonesia`}</p>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* </div> */}
+                  <div>
+                    {/* suggest part of div */}
+                    {tourText.length
+                      ? suggestTour.length !== 0 && (
+                        <div
+                          id="suggested_item_tour"
+                          className="bg-white rounded-lg w-5/6 lg:w-1/3 z-10 p-4 absolute"
+                        >
+                          {suggestTour
+                            ?.slice(0, 10)
+                            ?.map(({ name, index }) => (
+                              <div className="border-b-2 " key={index}>
+                                <p
+                                  onClick={() => handleText(name)}
+                                  className="pt-3 divide-y hover:text-green-400 hover:cursor-pointer divide-dashed"
+                                >
+                                  {name}
+                                </p>
+                              </div>
+                            ))}
+                        </div>
+                      )
+                      : ""}
+                  </div>
+                </div>
+              )}
+              {/* sm:w-3/2 lg:1/2 */}
+              {active === "visa" && (
+                // <div className="w-screen flex justify-center">
+                <div className="grid grid-cols-1 sm:grid-cols-1 relative rounded-2xl p-10 shadow-lg bg-white">
+                  <div className="w-full mx-auto hover:cursor-pointer leading-tight border p-3 rounded-2xl">
                     <p
                       onClick={() => setToggle(!toggle)}
                       className="text-xs md:text-sm lg:text-sm"
@@ -369,7 +517,18 @@ const HomeHeader = ({ allTours, allHotel }) => {
             </div>
           </div>
 
-          {active === "hotel" ? (
+          {active === "flight" && (
+            <div
+              onClick={() => handleButton(singleHotelData[0]?._id)}
+              className="flex justify-center w-full -mt-4"
+            >
+              <button className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3  text-white bg-[#33D687]">
+                Book
+              </button>
+            </div>
+          )}
+
+          {active === "hotel" && (
             <div
               onClick={() => handleButton(singleHotelData[0]?._id)}
               className="flex justify-center w-full -mt-4"
@@ -378,13 +537,24 @@ const HomeHeader = ({ allTours, allHotel }) => {
                 Search
               </button>
             </div>
-          ) : (
+          )}
+          {active === "tour" && (
             <div
               onClick={() => handleButton(singleTourData[0]?._id)}
               className="flex justify-center w-full -mt-4"
             >
               <button className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3 text-white bg-[#33D687]">
                 Search
+              </button>
+            </div>
+          )}
+          {active === "visa" && (
+            <div
+              onClick={() => handleButton(singleTourData[0]?._id)}
+              className="flex justify-center w-full -mt-4"
+            >
+              <button className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3 text-white bg-[#33D687]">
+                Apply
               </button>
             </div>
           )}
