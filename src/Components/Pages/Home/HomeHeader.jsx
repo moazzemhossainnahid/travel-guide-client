@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAirports from "../../../Hooks/useAirports";
+
 
 const HomeHeader = ({ allTours, allHotel }) => {
   const navigate = useNavigate();
@@ -14,6 +16,63 @@ const HomeHeader = ({ allTours, allHotel }) => {
   const [singleHotelData, setSingleHotelData] = useState([]);
   const [hotelName, setHotelName] = useState("");
   const [tourName, setTourName] = useState("");
+  const [airports] = useAirports();
+
+  const [fromAirport, setFromAirport] = useState('');
+  const [toAirport, setToAirport] = useState('');
+  const [journeyDate, setJourneyDate] = useState('');
+  const [travelerClass, setTravelerClass] = useState('Economy');
+  const [numTravelers, setNumTravelers] = useState(1);
+  const [filteredAirports, setFilteredAirports] = useState([]);
+
+  const airportsArray = Object.values(airports);
+
+  useEffect(() => {
+    // Check if either fromAirport or toAirport is non-empty
+    if (fromAirport || toAirport) {
+      const matches = airportsArray.filter(airport => {
+        // Check if the airport matches the fromAirport or toAirport
+        const fromMatch = fromAirport && (
+          airport.name.toLowerCase().includes(fromAirport.toLowerCase()) ||
+          airport.city.toLowerCase().includes(fromAirport.toLowerCase()) ||
+          airport.country.toLowerCase().includes(fromAirport.toLowerCase()) ||
+          airport.iata.toLowerCase().includes(fromAirport.toLowerCase())
+        );
+  
+        const toMatch = toAirport && (
+          airport.name.toLowerCase().includes(toAirport.toLowerCase()) ||
+          airport.city.toLowerCase().includes(toAirport.toLowerCase()) ||
+          airport.country.toLowerCase().includes(toAirport.toLowerCase()) ||
+          airport.iata.toLowerCase().includes(toAirport.toLowerCase())
+        );
+  
+        // Return true if the airport matches either fromAirport or toAirport
+        return fromMatch || toMatch;
+      }).slice(0, 10); // Limit to first 10 matches
+      setFilteredAirports(matches);
+    } else {
+      // Reset filteredAirports if both fromAirport and toAirport are empty
+      setFilteredAirports([]);
+    }
+  }, [fromAirport, toAirport, airportsArray]);
+  
+
+  const handleSearch = () => {
+
+    // Implement your search logic here
+    console.log({
+      fromAirport,
+      toAirport,
+      journeyDate,
+      travelerClass,
+      numTravelers,
+    });
+  };
+
+
+
+
+
 
 
   const handleSearchField = async (name) => {
@@ -91,7 +150,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
   return (
     <div
       className="bg-gradient-to-tr from-purple-400 to-green-700  
-   h-screen sm:h-screen md:h-[50rem] lg:h-[40rem] relative w-full bg-cover bg-center"
+   h-[70rem] md:h-[60rem] lg:h-[50rem] relative w-full bg-cover bg-center"
     >
       <img
         src="https://i.ibb.co/L98m2Qc/xhero-1-jpg-pagespeed-ic-DUdgc-Mb-Ja5.webp"
@@ -195,43 +254,89 @@ const HomeHeader = ({ allTours, allHotel }) => {
               {active === "flight" && (
                 <div className="rounded-2xl relative">
                   <div className="grid grid-cols-1 sm:grid-cols-1 relative rounded-2xl p-10 shadow-lg bg-white">
-                    <div className="w-full mx-auto hover:cursor-pointer leading-tight border p-3 rounded-2xl">
 
-                        <input
-                          type="search"
-                          onChange={(e) => handleSearchField(e.target.value)}
-                          placeholder="type your expected hotel..."
-                          className="w-full shadow appearance-none rounded-lg  py-3 px-3
-                        text-gray-700 leading-tight border border-slate-300 
-                        focus:outline-none focus:border-red-400 focus:ring-1
-                         focus:ring-red-400"
-                        />
-                      
+                    <div className="w-full h-full mx-auto hover:cursor-pointer leading-tight border p-3 rounded-2xl">
+                      <div className="flex flex-wrap gap-4">
+                        <div className="w-full h-full flex flex-col md:flex-row justify-between items-center gap-3">
+                          {/* From */}
+
+                          <div className="w-full md:w-1/2 leading-tight p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">From</p>
+                            <input
+                              type="search"
+                              value={fromAirport}
+                              onChange={(e) => setFromAirport(e.target.value)}
+                              list="from-airports"
+                              placeholder="Select departure airport..."
+                              className="w-full shadow appearance-none rounded-lg py-3 px-3 text-gray-700 leading-tight border border-slate-300 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400"
+                            />
+                            <datalist id="from-airports">
+                              {filteredAirports?.map((airport, index) => (
+                                <option key={index} value={`${airport.name} (${airport.iata}) - ${airport.city}, ${airport.country}`} />
+                              ))}
+                            </datalist>
+                          </div>
+
+
+
+                          {/* To */}
+                          <div className="w-full md:w-1/2 leading-tight p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">To</p>
+                            <input
+                              type="search"
+                              value={toAirport}
+                              onChange={(e) => setToAirport(e.target.value)}
+                              list="to-airports"
+                              placeholder="Select arrival airport..."
+                              className="w-full shadow appearance-none rounded-lg py-3 px-3 text-gray-700 leading-tight border border-slate-300 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400"
+                            />
+                            <datalist id="to-airports">
+                              {filteredAirports?.map((airport, index) => (
+                                <option key={index} value={`${airport.name} (${airport.iata}) - ${airport.city}, ${airport.country}`} />
+                              ))}
+                            </datalist>
+                          </div>
+                        </div>
+                        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-3">
+                          {/* Journey Date */}
+                          <div className="w-full md:w-1/2 leading-tight p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">Journey Date</p>
+                            <input
+                              type="date"
+                              value={journeyDate}
+                              onChange={(e) => setJourneyDate(e.target.value)}
+                              className="appearance-none py-3 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-red-400 focus:border-red-400 block w-full p-2 h-11"
+                            />
+                          </div>
+
+                          {/* Traveler Class */}
+                          <div className="w-full md:w-1/2 leading-tight p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">Traveler Class</p>
+                            <select
+                              value={travelerClass}
+                              onChange={(e) => setTravelerClass(e.target.value)}
+                              className="w-full shadow appearance-none rounded-lg py-3 px-3 text-gray-700 leading-tight border border-slate-300 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400"
+                            >
+                              <option value="Economy">Economy</option>
+                              <option value="Business">Business</option>
+                              <option value="First Class">First Class</option>
+                            </select>
+                          </div>
+
+                          {/* Number of Travelers */}
+                          <div className="w-full md:w-1/2 leading-tight p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">Number of Travelers</p>
+                            <input
+                              type="number"
+                              min="1"
+                              value={numTravelers}
+                              onChange={(e) => setNumTravelers(e.target.value)}
+                              className="w-full shadow appearance-none rounded-lg py-3 px-3 text-gray-700 leading-tight border border-slate-300 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400"
+                            />
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    {/* <div className="leading-tight border p-3 rounded-2xl">
-                      <p className="text-xs md:text-sm lg:text-sm pb-2">
-                        CHECK IN
-                      </p>
-                      <input
-                        className=" appearance-none py-3 border
-                      border-gray-300 text-gray-700 
-                      sm:text-sm rounded-lg focus:ring-red-400 
-                      focus:border-red-400 block w-full p-2 h-11 "
-                        type="date"
-                      />
-                    </div>
-                    <div className="leading-tight border p-3 rounded-2xl">
-                      <p className="text-xs md:text-sm lg:text-sm pb-2">
-                        CHECK OUT
-                      </p>
-                      <input
-                        className=" appearance-none py-3 border
-                      border-gray-300 text-gray-700 
-                      sm:text-sm rounded-lg focus:ring-red-400 
-                      focus:border-red-400 block w-full p-2 h-11 "
-                        type="date"
-                      />
-                    </div> */}
                   </div>
                   <div>
                     {/* suggest part of div */}
@@ -522,8 +627,8 @@ const HomeHeader = ({ allTours, allHotel }) => {
               onClick={() => handleButton(singleHotelData[0]?._id)}
               className="flex justify-center w-full -mt-4"
             >
-              <button className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3  text-white bg-[#33D687]">
-                Book
+              <button onClick={handleSearch} className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3  text-white bg-[#33D687]">
+                Search Flights
               </button>
             </div>
           )}
