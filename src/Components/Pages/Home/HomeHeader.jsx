@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAirports from "../../../Hooks/useAirports";
+import { toast } from "react-toastify";
+
 
 
 const HomeHeader = ({ allTours, allHotel }) => {
@@ -24,6 +26,22 @@ const HomeHeader = ({ allTours, allHotel }) => {
   const [travelerClass, setTravelerClass] = useState('Economy');
   const [numTravelers, setNumTravelers] = useState(1);
   const [filteredAirports, setFilteredAirports] = useState([]);
+  const [userInfo, setUserInfo] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: ''
+  });
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo({
+      ...userInfo,
+      [name]: value
+    });
+  };
+
 
   const airportsArray = Object.values(airports);
 
@@ -38,14 +56,14 @@ const HomeHeader = ({ allTours, allHotel }) => {
           airport.country.toLowerCase().includes(fromAirport.toLowerCase()) ||
           airport.iata.toLowerCase().includes(fromAirport.toLowerCase())
         );
-  
+
         const toMatch = toAirport && (
           airport.name.toLowerCase().includes(toAirport.toLowerCase()) ||
           airport.city.toLowerCase().includes(toAirport.toLowerCase()) ||
           airport.country.toLowerCase().includes(toAirport.toLowerCase()) ||
           airport.iata.toLowerCase().includes(toAirport.toLowerCase())
         );
-  
+
         // Return true if the airport matches either fromAirport or toAirport
         return fromMatch || toMatch;
       }).slice(0, 10); // Limit to first 10 matches
@@ -55,24 +73,72 @@ const HomeHeader = ({ allTours, allHotel }) => {
       setFilteredAirports([]);
     }
   }, [fromAirport, toAirport, airportsArray]);
-  
+
 
   const handleSearch = () => {
-
     // Implement your search logic here
-    console.log({
+
+    // console.log({
+    //   fromAirport,
+    //   toAirport,
+    //   journeyDate,
+    //   travelerClass,
+    //   numTravelers,
+    //   ...userInfo
+    // });
+
+    const info = {
       fromAirport,
       toAirport,
       journeyDate,
       travelerClass,
       numTravelers,
-    });
+      ...userInfo
+    }
+
+    console.log(info);
+
+    // send to database
+    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/flight-book`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //   console.log(data);
+        if (data?.status === "Successful") {
+          toast.success("Data Submitted Successfully");
+
+        } else {
+          toast.error("Faild to Booked Tour");
+        }
+      });
+
+    window.location.reload();
+
   };
 
 
-
-
-
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    handleSearch();
+    e.target.reset();
+    setUserInfo({
+      name: '',
+      email: '',
+      phone: '',
+      address: ''
+    });
+    setFromAirport("");
+    setToAirport("");
+    setJourneyDate("");
+    setNumTravelers("");
+    setTravelerClass("");
+  };
 
 
   const handleSearchField = async (name) => {
@@ -624,14 +690,24 @@ const HomeHeader = ({ allTours, allHotel }) => {
 
           {active === "flight" && (
             <div
-              onClick={() => handleButton(singleHotelData[0]?._id)}
               className="flex justify-center w-full -mt-4"
             >
-              <button onClick={handleSearch} className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3  text-white bg-[#33D687]">
+              <label htmlFor="personalInfo" className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3  text-white bg-[#33D687]">
+                Search Flights
+              </label>
+            </div>
+          )}
+          {/* 
+          {active === "flight" && (
+            <div
+              onClick={handleSearch}
+              className="flex justify-center w-full -mt-4"
+            >
+              <button className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3  text-white bg-[#33D687]">
                 Search Flights
               </button>
             </div>
-          )}
+          )} */}
 
           {active === "hotel" && (
             <div
@@ -663,6 +739,70 @@ const HomeHeader = ({ allTours, allHotel }) => {
               </button>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* <!-- The info submit modal --> */}
+
+      <input type="checkbox" id="personalInfo" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box relative  bg-slate-300">
+          <label
+            htmlFor="personalInfo"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          <h3 className="text-lg font-bold">Insert Personal Information</h3>
+          <form
+            onSubmit={handleFormSubmit}
+            action=""
+            className="py-3"
+          >
+            <div className="w-full flex flex-col md:flex-row justify-between items-center gap-3">
+              <input
+                value={userInfo.name}
+                onChange={handleInputChange}
+                name="name"
+                type="text"
+                placeholder="Enter Your Name"
+                className="input bg-slate-100 my-2 input-ghost w-full block mx-auto max-w-xs"
+              />
+              <input
+                type="tel"
+                name="phone"
+                value={userInfo.phone}
+                onChange={handleInputChange}
+                placeholder="Enter Your Phone"
+                className="input bg-slate-100 my-2 input-ghost w-full block mx-auto max-w-xs"
+              />
+            </div>
+            <div className="w-full flex flex-col  justify-between items-center gap-3">
+              <input
+                name="email"
+                value={userInfo.email}
+                onChange={handleInputChange}
+                type="email"
+                placeholder="Enter Your Email"
+                className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
+              />
+            </div>
+            <div className="w-full">
+              <textarea
+                name="address"
+                value={userInfo.address}
+                onChange={handleInputChange}
+                type="text"
+                placeholder="Enter Your Address"
+                className="input bg-slate-100 resize-none my-2 input-ghost w-full h-16 block mx-auto"
+              />
+            </div>
+            <input
+              className="btn px-7 btn-warning my-5 block mx-auto"
+              type="submit"
+              value="Send Data"
+            />
+          </form>
         </div>
       </div>
     </div>
