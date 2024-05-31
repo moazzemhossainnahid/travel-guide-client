@@ -27,6 +27,7 @@ import ManageOrders from './Components/Dashboard/AdminDashboard/ManageOrders/Man
 import ManageTours from './Components/Dashboard/AdminDashboard/ManageTours/ManageTours'
 import ManageBookedTours from './Components/Dashboard/AdminDashboard/ManageBookedTours/ManageBookedTours'
 import ManageBookedFlights from './Components/Dashboard/AdminDashboard/ManageBookedFlights/ManageBookedFlights'
+import ManageVisaApplications from './Components/Dashboard/AdminDashboard/ManageVisaApplications/ManageVisaApplications'
 
 function App() {
 
@@ -63,6 +64,7 @@ function App() {
               <Route path="mtours" element={<ManageTours />} />
               <Route path="mbooktours" element={<ManageBookedTours />} />
               <Route path="mbookflights" element={<ManageBookedFlights />} />
+              <Route path="mvisaapplications" element={<ManageVisaApplications />} />
             </Route>
           </Routes>
         </div>
