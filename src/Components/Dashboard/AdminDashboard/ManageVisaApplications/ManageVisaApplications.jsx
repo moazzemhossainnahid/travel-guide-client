@@ -9,7 +9,7 @@ const ManageVisaApplications = () => {
   const [viewData, setViewData] = useState(null);
  
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/visa-application", {
+    fetch("https://travel-guide-server-ii.vercel.app/api/v1/visa-application", {
       method: 'GET',
       headers: {
         'content-type': 'application/json',

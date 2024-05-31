@@ -18,7 +18,7 @@ const DeleteHotelsModal = ({ deleteHotel, setNumber, number }) => {
     
     const handleDelete = (id) => {
         // send to database
-    fetch(`http://localhost:5000/api/v1/countries/hotels/delete/${id}`, {
+    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/countries/hotels/delete/${id}`, {
         method: "PATCH",
         headers: {
             "content-type": "application/json",

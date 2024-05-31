@@ -22,7 +22,7 @@ const DBCards = () => {
 );
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/users`, {
+    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/users`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -33,7 +33,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/tours`, {
+    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/tours`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -44,7 +44,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/countries`, {
+    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/countries`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -55,7 +55,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/tour-booking`, {
+    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/tour-booking`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -66,7 +66,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/orders`, {
+    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/orders`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -77,7 +77,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/flight-booking`, {
+    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/flight-booking`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -88,7 +88,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/visa-application`, {
+    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/visa-application`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
