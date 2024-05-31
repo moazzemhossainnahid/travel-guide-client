@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../../../../../firebase.init";
-import { FaArrowAltCircleRight, FaHotel, FaUsers } from "react-icons/fa";
+import { FaArrowAltCircleRight, FaBook, FaHotel, FaPlane, FaUsers } from "react-icons/fa";
 import { FaAddressBook, FaBookAtlas, FaCity, FaTentArrowTurnLeft } from "react-icons/fa6";
 
 const DBCards = () => {
@@ -13,6 +13,8 @@ const DBCards = () => {
   const [tourBooking, setTourBooking] = useState([]);
   const [countries, setCountries] = useState([]);
   const [bookedHotel, setBookedHotel] = useState([]);
+  const [flightBooking, setFlightBooking] = useState([]);
+  const [visaApplication, setVisaApplication] = useState([]);
   const [user] = useAuthState(auth);
 
   const allHotels = countries?.flatMap(country =>
@@ -20,7 +22,7 @@ const DBCards = () => {
 );
 
   useEffect(() => {
-    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/users`, {
+    fetch(`http://localhost:5000/api/v1/users`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -31,7 +33,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/tours`, {
+    fetch(`http://localhost:5000/api/v1/tours`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -42,7 +44,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/countries`, {
+    fetch(`http://localhost:5000/api/v1/countries`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -53,7 +55,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/tour-booking`, {
+    fetch(`http://localhost:5000/api/v1/tour-booking`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -64,7 +66,7 @@ const DBCards = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/orders`, {
+    fetch(`http://localhost:5000/api/v1/orders`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -74,6 +76,16 @@ const DBCards = () => {
       .then((data) => setBookedHotel(data?.data?.result));
   }, []);
 
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v1/flight-booking`, {
+      method: "GET",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setFlightBooking(data?.data?.result));
+  }, []);
 
   return (
     <div className="">
@@ -212,6 +224,54 @@ const DBCards = () => {
           <div
             onClick={() => navigate("/cpanel/mbooktours")}
             className="bg-[#8f2632] cursor-pointer py-2 text-center rounded-b-xl"
+          >
+            <h2 className="text-md text-white flex items-center justify-center gap-2">
+              More Info{" "}
+              <FaArrowAltCircleRight className="pl-2 text-2xl" />{" "}
+            </h2>
+          </div>
+        </div>
+
+        {/* Total Flight Bookings */}
+        <div className="">
+          <div className="flex items-center justify-between bg-[#bb329b] p-3 rounded-t-xl">
+            <div className="">
+              <h3 className="text-3xl md:text-4xl font-bold py-2 text-white">
+                {flightBooking?.length}{" "}
+              </h3>
+              <h3 className="text-md font-bold text-white">Total Flight Bookings</h3>
+            </div>
+            <div className="">
+              <FaPlane className="text-[#42424281] text-3xl md:text-4xl" />
+            </div>
+          </div>
+          <div
+            onClick={() => navigate("/cpanel/mbookflights")}
+            className="bg-[#8f2677] cursor-pointer py-2 text-center rounded-b-xl"
+          >
+            <h2 className="text-md text-white flex items-center justify-center gap-2">
+              More Info{" "}
+              <FaArrowAltCircleRight className="pl-2 text-2xl" />{" "}
+            </h2>
+          </div>
+        </div>
+
+        {/* Total Visa Applications */}
+        <div className="">
+          <div className="flex items-center justify-between bg-[#adab30] p-3 rounded-t-xl">
+            <div className="">
+              <h3 className="text-3xl md:text-4xl font-bold py-2 text-white">
+                {tourBooking?.length}{" "}
+              </h3>
+              <h3 className="text-md font-bold text-white">Total Booked Tour</h3>
+            </div>
+            <div className="">
+              <FaBook className="text-[#42424281] text-3xl md:text-4xl" />
+            </div>
+          </div>
+          <div
+            onClick={() => navigate("/cpanel/mvisaapplications")}
+            className="bg-[#757422] cursor-pointer py-2 text-center rounded-b-xl"
           >
             <h2 className="text-md text-white flex items-center justify-center gap-2">
               More Info{" "}

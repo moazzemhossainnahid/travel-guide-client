@@ -2,9 +2,9 @@ import React from 'react';
 import { FaEye, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'
-const ManageBookedToursRow = ({ booked, index, setViewData }) => {
+const ManageBookedFlightsRow = ({ booked, index, setViewData }) => {
 
-    const { name, phone, address, email, tourPlan, adult, children, _id } = booked;
+    const { name, phone, address, email, fromAirport, toAirport, travelerClass, journeyDate, numTravelers, _id } = booked;
 
 
     console.log(booked);
@@ -20,7 +20,7 @@ const ManageBookedToursRow = ({ booked, index, setViewData }) => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                const url = `http://localhost:5000/api/v1/tour-booking/${id}`;
+                const url = `http://localhost:5000/api/v1/flight-booking/${id}`;
                 fetch(url, {
                     method: 'DELETE',
                     headers: {
@@ -56,15 +56,15 @@ const ManageBookedToursRow = ({ booked, index, setViewData }) => {
             </td>
             <td className="w-full lg:w-auto p-2 text-sm text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Name</span>
-                {name} <br />
+                {fromAirport} <br />
             </td>
             <td className="w-full lg:w-auto p-2 font-bold text-green-700 text-sm text-center border border-b block lg:table-cell relative lg:static">
                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Tour</span>
-                {tourPlan}
+                {toAirport}
             </td>
             <td className="w-full lg:w-auto p-2 text-sm text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Phone</span>
-                {phone}
+                {journeyDate}
             </td>
             <td className="w-full lg:w-auto text-xs p-2 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                 <div className="flex justify-between px-3 pb-1 gap-2 items-center">
@@ -77,4 +77,4 @@ const ManageBookedToursRow = ({ booked, index, setViewData }) => {
     );
 };
 
-export default ManageBookedToursRow;
+export default ManageBookedFlightsRow;

@@ -16,7 +16,7 @@ const UseToken = (user) => {
  
 
         if (email) {
-            fetch(`https://travel-guide-server-ii.vercel.app/api/v1/users/${email}`, {
+            fetch(`http://localhost:5000/api/v1/users/${email}`, {
                 method: 'PUT',
                 headers: { 'content-type': 'application/json' },
                 body: JSON.stringify(currentUser)

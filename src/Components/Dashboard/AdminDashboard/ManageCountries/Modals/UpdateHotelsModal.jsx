@@ -37,7 +37,7 @@ const UpdateHotelsModal = ({ updateHotel }) => {
         //                 console.log(blog);
 
         //                 // send to database
-        //                 fetch(`https://travel-guide-server-ii.vercel.app/api/v1/countries/${_id}`, {
+        //                 fetch(`http://localhost:5000/api/v1/countries/${_id}`, {
         //                     method: "PATCH",
         //                     headers: {
         //                         "content-type": "application/json",
@@ -84,7 +84,7 @@ const UpdateHotelsModal = ({ updateHotel }) => {
         console.log(hotel);
 
         // send to database
-        fetch(`https://travel-guide-server-ii.vercel.app/api/v1/countries/hotels/${_id}`, {
+        fetch(`http://localhost:5000/api/v1/countries/hotels/${_id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json",

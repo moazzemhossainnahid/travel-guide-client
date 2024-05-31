@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import ManageBookedToursRow from "./ManageBookedToursRow";
-import ViewBookedToursModal from "./Modals/ViewBookedToursModal";
+import ManageBookedFlightsRow from "./ManageBookedFlightsRow";
+import ViewBookedFlightsModal from "./Modals/ViewBookedFlightsModal";
 
-const ManageBookedTours = () => {
-  const [tourBooking, setTourBooking] = useState(null);
+const ManageBookedFlights = () => {
+  const [flightBooking, setFlightBooking] = useState(null);
   const [viewData, setViewData] = useState(null);
  
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/tour-booking", {
+    fetch("http://localhost:5000/api/v1/flight-booking", {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -16,17 +16,17 @@ const ManageBookedTours = () => {
       }
     })
       .then((res) => res.json())
-      .then((data) => setTourBooking(data?.data?.result));
+      .then((data) => setFlightBooking(data?.data?.result));
   }, []);
 
-  // console.log(tourBooking);
+  // console.log(flightBooking);
 
   return (
     <div className=" text-left h-full w-full">
       <div className="w-full flex items-center justify-center my-12">
         <div className="bg-white shadow rounded py-12 px-8 mb-20">
           <p className="md:text-3xl text-xl font-bold pb-10 leading-7 text-center text-gray-700">
-            Total Booked Tours: {tourBooking?.length}
+            Total Booked Flights: {flightBooking?.length}
           </p>
           <table className="border-collapse w-full bg-slate-200">
             {/* <!-- head --> */}
@@ -36,13 +36,13 @@ const ManageBookedTours = () => {
                   Index
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Name
+                  From
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Tour
+                  To
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Phone
+                  Date
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
                   Action
@@ -52,25 +52,25 @@ const ManageBookedTours = () => {
             <tbody>
               {/* <!-- row 1 --> */}
 
-              {tourBooking?.map((booked, index) => (
-                <ManageBookedToursRow
+              {flightBooking?.map((booked, index) => (
+                <ManageBookedFlightsRow
                   key={booked?._id}
                   booked={booked}
                   setViewData={setViewData}
                   index={index}
-                ></ManageBookedToursRow>
+                ></ManageBookedFlightsRow>
               ))}
             </tbody>
           </table>
         </div>
       </div>
       {viewData && (
-        <ViewBookedToursModal
+        <ViewBookedFlightsModal
           booked={viewData}
-        ></ViewBookedToursModal>
+        ></ViewBookedFlightsModal>
       )}
     </div>
   );
 };
 
-export default ManageBookedTours;
+export default ManageBookedFlights;

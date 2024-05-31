@@ -26,13 +26,14 @@ import ManageHotels from './Components/Dashboard/AdminDashboard/ManageCountries/
 import ManageOrders from './Components/Dashboard/AdminDashboard/ManageOrders/ManageOrders'
 import ManageTours from './Components/Dashboard/AdminDashboard/ManageTours/ManageTours'
 import ManageBookedTours from './Components/Dashboard/AdminDashboard/ManageBookedTours/ManageBookedTours'
+import ManageBookedFlights from './Components/Dashboard/AdminDashboard/ManageBookedFlights/ManageBookedFlights'
 
 function App() {
 
   return (
     <>
       <div className="App pt-16">
-        {(window.location.pathname !== '/cpanel' && window.location.pathname !== '/cpanel/addashboard' && window.location.pathname !== '/cpanel/musers' && window.location.pathname !== '/cpanel/mbookhotels' && window.location.pathname !== '/cpanel/mhotels' && window.location.pathname !== '/cpanel/mtours' && window.location.pathname !== '/cpanel/mbooktours') && <Header />}
+        {(window.location.pathname !== '/cpanel' && window.location.pathname !== '/cpanel/addashboard' && window.location.pathname !== '/cpanel/musers' && window.location.pathname !== '/cpanel/mbookhotels' && window.location.pathname !== '/cpanel/mhotels' && window.location.pathname !== '/cpanel/mtours' && window.location.pathname !== '/cpanel/mbooktours' && window.location.pathname !== '/cpanel/mbookflights' && window.location.pathname !== '/cpanel/mvisaapplications') && <Header />}
         {/* <Header /> */}
         <div className="">
           <Routes>
@@ -61,10 +62,11 @@ function App() {
               <Route path="mbookhotels" element={<ManageOrders />} />
               <Route path="mtours" element={<ManageTours />} />
               <Route path="mbooktours" element={<ManageBookedTours />} />
+              <Route path="mbookflights" element={<ManageBookedFlights />} />
             </Route>
           </Routes>
         </div>
-        {(window.location.pathname !== '/cpanel' && window.location.pathname !== '/cpanel/addashboard' && window.location.pathname !== '/cpanel/musers' && window.location.pathname !== '/cpanel/mbookhotels' && window.location.pathname !== '/cpanel/mhotels' && window.location.pathname !== '/cpanel/mtours' && window.location.pathname !== '/cpanel/mbooktours') && <Footer />}
+        {(window.location.pathname !== '/cpanel' && window.location.pathname !== '/cpanel/addashboard' && window.location.pathname !== '/cpanel/musers' && window.location.pathname !== '/cpanel/mbookhotels' && window.location.pathname !== '/cpanel/mhotels' && window.location.pathname !== '/cpanel/mtours' && window.location.pathname !== '/cpanel/mbooktours' && window.location.pathname !== '/cpanel/mbookflights' && window.location.pathname !== '/cpanel/mvisaapplications') && <Footer />}
         <ToastContainer />
       </div>
     </>

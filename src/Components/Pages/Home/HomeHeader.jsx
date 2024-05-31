@@ -99,7 +99,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
     console.log(info);
 
     // send to database
-    fetch(`https://travel-guide-server-ii.vercel.app/api/v1/flight-book`, {
+    fetch(`http://localhost:5000/api/v1/flight-booking`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -112,13 +112,11 @@ const HomeHeader = ({ allTours, allHotel }) => {
         //   console.log(data);
         if (data?.status === "Successful") {
           toast.success("Data Submitted Successfully");
-
+          window.location.reload();
         } else {
           toast.error("Faild to Booked Tour");
         }
       });
-
-    window.location.reload();
 
   };
 

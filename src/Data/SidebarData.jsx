@@ -1,4 +1,4 @@
-import { FaCube, FaHotel, FaUser } from "react-icons/fa";
+import { FaBook, FaCube, FaHotel, FaPlane, FaUser } from "react-icons/fa";
 import { FaAddressBook, FaBookAtlas, FaTentArrowTurnLeft } from "react-icons/fa6";
 
 export const SidebarData = [
@@ -31,5 +31,15 @@ export const SidebarData = [
         title: "Manage Tour Bookings",
         href: "mbooktours",
         icon: <FaBookAtlas/>,
+    },
+    {
+        title: "Manage Flight Bookings",
+        href: "mbookflights",
+        icon: <FaPlane/>,
+    },
+    {
+        title: "Manage Visa Applications",
+        href: "mvisaapplications",
+        icon: <FaBook/>,
     },
 ];
