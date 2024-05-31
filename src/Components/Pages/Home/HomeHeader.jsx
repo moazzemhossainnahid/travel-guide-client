@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAirports from "../../../Hooks/useAirports";
 import { toast } from "react-toastify";
+import { countries } from "../../../Data/Data";
 
 
 
@@ -33,11 +34,33 @@ const HomeHeader = ({ allTours, allHotel }) => {
     address: ''
   });
 
+  const [maritalStatus, setMaritalStatus] = useState('Single');
+  const [visaDuration, setVisaDuration] = useState('3 Months');
+  const [visaPurpose, setVisaPurpose] = useState('Tourism');
+  const [country, setCountry] = useState('India');
+  const [nationality, setNationality] = useState('Bangladeshi');
+  const [dob, setDob] = useState('');
+  const [vUserInfo, setVUserInfo] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    nidNo: '',
+    passportNo: ''
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserInfo({
       ...userInfo,
+      [name]: value
+    });
+  };
+
+  const handleVisaInputChange = (e) => {
+    const { name, value } = e.target;
+    setVUserInfo({
+      ...vUserInfo,
       [name]: value
     });
   };
@@ -96,10 +119,48 @@ const HomeHeader = ({ allTours, allHotel }) => {
       ...userInfo
     }
 
-    console.log(info);
+    // console.log(info);
 
     // send to database
     fetch(`http://localhost:5000/api/v1/flight-booking`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //   console.log(data);
+        if (data?.status === "Successful") {
+          toast.success("Data Submitted Successfully");
+          window.location.reload();
+        } else {
+          toast.error("Faild to Booked Tour");
+        }
+      });
+
+  };
+  
+
+  const handleApply = () => {
+    // Implement your search logic here
+
+    const info = {
+      maritalStatus,
+      visaPurpose,
+      visaDuration,
+      country,
+      nationality,
+      dob,
+      ...vUserInfo
+    }
+
+    console.log(info);
+
+    // send to database
+    fetch(`http://localhost:5000/api/v1/visa-application`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -136,6 +197,26 @@ const HomeHeader = ({ allTours, allHotel }) => {
     setJourneyDate("");
     setNumTravelers("");
     setTravelerClass("");
+  };
+
+  const handleVisaFormSubmit = (e) => {
+    e.preventDefault();
+    handleApply();
+    e.target.reset();
+    setUserInfo({
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      nidNo:'',
+      passportNo:''
+    });
+    setMaritalStatus("");
+    setNationality("");
+    setCountry("");
+    setDob("");
+    setVisaDuration("");
+    setVisaPurpose("");
   };
 
 
@@ -213,8 +294,8 @@ const HomeHeader = ({ allTours, allHotel }) => {
 
   return (
     <div
-      className="bg-gradient-to-tr from-purple-400 to-green-700  
-   h-[70rem] md:h-[60rem] lg:h-[50rem] relative w-full bg-cover bg-center"
+      className={`bg-gradient-to-tr from-purple-400 to-green-700  
+      h-[70rem] ${active === "visa" && "h-[80rem]"} md:h-[60rem] lg:h-[50rem] relative w-full bg-cover bg-center`}
     >
       <img
         src="https://i.ibb.co/L98m2Qc/xhero-1-jpg-pagespeed-ic-DUdgc-Mb-Ja5.webp"
@@ -480,30 +561,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                         </div>
                       )}
                     </div>
-                    {/* <div className="leading-tight border p-3 rounded-2xl">
-                      <p className="text-xs md:text-sm lg:text-sm pb-2">
-                        CHECK IN
-                      </p>
-                      <input
-                        className=" appearance-none py-3 border
-                      border-gray-300 text-gray-700 
-                      sm:text-sm rounded-lg focus:ring-red-400 
-                      focus:border-red-400 block w-full p-2 h-11 "
-                        type="date"
-                      />
-                    </div>
-                    <div className="leading-tight border p-3 rounded-2xl">
-                      <p className="text-xs md:text-sm lg:text-sm pb-2">
-                        CHECK OUT
-                      </p>
-                      <input
-                        className=" appearance-none py-3 border
-                      border-gray-300 text-gray-700 
-                      sm:text-sm rounded-lg focus:ring-red-400 
-                      focus:border-red-400 block w-full p-2 h-11 "
-                        type="date"
-                      />
-                    </div> */}
+
                   </div>
                   <div>
                     {/* suggest part of div */}
@@ -609,71 +667,133 @@ const HomeHeader = ({ allTours, allHotel }) => {
               )}
               {/* sm:w-3/2 lg:1/2 */}
               {active === "visa" && (
-                // <div className="w-screen flex justify-center">
-                <div className="grid grid-cols-1 sm:grid-cols-1 relative rounded-2xl p-10 shadow-lg bg-white">
-                  <div className="w-full mx-auto hover:cursor-pointer leading-tight border p-3 rounded-2xl">
-                    <p
-                      onClick={() => setToggle(!toggle)}
-                      className="text-xs md:text-sm lg:text-sm"
-                    >
-                      CITY/HOTEL/RESORT/AREA
-                    </p>
-                    {toggle === true ? (
-                      <input
-                        type="search"
-                        onChange={(e) => handleSearchField(e.target.value)}
-                        placeholder="type your expected tour..."
-                        className="w-full appearance-none rounded-lg py-3 mt-1 px-3
-                          text-gray-700 leading-tight border border-slate-300 
-                          focus:outline-none focus:border-red-400 focus:ring-1
-                           focus:ring-red-400"
-                      />
-                    ) : (
-                      <div>
-                        {tourName.length ? (
-                          <h2
-                            onClick={() => setToggle(!toggle)}
-                            className="text-md md:text-xl font-semibold lg:text-2xl py-2"
-                          >
-                            {tourName}
-                          </h2>
-                        ) : (
-                          <h2
-                            onClick={() => setToggle(!toggle)}
-                            className="text-md md:text-xl font-semibold lg:text-2xl py-2"
-                          >
-                            Gardens by the Bay Tour
-                          </h2>
-                        )}
-                        {singleTourData[0]?.country ? (
-                          <p className="text-xs lg:text-sm">
-                            {singleTourData[0]?.country}
-                          </p>
-                        ) : (
-                          <p className="text-xs lg:text-sm">{`Indonesia`}</p>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                <div className="rounded-2xl relative">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 relative rounded-2xl p-10 shadow-lg bg-white">
 
-                  {/* </div> */}
+                    <div className="w-full h-full mx-auto hover:cursor-pointer leading-tight border p-3 rounded-2xl">
+                      <div className="flex flex-wrap gap-4">
+                        <div className="w-full h-full flex flex-col md:flex-row justify-between items-center gap-3">
+
+                          {/* Country Selection */}
+                          <div className="w-full md:w-1/2 p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">Country for Visa</p>
+                            <select
+                              value={country}
+                              onChange={(e) => setCountry(e.target.value)}
+                              className="w-full shadow appearance-none rounded-lg py-3 px-3 text-gray-700 leading-tight border border-slate-300 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400"
+                            >
+                              {countries?.map((country) => (
+                                <option key={country} value={country}>
+                                  {country}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+
+
+                          {/* Visa Purpose */}
+                          <div className="w-full md:w-1/2 p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">Visa Purpose</p>
+                            <select
+                              value={visaPurpose}
+                              onChange={(e) => setVisaPurpose(e.target.value)}
+                              className="w-full shadow appearance-none rounded-lg py-3 px-3 text-gray-700 leading-tight border border-slate-300 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400"
+                            >
+                              <option value="Tourism">Tourism</option>
+                              <option value="Business">Business</option>
+                              <option value="Study">Study</option>
+                              <option value="Work">Work</option>
+                              <option value="Transit">Transit</option>
+                              <option value="Medical Treatment">Medical Treatment</option>
+                              <option value="Family Visit">Family Visit</option>
+                              <option value="Conference">Conference</option>
+                            </select>
+                          </div>
+
+                          {/* Visa Duration */}
+                          <div className="w-full md:w-1/2 p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">Visa Duration</p>
+                            <select
+                              value={visaDuration}
+                              onChange={(e) => setVisaDuration(e.target.value)}
+                              className="w-full shadow appearance-none rounded-lg py-3 px-3 text-gray-700 leading-tight border border-slate-300 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400"
+                            >
+                              <option value="3 Months">3 Months</option>
+                              <option value="6 Months">6 Months</option>
+                              <option value="9 Months">9 Months</option>
+                              <option value="1 Year">1 Year</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-3">
+
+                          {/* Nationality */}
+                          <div className="w-full md:w-1/2 leading-tight p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">Nationality</p>
+                            <select
+                              value={nationality}
+                              onChange={(e) => setNationality(e.target.value)}
+                              className="w-full shadow appearance-none rounded-lg py-3 px-3 text-gray-700 leading-tight border border-slate-300 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400"
+                            >
+                              <option value="Bangladeshi">Bangladeshi</option>
+                              <option value="Indian">Indian</option>
+                              <option value="American">American</option>
+                            </select>
+                          </div>
+
+                          {/* Marital Status */}
+                          <div className="w-full md:w-1/2 leading-tight p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">Marital Status</p>
+                            <select
+                              value={maritalStatus}
+                              onChange={(e) => setMaritalStatus(e.target.value)}
+                              className="w-full shadow appearance-none rounded-lg py-3 px-3 text-gray-700 leading-tight border border-slate-300 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400"
+                            >
+                              <option value="Married">Married</option>
+                              <option value="Single">Single</option>
+                              <option value="Divorced">Divorced</option>
+                              <option value="Widowed">Widowed</option>
+                              <option value="Separated">Separated</option>
+                              <option value="In a Relationship">In a Relationship</option>
+                              <option value="It's Complicated">{`It's Complicated`}</option>
+                            </select>
+                          </div>
+
+                          {/* Date of Birth */}
+                          <div className="w-full md:w-1/2 leading-tight p-3 rounded-2xl">
+                            <p className="text-xs md:text-sm lg:text-sm pb-2">Date of Birth</p>
+                            <input
+                              type="date"
+                              value={dob}
+                              onChange={(e) => setDob(e.target.value)}
+                              className="appearance-none py-3 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-red-400 focus:border-red-400 block w-full p-2 h-11"
+                            />
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div>
                     {/* suggest part of div */}
-                    {tourText.length
-                      ? suggestTour.length !== 0 && (
+                    {hotelText.length
+                      ? suggestHotel?.length !== 0 && (
                         <div
-                          id="suggested_item_tour"
+                          id="suggested_item"
                           className="bg-white rounded-lg w-5/6 lg:w-1/3 z-10 p-4 absolute"
                         >
-                          {suggestTour
+                          {suggestHotel
                             ?.slice(0, 10)
-                            ?.map(({ name, index }) => (
+                            ?.map(({ hotel_name, index }) => (
                               <div className="border-b-2 " key={index}>
                                 <p
-                                  onClick={() => handleText(name)}
+                                  onClick={() => handleText(hotel_name)}
                                   className="pt-3 divide-y hover:text-green-400 hover:cursor-pointer divide-dashed"
                                 >
-                                  {name}
+                                  {hotel_name}
                                 </p>
                               </div>
                             ))}
@@ -695,17 +815,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
               </label>
             </div>
           )}
-          {/* 
-          {active === "flight" && (
-            <div
-              onClick={handleSearch}
-              className="flex justify-center w-full -mt-4"
-            >
-              <button className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3  text-white bg-[#33D687]">
-                Search Flights
-              </button>
-            </div>
-          )} */}
+
 
           {active === "hotel" && (
             <div
@@ -729,18 +839,17 @@ const HomeHeader = ({ allTours, allHotel }) => {
           )}
           {active === "visa" && (
             <div
-              onClick={() => handleButton(singleTourData[0]?._id)}
               className="flex justify-center w-full -mt-4"
             >
-              <button className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3 text-white bg-[#33D687]">
+              <label htmlFor="visaApplication" className="px-14 rounded-lg text-[1.2rem] absolute font-bold py-3 text-white bg-[#33D687]">
                 Apply
-              </button>
+              </label>
             </div>
           )}
         </div>
       </div>
 
-      {/* <!-- The info submit modal --> */}
+      {/* <!-- The flight info submit modal --> */}
 
       <input type="checkbox" id="personalInfo" className="modal-toggle" />
       <div className="modal">
@@ -799,6 +908,88 @@ const HomeHeader = ({ allTours, allHotel }) => {
               className="btn px-7 btn-warning my-5 block mx-auto"
               type="submit"
               value="Send Data"
+            />
+          </form>
+        </div>
+      </div>
+
+      {/* <!-- The visa info submit modal --> */}
+
+      <input type="checkbox" id="visaApplication" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box relative  bg-slate-300">
+          <label
+            htmlFor="visaApplication"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          <h3 className="text-lg font-bold">Insert Personal Information</h3>
+          <form
+            onSubmit={handleVisaFormSubmit}
+            action=""
+            className="py-3"
+          >
+            <div className="w-full flex flex-col md:flex-row justify-between items-center gap-3">
+              <input
+                value={vUserInfo.name}
+                onChange={handleVisaInputChange}
+                name="name"
+                type="text"
+                placeholder="Enter Your Name"
+                className="input bg-slate-100 my-2 input-ghost w-full block mx-auto max-w-xs"
+              />
+              <input
+                type="tel"
+                name="phone"
+                value={vUserInfo.phone}
+                onChange={handleVisaInputChange}
+                placeholder="Enter Your Phone"
+                className="input bg-slate-100 my-2 input-ghost w-full block mx-auto max-w-xs"
+              />
+            </div>
+            <div className="w-full flex flex-col md:flex-row justify-between items-center gap-3">
+              <input
+                value={vUserInfo.nidNo}
+                onChange={handleVisaInputChange}
+                name="nidNo"
+                type="text"
+                placeholder="Enter NID Number"
+                className="input bg-slate-100 my-2 input-ghost w-full block mx-auto max-w-xs"
+              />
+              <input
+                type="text"
+                name="passportNo"
+                value={vUserInfo.passportNo}
+                onChange={handleVisaInputChange}
+                placeholder="Enter Passport Number"
+                className="input bg-slate-100 my-2 input-ghost w-full block mx-auto max-w-xs"
+              />
+            </div>
+            <div className="w-full flex flex-col  justify-between items-center gap-3">
+              <input
+                name="email"
+                value={vUserInfo.email}
+                onChange={handleVisaInputChange}
+                type="email"
+                placeholder="Enter Your Email"
+                className="input bg-slate-100 my-2 input-ghost w-full block mx-auto"
+              />
+            </div>
+            <div className="w-full">
+              <textarea
+                name="address"
+                value={vUserInfo.address}
+                onChange={handleVisaInputChange}
+                type="text"
+                placeholder="Enter Your Address"
+                className="input bg-slate-100 resize-none my-2 input-ghost w-full h-16 block mx-auto"
+              />
+            </div>
+            <input
+              className="btn px-7 btn-outline btn-neutral my-5 block mx-auto"
+              type="submit"
+              value="Submit Application"
             />
           </form>
         </div>
