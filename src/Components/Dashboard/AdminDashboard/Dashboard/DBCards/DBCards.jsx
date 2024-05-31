@@ -87,6 +87,17 @@ const DBCards = () => {
       .then((data) => setFlightBooking(data?.data?.result));
   }, []);
 
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v1/visa-application`, {
+      method: "GET",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setVisaApplication(data?.data?.result));
+  }, []);
+
   return (
     <div className="">
       <div className="grid md:grid-cols-2 gap-5 py-10 text-start">
@@ -261,9 +272,9 @@ const DBCards = () => {
           <div className="flex items-center justify-between bg-[#adab30] p-3 rounded-t-xl">
             <div className="">
               <h3 className="text-3xl md:text-4xl font-bold py-2 text-white">
-                {tourBooking?.length}{" "}
+                {visaApplication?.length}{" "}
               </h3>
-              <h3 className="text-md font-bold text-white">Total Booked Tour</h3>
+              <h3 className="text-md font-bold text-white">Total Visa Application</h3>
             </div>
             <div className="">
               <FaBook className="text-[#42424281] text-3xl md:text-4xl" />

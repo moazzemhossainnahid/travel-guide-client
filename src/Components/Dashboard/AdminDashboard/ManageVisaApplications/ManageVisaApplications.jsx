@@ -9,7 +9,7 @@ const ManageVisaApplications = () => {
   const [viewData, setViewData] = useState(null);
  
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/visa-applications", {
+    fetch("http://localhost:5000/api/v1/visa-application", {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -40,7 +40,7 @@ const ManageVisaApplications = () => {
                   Name
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                  Tour
+                  Visa
                 </th>
                 <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
                   Phone

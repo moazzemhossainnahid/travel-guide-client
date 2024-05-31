@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'
 const ManageVisaApplicationsRow = ({ booked, index, setViewData }) => {
 
-    const { name, phone, address, email, tourPlan, adult, children, _id } = booked;
+    const { name, phone, address, email, country, adult, children, _id } = booked;
 
 
     console.log(booked);
@@ -59,8 +59,8 @@ const ManageVisaApplicationsRow = ({ booked, index, setViewData }) => {
                 {name} <br />
             </td>
             <td className="w-full lg:w-auto p-2 font-bold text-green-700 text-sm text-center border border-b block lg:table-cell relative lg:static">
-                <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Tour</span>
-                {tourPlan}
+                <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Visa</span>
+                {country}
             </td>
             <td className="w-full lg:w-auto p-2 text-sm text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Phone</span>

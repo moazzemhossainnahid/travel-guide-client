@@ -101,15 +101,6 @@ const HomeHeader = ({ allTours, allHotel }) => {
   const handleSearch = () => {
     // Implement your search logic here
 
-    // console.log({
-    //   fromAirport,
-    //   toAirport,
-    //   journeyDate,
-    //   travelerClass,
-    //   numTravelers,
-    //   ...userInfo
-    // });
-
     const info = {
       fromAirport,
       toAirport,
@@ -137,7 +128,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
           toast.success("Data Submitted Successfully");
           window.location.reload();
         } else {
-          toast.error("Faild to Booked Tour");
+          toast.error("Faild to Booked Flight");
         }
       });
 
@@ -175,7 +166,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
           toast.success("Data Submitted Successfully");
           window.location.reload();
         } else {
-          toast.error("Faild to Booked Tour");
+          toast.error("Faild to Apply for Visa");
         }
       });
 
@@ -766,6 +757,7 @@ const HomeHeader = ({ allTours, allHotel }) => {
                             <p className="text-xs md:text-sm lg:text-sm pb-2">Date of Birth</p>
                             <input
                               type="date"
+                              required
                               value={dob}
                               onChange={(e) => setDob(e.target.value)}
                               className="appearance-none py-3 border border-gray-300 text-gray-700 sm:text-sm rounded-lg focus:ring-red-400 focus:border-red-400 block w-full p-2 h-11"
