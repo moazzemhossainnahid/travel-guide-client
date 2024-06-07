@@ -7,7 +7,7 @@ const ManageVisaApplicationsRow = ({ booked, index, setViewData }) => {
     const { name, phone, address, email, country, adult, children, _id } = booked;
 
 
-    console.log(booked);
+    // console.log(booked);
 
     const handleDelete = (id) => {
         Swal.fire({
