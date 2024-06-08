@@ -4,12 +4,25 @@ import { useForm } from 'react-hook-form';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../../firebase.init';
 import useProfile from '../../../../Hooks/useProfile';
+import { useEffect } from 'react';
 
    
 const Profile = () => {
     const { register, handleSubmit, reset } = useForm();
     const [user] = useAuthState(auth);
     const [profile] = useProfile();
+
+
+  useEffect(() => {
+    const checkToken = () => {
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+        auth.signOut();
+      }
+    };
+
+    checkToken();
+  }, [user]);
 
     const imageUrlKey = 'e738f1d16de6b265746b7f82cc157644';
 
@@ -64,7 +77,8 @@ const Profile = () => {
 
     }
 
-    // console.log(profile);
+    console.log("user",user);
+    console.log("profile",profile);
 
     return (
         <section className='bg-gradient-to-l from-secondary to-accent h-full w-full'>
