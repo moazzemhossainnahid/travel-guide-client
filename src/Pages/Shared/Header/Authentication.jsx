@@ -6,12 +6,26 @@ import { signOut } from 'firebase/auth';
 import auth from '../../../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import UseAdmin from '../../../Hooks/useAdmin';
-
+import { useEffect } from 'react';
+import { jwtDecode } from "jwt-decode";
 
 const Authentication = () => {
     const navigate = useNavigate();
     const [user] = useAuthState(auth);
     const [admin] = UseAdmin();
+
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            const expirationTime = decodedToken.exp * 1000 - 60000; // 1 minute before expiration
+            if (Date.now() >= expirationTime) {
+                handleSignOut();
+            } else {
+                setTimeout(handleSignOut, expirationTime - Date.now());
+            }
+        }
+    }, []);
 
     const handleSignOut = async () => {
         await signOut(auth)
